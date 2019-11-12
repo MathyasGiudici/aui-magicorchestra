@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class TesterMovement : MonoBehaviour
 {
-    private const float EPSILON = 0;
-
-    //Singleton TesterMovement
+    //Singleton of the TesterMovement class
     public static TesterMovement singleton = null;
 
+    //Constants
+    private const float EPSILON = 0; 
 
+    //Player parameter
     public float speed = 3;
     public bool isMovementEnabled = true;
 
-    //Managing Singleton
+    /* <summary>
+    * The function is called when the component is instantiated
+    * </summary>
+    */
     void Awake()
     {
+        //Code to manage the singleton uniqueness
         if ((singleton != null) && (singleton != this))
         {
             Destroy(gameObject);
@@ -24,12 +29,18 @@ public class TesterMovement : MonoBehaviour
         singleton = this;
     }
 
-    // Start is called before the first frame update
+    /* <summary>
+     * Start is called before the first frame update
+     * </summary>
+     */
     void Start()
     {
     }
 
-    // Update is called once per frame
+    /* <summary>
+     * Update is called once per frame
+     * </summary>
+     */
     void Update()
     {
         //Tester Pillar movement
@@ -60,7 +71,7 @@ public class TesterMovement : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space) == true)
         {
-            //
+            CorsiController.singleton.UserGesture();
         }
     }
 }

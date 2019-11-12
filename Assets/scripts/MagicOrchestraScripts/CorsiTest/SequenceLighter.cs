@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SequenceLighter : MonoBehaviour
 {
-    //Singleton SequenceLighter
+    //Singleton of the SequenceLighter class
     public static SequenceLighter singleton = null;
 
-    //Material for the light
+    //Material for the cubes
     public Material defaultMaterial;
     public Material lightMaterial;
 
@@ -16,14 +16,18 @@ public class SequenceLighter : MonoBehaviour
     public GameObject[] userTurnPanel;
 
     //Time of the light
-    private float time = 2;
+    private float showTime = 2;
 
     //Coroutine reference
     private Coroutine lightCoroutine = null;
 
-    //Managing Singleton
+    /* <summary>
+     * The function is called when the component is instantiated
+     * </summary>
+     */
     void Awake()
     {
+        //Code to manage the singleton uniqueness
         if ((singleton != null) && (singleton != this))
         {
             Destroy(gameObject);
@@ -32,24 +36,35 @@ public class SequenceLighter : MonoBehaviour
         singleton = this;
     }
 
-    /* Function to show the sequence on the frontal plane
+    /* <summary>
+     * The function shows the sequence of lights (cubes) on the frontal plane
+     * </summary>
      *
-     * NB: sequence is expeted as array of numbers NOT as index of an array
+     * <param name="color"> color must be a string containing the hexadecimal value of the color </param>
+     * <param name="time"> time must be a float number that represents the number of seconds the light should be on </param>
+     * <param name="sequence"> sequence is an array of numbers representing the light sequence </param>
+     * <remarks> sequence must contain the number of cubes and NOT as indexes </remarks>
      */
-    public void StartSequence(string color, float time, int[] sequence)
+    public void StartSequence(string color, float showTime, int[] sequence)
     {
-        //Changing the light color
-        if (color != "#ff0000")
-            this.ChangeColor(color);
+        //Setting the color of the light
+        this.ChangeColor(color);
 
-        //Saving the show time of the light
-        if(time > 1)
-            this.time = time;
+        //Setting the showing time of the light
+        this.showTime = showTime;
 
         //Launching the Coroutine to show sequence
         this.lightCoroutine = StartCoroutine(this.LightCoroutine(sequence, gameObject));
     }
 
+    /* <summary>
+    * The function shows the sequence of lights (cubes) on the frontal plane
+    * </summary>
+    *
+    * <param name="sequence"> sequence is an array of numbers representing the light sequence </param>
+    * <remarks> sequence must contain the number of cubes and NOT as indexes </remarks>
+    * <param name="plane"> plane is the GameObject reference to the plane where the cubes are </param>
+    */
     private IEnumerator LightCoroutine (int[] sequence, GameObject plane)
     {
         GameObject frontalCube;
@@ -69,11 +84,11 @@ public class SequenceLighter : MonoBehaviour
                 frontalCube = plane.transform.GetChild(number - 1).gameObject.transform.GetChild(0).gameObject;
 
                 //Turn on the light
-                ShowLight(frontalCube);
-                yield return new WaitForSeconds(this.time);
+                CorsiUtils.ShowLightOnCube(frontalCube,lightMaterial);
+                yield return new WaitForSeconds(this.showTime);
 
                 //Turn off the light
-                RestoreIntialCube(frontalCube);
+                CorsiUtils.RestoreIntialCube(frontalCube,defaultMaterial);
             }        
         }
 
@@ -88,41 +103,16 @@ public class SequenceLighter : MonoBehaviour
             go.SetActive(false);
         }
 
-        CorsiController.singleton.EndFrontalSequence();
+        CorsiController.singleton.EndFrontalPhase();
         StopCoroutine(this.lightCoroutine);
     }
 
-    private void ShowLight(GameObject frontalCube)
-    {
-        frontalCube.GetComponent<Renderer>().material = lightMaterial;
-    }
-
-    private void RestoreIntialCube(GameObject frontalCube)
-    {
-        frontalCube.GetComponent<Renderer>().material = defaultMaterial;
-    }
-
-    //Change the color of the material 
+    /* <summary>
+     * The function changes the color of the Material used as light for the sequence
+     * </summary>
+     */
     private void ChangeColor(string color)
     {
-        //Converting the string
-        //Escaping the intial char
-        if (color.IndexOf('#') != -1)
-            color = color.Replace("#", "");
-
-        //Retriving RGB
-        int r, g, b = 0;
-        r = int.Parse(color.Substring(0, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
-        g = int.Parse(color.Substring(2, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
-        b = int.Parse(color.Substring(4, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
-
-        //Creating the new Material
-        Material material = new Material(lightMaterial);
-
-        material.color = new Color(r,g,b);
-        material.SetColor("_EMISSION", material.color);
-
-        this.lightMaterial = material;
+        CorsiUtils.CreateMaterialFromColor(lightMaterial, color);
     }
-
 }

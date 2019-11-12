@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class CorsiController : MonoBehaviour
 {
-    public static CorsiController singleton;
+    //Singleton of the CorsiController class
+    public static CorsiController singleton = null;
 
-    string color = "#ff0000";
-    float time = 2;
+    //Protected parameters that contains the main custom parameters of the game
     int[] sequence = { 2, 4 };
+    string lightColor = "#ff0000";
 
-    //Managing Singleton
+    float timeInShowing = 2;
+
+    bool isGestureMode = false;
+    float timeInDetecting = 2;
+
+    /* <summary>
+     * The function is called when the component is instantiated
+     * </summary>
+     */
     void Awake()
     {
+        //Code to manage the singleton uniqueness
         if ((singleton != null) && (singleton != this))
         {
             Destroy(gameObject);
@@ -21,40 +31,84 @@ public class CorsiController : MonoBehaviour
         singleton = this;
     }
 
-    // Start is called before the first frame update
+    /* <summary>
+     * Start is called before the first frame update
+     * </summary>
+     */
     void Start()
     {
         Debug.Log("Corsi Test is on fire!");
     }
 
-    // Update is called once per frame
+    /* <summary>
+     * Update is called once per frame
+     * </summary>
+     */
     void Update()
     {
         //Instruction to Start Sequence
         if (Input.GetKeyUp(KeyCode.S) == true)
         {
-            StartFrontalSequence();
+            StartFrontalPhase();
         }
     }
 
-    public void StartFrontalSequence()
+    /* <summary>
+     * StartFrontalSequence manage the first phase of the game
+     * </summary>
+     */
+    public void StartFrontalPhase()
     {
         this.DisablePlayerMovement();
-        SequenceLighter.singleton.StartSequence(color, time, sequence);
+        SequenceLighter.singleton.StartSequence(lightColor, timeInShowing, sequence);
     }
 
-    public void EndFrontalSequence()
+    /* <summary>
+     * EndFrontalSequence is called when the first phase is ended
+     * </summary>
+     */
+    public void EndFrontalPhase()
     {
         Debug.Log("End of frontal sequence");
-        EnablingPlayerMovement();
+        StartUserPhase();
     }
 
-    private void EnablingPlayerMovement()
+    /* <summary>
+     * StartFrontalSequence manage the second phase of the game
+     * </summary>
+     */
+    public void StartUserPhase()
+    {
+        //Enabling the user movement
+        EnablingPlayerMovement();
+
+        //Instantiating the User phase manager
+        SequenceUser.singleton.StartSequence(lightColor,timeInDetecting,isGestureMode,sequence);
+    }
+
+    public void UserGesture()
+    {
+        if (SequenceUser.singleton.GetGestureMode())
+            SequenceUser.singleton.CubeSelection();
+    }
+
+    public void CorrectUserSequence()
+    {
+        Debug.Log("Sequence reproduced by the user correctly");
+    }
+
+    public void WrongUserSequence()
+    {
+        Debug.Log("Sequence reproduced by the user NOT correctly");
+        this.StartFrontalPhase(); 
+    }
+
+    public void EnablingPlayerMovement()
     {
         TesterMovement.singleton.isMovementEnabled = true;
     }
 
-    private void DisablePlayerMovement()
+    public void DisablePlayerMovement()
     {
         TesterMovement.singleton.isMovementEnabled = false;
     }
