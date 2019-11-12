@@ -87,37 +87,48 @@ public class SequenceUser : MonoBehaviour
         }
     }
 
+    private void DestoryControllerOnCubes()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            if (gameObject.transform.GetChild(i).gameObject.transform.GetChild(1).gameObject.GetComponent<ZenithCubeController>() != null)
+            {
+                ZenithCubeController target = gameObject.transform.GetChild(i).gameObject.transform.GetChild(1).gameObject.GetComponent<ZenithCubeController>();
+                Destroy(target);
+            }                
+        }
+    }
+
     /* <summary>
     * The function allow the selection of a cube of the sequence
     * </summary>
     */
     public void CubeSelection()
     {
-        //Lighting the cube
-        this.coroutine = StartCoroutine(this.LightCoroutine(currentCube));
-
         //Checking the correctness of the sequence
         if ( currentIndexSequence <= (sequence.Length - 1))
         {
             if (sequence[currentIndexSequence] == currentCubeNumber)
             {
                 if (currentIndexSequence == (sequence.Length - 1))
-                    this.CorrectSequence();
+                    this.coroutine = StartCoroutine(this.LightCoroutine(currentCube, true, correctSequencePanel, true));
+                else
+                    this.coroutine = StartCoroutine(this.LightCoroutine(currentCube,false,null,true)); //Light the cube
             }
             else
             {
-                this.ErrorInSequence();
+                this.coroutine = StartCoroutine(this.LightCoroutine(currentCube, true, wrongSequencePanel, false));
             }  
         }
         else
         {
-            Debug.Log("Something strange");
+            Debug.LogWarning("Something not correct with the detection of the sequence");
         }        
 
         currentIndexSequence++;
     }
 
-    private IEnumerator LightCoroutine(GameObject cubeToLight)
+    private IEnumerator LightCoroutine(GameObject cubeToLight, bool isFinal, GameObject panel, bool isSequenceCorrect)
     {
         //Turn on the light
         CorsiUtils.ShowLightOnCube(cubeToLight, lightMaterial);
@@ -125,45 +136,29 @@ public class SequenceUser : MonoBehaviour
 
         //Turn off the light
         CorsiUtils.RestoreIntialCube(cubeToLight, defaultMaterial);
-        StopCoroutine(this.coroutine);
+
+        //Final cube detected
+        if (isFinal)
+        {
+            //Showing the Panel
+            panel.SetActive(true);
+            yield return new WaitForSeconds(CorsiUtils.panelTimeFocus);
+            panel.SetActive(false);
+            yield return new WaitForSeconds(CorsiUtils.panelTimeAfterFocus);
+
+            //Recalling game manager
+            if (isSequenceCorrect)
+                CorsiController.singleton.CorrectUserSequence();
+            else
+                CorsiController.singleton.WrongUserSequence();
+        }
+
+        //Abort coroutine
+        StopClassCoroutine();
     }
 
-    /* <summary>
-     * The function is called if the sequence is correct
-     * </summary>
-     */
-    private void CorrectSequence()
+    private void StopClassCoroutine()
     {
-        CorsiController.singleton.CorrectUserSequence();
-        return;
-        this.coroutine = StartCoroutine(this.PanelCoroutine(correctSequencePanel,true));
-    }
-
-    /* <summary>
-     * The function is called if the sequence is NOT correct
-     * </summary>
-     */
-    private void ErrorInSequence()
-    {
-        CorsiController.singleton.WrongUserSequence();
-        return;
-        this.coroutine = StartCoroutine(this.PanelCoroutine(wrongSequencePanel,false));
-    }
-
-    private IEnumerator PanelCoroutine(GameObject panel, bool isSequenceCorrect)
-    {
-        //Showing the Panel
-        panel.SetActive(true);
-        yield return new WaitForSeconds(3.0f);
-        panel.SetActive(false);
-        yield return new WaitForSeconds(2.0f);
-
-        if (isSequenceCorrect)
-            CorsiController.singleton.CorrectUserSequence();
-        else
-            CorsiController.singleton.WrongUserSequence();
-
-        //Stopping coroutine
         StopCoroutine(this.coroutine);
     }
 

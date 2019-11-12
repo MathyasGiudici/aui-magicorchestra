@@ -71,7 +71,7 @@ public class SequenceLighter : MonoBehaviour
 
         //Showing the Starting Panel
         startingPanel.SetActive(true);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(4.0f);
         startingPanel.SetActive(false);
         yield return new WaitForSeconds(2.0f);
 

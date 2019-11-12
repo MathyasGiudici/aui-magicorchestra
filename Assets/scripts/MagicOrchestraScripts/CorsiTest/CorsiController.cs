@@ -8,13 +8,14 @@ public class CorsiController : MonoBehaviour
     public static CorsiController singleton = null;
 
     //Protected parameters that contains the main custom parameters of the game
-    int[] sequence = { 2, 4 };
+    //int[] sequence = { 2, 3, 6, 7, 4, 8, 1, 9, 5 };
+    int[] sequence = { 2 , 4};
     string lightColor = "#ff0000";
 
     float timeInShowing = 2;
 
     bool isGestureMode = false;
-    float timeInDetecting = 2;
+    float timeInDetecting = 2.0f;
 
     /* <summary>
      * The function is called when the component is instantiated

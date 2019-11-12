@@ -64,4 +64,5 @@ public class ZenithCubeController : MonoBehaviour
         //Informing the SequenceUser of the current position
         SequenceUser.singleton.DeleteCurrentCube();
     }
+
 }
