@@ -29,11 +29,19 @@ public static class CorsiUtils
 
     }
 
+    /* <summary>
+     * The function changes the material of a cube in order to "turn on" the light
+     * </summary>
+     */
     public static void ShowLightOnCube(GameObject cube, Material lightMaterial)
     {
         cube.GetComponent<Renderer>().material = lightMaterial;
     }
 
+    /* <summary>
+     * The function changes the material of a cube in order to "turn off" the light
+     * </summary>
+     */
     public static void RestoreIntialCube(GameObject cube, Material defaultMaterial)
     {
         cube.GetComponent<Renderer>().material = defaultMaterial;

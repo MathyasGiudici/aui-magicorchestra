@@ -41,7 +41,7 @@ public class SequenceLighter : MonoBehaviour
      * </summary>
      *
      * <param name="color"> color must be a string containing the hexadecimal value of the color </param>
-     * <param name="time"> time must be a float number that represents the number of seconds the light should be on </param>
+     * <param name="showTime"> time must be a float number that represents the number of seconds the light should be on </param>
      * <param name="sequence"> sequence is an array of numbers representing the light sequence </param>
      * <remarks> sequence must contain the number of cubes and NOT as indexes </remarks>
      */

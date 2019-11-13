@@ -51,7 +51,7 @@ public class SequenceUser : MonoBehaviour
      * </summary>
      *
      * <param name="color"> color must be a string containing the hexadecimal value of the color </param>
-     * <param name="time"> time must be a float number that represents the number of seconds the light should be on </param>
+     * <param name="captureTime"> time must be a float number that represents the number of seconds the light should be on </param>
      * <param name="isGestureMode"> isGestureMode represents if the user must compute a gesture to select the cube</param>
      * <param name="sequence"> sequence is an array of numbers representing the light sequence </param>
      * <remarks> sequence must contain the number of cubes and NOT as indexes </remarks>
@@ -78,6 +78,10 @@ public class SequenceUser : MonoBehaviour
         this.InstantiateControllerOnCubes();
     }
 
+    /* <summary>
+     * InstantiateControllerOnCubes creates the ZenithCubeController in the cubes
+     * </summary>
+     */
     private void InstantiateControllerOnCubes()
     {
         for(int i = 0; i<9; i++)
@@ -87,7 +91,11 @@ public class SequenceUser : MonoBehaviour
         }
     }
 
-    private void DestoryControllerOnCubes()
+    /* <summary>
+     * InstantiateControllerOnCubes destroies the ZenithCubeController in the cubes
+     * </summary>
+     */
+    private void DestroyControllerOnCubes()
     {
         for (int i = 0; i < 9; i++)
         {
@@ -95,7 +103,7 @@ public class SequenceUser : MonoBehaviour
             {
                 ZenithCubeController target = gameObject.transform.GetChild(i).gameObject.transform.GetChild(1).gameObject.GetComponent<ZenithCubeController>();
                 Destroy(target);
-            }                
+            }
         }
     }
 
@@ -110,6 +118,7 @@ public class SequenceUser : MonoBehaviour
         {
             if (sequence[currentIndexSequence] == currentCubeNumber)
             {
+                //Checking if the last selected cube is the last number of the sequence to be catched
                 if (currentIndexSequence == (sequence.Length - 1))
                     this.coroutine = StartCoroutine(this.LightCoroutine(currentCube, true, correctSequencePanel, true));
                 else
@@ -117,6 +126,7 @@ public class SequenceUser : MonoBehaviour
             }
             else
             {
+                //Sequence not correct
                 this.coroutine = StartCoroutine(this.LightCoroutine(currentCube, true, wrongSequencePanel, false));
             }  
         }
@@ -140,6 +150,7 @@ public class SequenceUser : MonoBehaviour
         //Final cube detected
         if (isFinal)
         {
+            DestroyControllerOnCubes();
             //Showing the Panel
             panel.SetActive(true);
             yield return new WaitForSeconds(CorsiUtils.panelTimeFocus);
@@ -157,6 +168,10 @@ public class SequenceUser : MonoBehaviour
         StopClassCoroutine();
     }
 
+    /* <summary>
+     * StopClassCoroutine stops the corutine instanciated by this class
+     * </summary>
+     */
     private void StopClassCoroutine()
     {
         StopCoroutine(this.coroutine);
@@ -182,11 +197,19 @@ public class SequenceUser : MonoBehaviour
         this.currentCube = null;
     }
 
+    /* <summary>
+     * Getter for the number that represents the number of second the user must stay on the cube to select it
+     * </summary>
+     */
     public float GetCaptureTime()
     {
         return this.captureTime;
     }
 
+    /* <summary>
+     * Getter for the bool that represents if the user has or not to play a gesture to select the cube where he/she is
+     * </summary>
+     */
     public bool GetGestureMode()
     {
         return this.isGestureMode;

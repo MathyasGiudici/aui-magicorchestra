@@ -87,28 +87,50 @@ public class CorsiController : MonoBehaviour
         SequenceUser.singleton.StartSequence(lightColor,timeInDetecting,isGestureMode,sequence);
     }
 
+    /* <summary>
+     * UserGesture is called when a gesture to select a cube by the user is performed
+     * </summary>
+     */
     public void UserGesture()
     {
         if (SequenceUser.singleton.GetGestureMode())
             SequenceUser.singleton.CubeSelection();
     }
 
+    /* <summary>
+     * EndFrontalSequence is called when the second phase is ended and
+     * the user has performed a correct sequence
+     * </summary>
+     */
     public void CorrectUserSequence()
     {
         Debug.Log("Sequence reproduced by the user correctly");
     }
 
+    /* <summary>
+     * EndFrontalSequence is called when the second phase is ended and
+     * the user has NOT performed a correct sequence
+     * </summary>
+     */
     public void WrongUserSequence()
     {
         Debug.Log("Sequence reproduced by the user NOT correctly");
         this.StartFrontalPhase(); 
     }
 
+    /* <summary>
+     * Function to allow user movement detection
+     * </summary>
+     */
     public void EnablingPlayerMovement()
     {
         TesterMovement.singleton.isMovementEnabled = true;
     }
 
+    /* <summary>
+     * Function to disable user movement detection
+     * </summary>
+     */
     public void DisablePlayerMovement()
     {
         TesterMovement.singleton.isMovementEnabled = false;

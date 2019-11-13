@@ -39,8 +39,8 @@ public class ZenithCubeController : MonoBehaviour
         //Reproducing a sound after a given amount of time
         if ((parent != null) && ((this.timer%60) >= timeToGong) && ((this.timer % 60) < (timeToGong + Time.deltaTime)))
         {
-            //Reproducing a souund after a while
-            parent.GetComponent<AudioSource>().Play();
+            //Reproducing a sound
+            //parent.GetComponent<AudioSource>().Play();
 
             //Checking if the gestureMode is enabled
             if (!isGestureMode)
@@ -64,5 +64,4 @@ public class ZenithCubeController : MonoBehaviour
         //Informing the SequenceUser of the current position
         SequenceUser.singleton.DeleteCurrentCube();
     }
-
 }
