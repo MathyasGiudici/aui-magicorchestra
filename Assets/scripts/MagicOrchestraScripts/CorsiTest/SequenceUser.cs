@@ -142,7 +142,7 @@ public class SequenceUser : MonoBehaviour
     {
         //Turn on the light
         CorsiUtils.ShowLightOnCube(cubeToLight, lightMaterial);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(CorsiUtils.reactionLightTime);
 
         //Turn off the light
         CorsiUtils.RestoreIntialCube(cubeToLight, defaultMaterial);
@@ -153,9 +153,9 @@ public class SequenceUser : MonoBehaviour
             DestroyControllerOnCubes();
             //Showing the Panel
             panel.SetActive(true);
-            yield return new WaitForSeconds(CorsiUtils.panelTimeFocus);
+            yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
             panel.SetActive(false);
-            yield return new WaitForSeconds(CorsiUtils.panelTimeAfterFocus);
+            yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
 
             //Recalling game manager
             if (isSequenceCorrect)

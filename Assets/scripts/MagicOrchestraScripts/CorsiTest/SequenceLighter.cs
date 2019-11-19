@@ -71,9 +71,9 @@ public class SequenceLighter : MonoBehaviour
 
         //Showing the Starting Panel
         startingPanel.SetActive(true);
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         startingPanel.SetActive(false);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
 
         //Looping on the sequence
         foreach (int number in sequence)
@@ -97,7 +97,7 @@ public class SequenceLighter : MonoBehaviour
         {
             go.SetActive(true);
         }
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_short);
         foreach (GameObject go in userTurnPanel)
         {
             go.SetActive(false);
