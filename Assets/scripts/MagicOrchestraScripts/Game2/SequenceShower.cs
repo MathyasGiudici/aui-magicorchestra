@@ -72,8 +72,11 @@ public class SequenceShower : MonoBehaviour
             }
         }
 
+        //Enabling user actions
+        this.InstanciateUserDigitSpan(sequence, isReverse);
+
         //Showing user turn information
-        if(!isReverse)
+        if (!isReverse)
             this.frontalText.GetComponent<Text>().text = "Ripeti la sequenza";
         else
             this.frontalText.GetComponent<Text>().text = "Ripeti la sequenza IN ORDINE INVERSO";
@@ -82,7 +85,7 @@ public class SequenceShower : MonoBehaviour
         this.frontalText.GetComponent<Text>().text = "";
         yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
 
-        GameController.singleton.EndFrontalPhase(sequence, isReverse);
+        GameController.singleton.EndFrontalPhase();
 
         this.StopClassCoroutine();
     }
@@ -111,5 +114,11 @@ public class SequenceShower : MonoBehaviour
     public void StopClassCoroutine()
     {
         StopCoroutine(this.coroutine);
+    }
+
+    private void InstanciateUserDigitSpan(int[] sequence, bool isReverse)
+    {
+        gameObject.AddComponent<UserDigitSpan>();
+        UserDigitSpan.singleton.Init(sequence, isReverse);
     }
 }

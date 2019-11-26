@@ -63,11 +63,9 @@ public class GameController : MonoBehaviour
      * EndFrontalSequence is called when the first phase is ended
      * </summary>
      */
-    public void EndFrontalPhase(int[] sequence, bool isReverse)
+    public void EndFrontalPhase()
     {
         Debug.Log("End of frontal sequence");
-        gameObject.AddComponent<UserDigitSpan>();
-        UserDigitSpan.singleton.Init(sequence, isReverse);
     }
 
     public void CorrectUserSequence()
