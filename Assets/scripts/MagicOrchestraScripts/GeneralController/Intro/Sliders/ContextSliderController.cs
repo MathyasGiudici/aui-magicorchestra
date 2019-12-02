@@ -10,8 +10,6 @@ public class ContextSliderController : MonoBehaviour
 
     private bool isContext = true;
 
-    public GameObject gameSelectionPanel;
-
     /* <summary>
      * The function is called when the component is instantiated
      * </summary>
@@ -28,15 +26,6 @@ public class ContextSliderController : MonoBehaviour
     }
 
     /* <summary>
-     * Start is called before the first frame update
-     * </summary>
-     */
-    void Start()
-    {
-        this.ShowContextMenu();
-    }
-
-    /* <summary>
      * Update is called once per frame
      * </summary>
      */
@@ -47,13 +36,11 @@ public class ContextSliderController : MonoBehaviour
         {
             gameObject.GetComponent<Slider>().value = 1;
             this.isContext = false;
-            this.ShowNoContextMenu();
         }
         else
         {
             gameObject.GetComponent<Slider>().value = 0;
             this.isContext = true;
-            this.ShowContextMenu();
         }
     }
 
@@ -66,29 +53,5 @@ public class ContextSliderController : MonoBehaviour
         return this.isContext;
     }
 
-    /* <summary>
-     * The function prepares the panel in case of context mode
-     * </summary>
-     */
-    private void ShowContextMenu()
-    {
-        //Configuring the panel
-        //Enabling the slider
-        gameSelectionPanel.gameObject.transform.GetChild(0).gameObject.SetActive(true);
-        //Disabling the toggles
-        gameSelectionPanel.gameObject.transform.GetChild(1).gameObject.SetActive(false);
-    }
 
-    /* <summary>
-     * The function prepares the panel in case of NO context mode
-     * </summary>
-     */
-    private void ShowNoContextMenu()
-    {
-        //Configuring the panel
-        //Enabling the slider
-        gameSelectionPanel.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        //Disabling the toggles
-        gameSelectionPanel.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-    }
 }

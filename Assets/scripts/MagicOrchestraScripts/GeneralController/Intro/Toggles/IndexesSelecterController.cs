@@ -27,15 +27,6 @@ public class IndexesSelecterController : MonoBehaviour
     }
 
     /* <summary>
-     * Start is called before the first frame update
-     * </summary>
-     */
-    void Start()
-    {
-        currentOn = 0;
-    }
-
-    /* <summary>
      * Update is called once per frame
      * </summary>
      */
@@ -44,7 +35,7 @@ public class IndexesSelecterController : MonoBehaviour
         IEnumerable<Toggle> toggles = gameObject.GetComponent<ToggleGroup>().ActiveToggles();
 
         foreach (Toggle toggle in toggles) {
-            this.currentOn = (int) Int32.Parse(toggle.gameObject.name[toggle.gameObject.name.Length - 1].ToString());
+            this.currentOn = toggle.GetComponent<IndexToggle>().number;
         }
     }
 

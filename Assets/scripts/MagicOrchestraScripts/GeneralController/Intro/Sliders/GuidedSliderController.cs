@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IndexGuidedSliderController : MonoBehaviour
+public class GuidedSliderController : MonoBehaviour
 {
     //Singleton of the IndexGuidedSliderController class
-    public static IndexGuidedSliderController singleton = null;
+    public static GuidedSliderController singleton = null;
 
     private bool isGuided = true;
 
@@ -26,32 +26,30 @@ public class IndexGuidedSliderController : MonoBehaviour
     }
 
     /* <summary>
-     * Start is called before the first frame update
-     * </summary>
-     */
-    void Start()
-    {
-        this.ChangeSubMenuStatus(false);
-    }
-
-    /* <summary>
      * Update is called once per frame
      * </summary>
      */
     void Update()
     {
+        if (ContextSliderController.singleton.GetContextStatus())
+        {
+            GuidedSliderController.singleton.gameObject.SetActive(true);
+        }
+        else
+        {
+            GuidedSliderController.singleton.gameObject.SetActive(false);
+            return;
+        }
         float value = gameObject.GetComponent<Slider>().value;
         if (value >= 0.5)
         {
             gameObject.GetComponent<Slider>().value = 1;
             this.isGuided = false;
-            this.ChangeSubMenuStatus(true);
         }
         else
         {
             gameObject.GetComponent<Slider>().value = 0;
             this.isGuided = true;
-            this.ChangeSubMenuStatus(false);
         }
     }
 
@@ -62,14 +60,5 @@ public class IndexGuidedSliderController : MonoBehaviour
     public bool GetGuidedStatus()
     {
         return this.isGuided;
-    }
-
-    /* <summary>
-     * The function shows the indexes of the games
-     * </summary>
-     */
-    private void ChangeSubMenuStatus(bool status)
-    {
-        gameObject.transform.parent.GetChild(1).gameObject.SetActive(status);
     }
 }
