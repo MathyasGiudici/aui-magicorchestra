@@ -8,7 +8,7 @@ public class ContextSliderController : MonoBehaviour
     //Singleton of the ContextSliderController class
     public static ContextSliderController singleton = null;
 
-    private bool isContext = true;
+    private bool isContext = false;
 
     /* <summary>
      * The function is called when the component is instantiated
@@ -35,12 +35,12 @@ public class ContextSliderController : MonoBehaviour
         if (value >= 0.5)
         {
             gameObject.GetComponent<Slider>().value = 1;
-            this.isContext = false;
+            this.isContext = true;
         }
         else
         {
             gameObject.GetComponent<Slider>().value = 0;
-            this.isContext = true;
+            this.isContext = false;
         }
     }
 

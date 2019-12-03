@@ -14,7 +14,7 @@ public class CanvasManager : MonoBehaviour
      */
     void Start()
     {
-        ShowIntro();
+        //ShowIntro();
     }
 
     /* <summary>

@@ -8,7 +8,7 @@ public class GuidedSliderController : MonoBehaviour
     //Singleton of the IndexGuidedSliderController class
     public static GuidedSliderController singleton = null;
 
-    private bool isGuided = true;
+    private bool isGuided = false;
 
     /* <summary>
      * The function is called when the component is instantiated
@@ -44,12 +44,12 @@ public class GuidedSliderController : MonoBehaviour
         if (value >= 0.5)
         {
             gameObject.GetComponent<Slider>().value = 1;
-            this.isGuided = false;
+            this.isGuided = true;
         }
         else
         {
             gameObject.GetComponent<Slider>().value = 0;
-            this.isGuided = true;
+            this.isGuided = false;
         }
     }
 
