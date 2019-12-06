@@ -34,10 +34,7 @@ public class Game3PanelManager : MonoBehaviour
         Game3Parameters.TimeInShowing   = this.GetChildElement(1).GetComponent<TimeSlider>().GetCurrentTime();
         Game3Parameters.LightColor      = this.GetChildElement(2).GetComponent<ColourSlider>().GetCurrentColor();
         Game3Parameters.IsGestureMode   = this.GetChildElement(3).GetComponent<GestureToggle>().GetGestureMode();
-        Game3Parameters.TimeInDetecting = this.GetChildElement(4).GetComponent<TimeSlider>().GetCurrentTime();
-
-        // TODO: Parameter log for debug
-        // Game3Parameters.LogMe();
+        Game3Parameters.TimeInDetecting = this.GetChildElement(4).GetComponent<TimeSlider>().GetCurrentTime();;
 
         this.EnableSecondPanel();
         this.LoadSequences();

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CorsiController : MonoBehaviour
 {
@@ -8,12 +9,9 @@ public class CorsiController : MonoBehaviour
     public static CorsiController singleton = null;
 
     //Protected parameters that contains the main custom parameters of the game
-    //int[] sequence = { 2, 3, 6, 7, 4, 8, 1, 9, 5 };
-    int[] sequence = { 2 , 4};
+    int[] sequence = { 2, 3, 6, 5, 8, 9 };
     string lightColor = "#ff0000";
-
     float timeInShowing = 2;
-
     bool isGestureMode = false;
     float timeInDetecting = 2.0f;
 
@@ -47,11 +45,7 @@ public class CorsiController : MonoBehaviour
      */
     void Update()
     {
-        //Instruction to Start Sequence
-        if (Input.GetKeyUp(KeyCode.S) == true)
-        {
-            StartFrontalPhase();
-        }
+
     }
 
     /* <summary>
@@ -105,6 +99,8 @@ public class CorsiController : MonoBehaviour
     public void CorrectUserSequence()
     {
         Debug.Log("Sequence reproduced by the user correctly");
+        // TODO: returning point. Must be checked to be better implemented
+        SceneManager.LoadScene("MagicOrchestra");
     }
 
     /* <summary>

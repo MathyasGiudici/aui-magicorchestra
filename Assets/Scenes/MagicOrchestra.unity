@@ -658,7 +658,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 2
 --- !u!224 &126033361
 RectTransform:
@@ -676,7 +676,7 @@ RectTransform:
   - {fileID: 1489998292}
   - {fileID: 1286029826}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1090,7 +1090,7 @@ RectTransform:
   m_Children:
   - {fileID: 1532037226}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3312,7 +3312,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728324859}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &728324861
 Camera:
   m_ObjectHideFlags: 0
@@ -3346,7 +3346,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
+  m_TargetDisplay: 1
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -7599,7 +7599,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903935516}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1903935518
 Camera:
   m_ObjectHideFlags: 0
@@ -7633,7 +7633,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
+  m_TargetDisplay: 2
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -8734,7 +8734,7 @@ RectTransform:
   m_Children:
   - {fileID: 653420800}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
