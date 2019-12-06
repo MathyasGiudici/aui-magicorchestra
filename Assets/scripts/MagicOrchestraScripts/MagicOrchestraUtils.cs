@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class MagicOrchestraUtils
 {
-    public const string pathToCorsiSequences = "/corsi_sequences/difficulty_";
+    public const string pathToCorsiSequences = "/corsi_sequences.csv";
 
     public const float generalTextTimeShow_short = 2.0f;
     public const float generalTextTimeShow_long = 4.0f;

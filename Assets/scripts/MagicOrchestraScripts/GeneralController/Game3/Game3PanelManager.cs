@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game3PanelManager : MonoBehaviour
 {
     public GameObject togglePrefab = null;
+    public GameObject toggleGroup = null;
 
-    private List<List<int>> sequences = null;
+    private List<SequenceObjectFile> sequenceObjectFiles = null;
 
     /* <summary>
      * Start is called before the first frame update
@@ -35,54 +37,124 @@ public class Game3PanelManager : MonoBehaviour
         Game3Parameters.TimeInDetecting = this.GetChildElement(4).GetComponent<TimeSlider>().GetCurrentTime();
 
         // TODO: Parameter log for debug
-        Game3Parameters.LogMe();
+        // Game3Parameters.LogMe();
 
         this.EnableSecondPanel();
-        this.LoadSequence();
+        this.LoadSequences();
     }
 
-    private void LoadSequence()
+    private void LoadSequences()
     {
-        // Loading the sequence file
-        string path = Application.streamingAssetsPath + MagicOrchestraUtils.pathToCorsiSequences + Game3Parameters.Difficulty.ToString() + ".json";
-        string jsonToString = File.ReadAllText(path);
-        CorsiSequenceObject corsiObj = JsonUtility.FromJson<CorsiSequenceObject>(jsonToString);
-
-        Debug.Log("dif:" + corsiObj.difficulty);
-        Debug.Log("seq:" + corsiObj.sequences);
-        // Saving the reference
-        this.sequences = corsiObj.sequences;
+        this.LoadingFromFile();
 
         // Getting the sequence panel
         GameObject sequencePanel = gameObject.transform.GetChild(1).transform.GetChild(0).gameObject;
+        SequenceObjectFile sequenceObjectFile = sequenceObjectFiles[Game3Parameters.Difficulty - 2];
 
-        // Looping on sequences
-        for(int arrayIndex = 0; arrayIndex < corsiObj.sequences.Count; arrayIndex++)
+        // Looping on sequences of the target difficulty
+        for (int arrayIndex = 0; arrayIndex < sequenceObjectFile.sequences.Count; arrayIndex++)
         {
-            int[] currentArray = corsiObj.sequences.ToArray()[arrayIndex].ToArray();
+            // Getting a sequence
+            List<int> currentArray = sequenceObjectFile.sequences[arrayIndex];
 
-            // Creating a new toogle
+            // Creating a new toggle
             GameObject toggle = Instantiate(togglePrefab);
             toggle.transform.SetParent(sequencePanel.transform);
             toggle.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             toggle.GetComponent<SequenceToggle>().SetIndex(arrayIndex);
 
-            string stringToWrite = "";
-            // Creating the visual sequence
+            // Setting toggle group
+            toggleGroup.GetComponent<ToggleGroup>().RegisterToggle(toggle.GetComponent<Toggle>());
+            toggle.GetComponent<Toggle>().group = toggleGroup.GetComponent<ToggleGroup>();
 
-            for(int elemIndex=0; elemIndex < currentArray.Length; elemIndex++)
+            // In order to leave only one toggle on
+            if( arrayIndex != 0)
             {
-                stringToWrite += currentArray[elemIndex].ToString() + " - ";
+                toggle.GetComponent<Toggle>().isOn = false;
             }
-            stringToWrite = stringToWrite.Remove(stringToWrite.Length - 3);
+
+            // Creating the visual sequence
+            string stringToWrite = "";
+            foreach(int number in currentArray)
+                stringToWrite = stringToWrite + number.ToString() + " ";
             toggle.transform.GetChild(1).gameObject.GetComponent<Text>().text = stringToWrite;
+        }
+    }
+
+    private void LoadingFromFile()
+    {
+        if( this.sequenceObjectFiles != null)
+        {
+            // Parsing already done
+            return;
+        }
+
+        // Instanciting the sequences list
+        this.sequenceObjectFiles = new List<SequenceObjectFile>();
+
+        // Loading the sequence file
+        string path = Application.streamingAssetsPath + MagicOrchestraUtils.pathToCorsiSequences;
+        string cvsFile = File.ReadAllText(path);
+        String[] lines = cvsFile.Split("\n"[0]);
+
+        // Looping on lines of the file
+        // KEEP ATTENTION:
+        // - line starts from 1 in order to skip the header line
+        // - line arrives before lines.Lenght - 1 because the last line is empty
+        for(int line=1; line < lines.Length -1; line++)
+        {
+            // Parsing the file removing the separetors
+            String[] lineData = lines[line].Split(","[0]);
+
+            // Creating the Unity Object representing the sequences
+            SequenceObjectFile objectFile = new SequenceObjectFile();
+            objectFile.sequences = new List<List<int>>();
+
+            // Converting the difficulty
+            objectFile.difficulty = int.Parse(lineData[0]);
+
+            // Retriving all the sequences of the target difficulty
+            for(int seqID=1 ; seqID < lineData.Length ; seqID++)
+            {
+                // Creating the list of a given sequence
+                List<int> seqList = new List<int>();
+
+                // Looping on chars to add numbers in the list
+                foreach (char singleChar in lineData[seqID])
+                {
+                    if (singleChar != " "[0])
+                        seqList.Add(int.Parse(singleChar.ToString()));
+                }
+
+                // Adding the sequence to the sequences' list
+                objectFile.sequences.Add(seqList);
+            }
+
+            // Adding the Object in the Class list
+            this.sequenceObjectFiles.Add(objectFile);
         }
     }
 
     public void SecondPanelGamePressed()
     {
-        
+        int arrayIndex = -1;
 
+        foreach (Toggle toggle in toggleGroup.GetComponent<ToggleGroup>().ActiveToggles())
+        {
+            if(toggle.GetComponent<Toggle>().isOn)
+            {
+                arrayIndex = toggle.GetComponent<SequenceToggle>().GetIndex();
+            }
+        }
+
+        if( arrayIndex == -1)
+        {
+            Debug.Log("Some problems in retriving toggle associated to a sequence");
+        }
+
+        Game3Parameters.Sequence = this.sequenceObjectFiles[Game3Parameters.Difficulty - 2].sequences[arrayIndex].ToArray();
+
+        SceneManager.LoadScene("CorsiTestScene");
     }
 
     private void EnableFirstPanel()
@@ -103,8 +175,7 @@ public class Game3PanelManager : MonoBehaviour
     }
 }
 
-[Serializable]
-public class CorsiSequenceObject
+public class SequenceObjectFile
 {
     public int difficulty;
     public List<List<int>> sequences;

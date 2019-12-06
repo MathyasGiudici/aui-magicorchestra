@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Game3Parameters
 {
-    // private static int[] sequence;
+    private static int[] sequence;
     private static string lightColor;
     private static int difficulty;
     private static bool isGestureMode;
@@ -67,6 +67,18 @@ public static class Game3Parameters
         set
         {
             timeInDetecting = value;
+        }
+    }
+
+    public static int[] Sequence
+    {
+        get
+        {
+            return sequence;
+        }
+        set
+        {
+            sequence = value;
         }
     }
 

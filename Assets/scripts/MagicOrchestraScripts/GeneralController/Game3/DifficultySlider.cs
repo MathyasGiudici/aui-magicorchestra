@@ -16,16 +16,11 @@ public class DifficultySlider : MonoBehaviour
         float value = gameObject.GetComponent<Slider>().value;
         float newValue = (float)Mathf.Round(value * 10f) / 10f;
         gameObject.GetComponent<Slider>().value = newValue;
-
-        this.CreateDifficultyValue();
-    }
-
-    public void CreateDifficultyValue()
-    {
-        float value = gameObject.GetComponent<Slider>().value * 8;
-        int newValue = Mathf.RoundToInt(value) + 2;
-        this.currentDifficulty = newValue;
+        newValue *= 7;
+        newValue = Mathf.RoundToInt(newValue) + 2;
+        this.currentDifficulty = (int) newValue;
         gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<Text>().text = newValue.ToString();
+
     }
 
     public int GetCurrentDifficulty()
