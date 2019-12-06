@@ -9,28 +9,21 @@ public class TimeSlider : MonoBehaviour
     private float currentTime = 0.0f;
 
     /* <summary>
-     * Start is called before the first frame update
-     * </summary>
-     */
-    void Start()
-    {
-        this.CreateTimeValue();
-    }
-
-    /* <summary>
      * Update is called once per frame
      * </summary>
      */
     void Update()
     {
-        this.CreateTimeValue();
+        float value = gameObject.GetComponent<Slider>().value;
+        float newValue = (float) Mathf.Round(value * 10f) / 10f;
+        gameObject.GetComponent<Slider>().value = newValue;
+        newValue *= 5;
+        gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<Text>().text = newValue.ToString();
+        this.currentTime = newValue;
     }
 
-    public void CreateTimeValue()
+    public float GetCurrentTime()
     {
-        float timeValue = gameObject.GetComponent<Slider>().value * 5f;
-        timeValue = (float) Mathf.Round(timeValue * 100f)/100f;
-        this.currentTime = timeValue;
-        gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<Text>().text = timeValue.ToString();
+        return this.currentTime;
     }
 }

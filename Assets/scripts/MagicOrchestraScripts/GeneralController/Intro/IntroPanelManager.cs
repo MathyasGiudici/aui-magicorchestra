@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePanelManager : MonoBehaviour
+public class IntroPanelManager : MonoBehaviour
 {
     // Update is called once per frame
     void Update()

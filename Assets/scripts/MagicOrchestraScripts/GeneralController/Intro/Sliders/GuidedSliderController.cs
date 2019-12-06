@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GuidedSliderController : MonoBehaviour
 {
-    //Singleton of the IndexGuidedSliderController class
+    //Singleton of the GuidedSliderController class
     public static GuidedSliderController singleton = null;
 
     private bool isGuided = false;
@@ -31,15 +31,6 @@ public class GuidedSliderController : MonoBehaviour
      */
     void Update()
     {
-        if (ContextSliderController.singleton.GetContextStatus())
-        {
-            GuidedSliderController.singleton.gameObject.SetActive(true);
-        }
-        else
-        {
-            GuidedSliderController.singleton.gameObject.SetActive(false);
-            return;
-        }
         float value = gameObject.GetComponent<Slider>().value;
         if (value >= 0.5)
         {

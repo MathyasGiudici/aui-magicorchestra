@@ -43,26 +43,10 @@ public static class MagicOrchestraParameters
         }
     }
 
-
-
-    public static class Game3Settings
-    { 
-        // private static int[] sequence;
-        private static string lightColor;
-        private static bool isGestureMode;
-        private static float timeInShowing, timeInDetecting;
-
-
-        public static string LightColor
-        {
-            get
-            {
-                return lightColor;
-            }
-            set
-            {
-                lightColor = value;
-            }
-        }
+    public static void LogMe()
+    {
+        Debug.Log("IsContext: " + IsContext);
+        Debug.Log("IsGuided: " + IsGuided);
+        Debug.Log("GameNumber: " + GameNumber);        
     }
 }

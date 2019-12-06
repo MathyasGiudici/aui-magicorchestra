@@ -28,5 +28,6 @@ public class GameStartButton : MonoBehaviour
             CanvasManager.singleton.ShowGameSettingPanel(panelName);
         }
 
+        MagicOrchestraParameters.LogMe();
     }
 }

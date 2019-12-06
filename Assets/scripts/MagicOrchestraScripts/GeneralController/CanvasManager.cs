@@ -14,6 +14,7 @@ public class CanvasManager : MonoBehaviour
      */
     void Start()
     {
+        // TODO: COMMENT THIS LINE ONLY IN DEBUG MODE
         //ShowIntro();
     }
 
