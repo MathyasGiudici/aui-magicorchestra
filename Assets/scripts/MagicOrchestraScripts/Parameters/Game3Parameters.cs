@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class Game3Parameters
 {
+    private static int difficulty;
     private static int[] sequence;
     private static string lightColor;
-    private static int difficulty;
     private static bool isGestureMode;
     private static float timeInShowing, timeInDetecting;
 
@@ -81,6 +81,20 @@ public static class Game3Parameters
             sequence = value;
         }
     }
+
+    public static string StringifyMe()
+    {
+        string toReturn = "";
+
+        toReturn += ("Difficoltà: " + Difficulty + "\n");
+        toReturn += ("Tempo proiezione frontale: " + TimeInShowing + " secondi\n");
+        // toReturn += ("Colore: " + LightColor + "\n");
+        toReturn += ("Modalità Gesture: " + IsGestureMode + "\n");
+        toReturn += ("Tempo di riconoscimento: " + TimeInDetecting + " secondi\n");
+
+        return toReturn;
+    }
+
 
     public static void LogMe()
     {

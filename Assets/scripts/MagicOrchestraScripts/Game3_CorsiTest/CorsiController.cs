@@ -36,16 +36,15 @@ public class CorsiController : MonoBehaviour
      */
     void Start()
     {
-        Debug.Log("Corsi Test is on fire!");
-    }
-
-    /* <summary>
-     * Update is called once per frame
-     * </summary>
-     */
-    void Update()
-    {
-
+        if (Game3Parameters.Difficulty == 0)
+        {
+            return;
+        }
+        this.sequence = Game3Parameters.Sequence;
+        this.lightColor = Game3Parameters.LightColor;
+        this.timeInShowing = Game3Parameters.TimeInShowing;
+        this.isGestureMode = Game3Parameters.IsGestureMode;
+        this.timeInDetecting = Game3Parameters.TimeInDetecting;
     }
 
     /* <summary>
@@ -65,7 +64,7 @@ public class CorsiController : MonoBehaviour
     public void EndFrontalPhase()
     {
         Debug.Log("End of frontal sequence");
-        StartUserPhase();
+        CorsiCanvasController.singleton.DecisionPoint();
     }
 
     /* <summary>

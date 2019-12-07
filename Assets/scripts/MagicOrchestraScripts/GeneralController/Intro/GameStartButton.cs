@@ -27,7 +27,5 @@ public class GameStartButton : MonoBehaviour
             string panelName = "Game" + gameNumber.ToString() +"SettingPanel";
             CanvasManager.singleton.ShowGameSettingPanel(panelName);
         }
-
-        MagicOrchestraParameters.LogMe();
     }
 }

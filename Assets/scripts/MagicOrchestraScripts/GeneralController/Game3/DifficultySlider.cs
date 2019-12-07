@@ -16,6 +16,8 @@ public class DifficultySlider : MonoBehaviour
         float value = gameObject.GetComponent<Slider>().value;
         float newValue = (float)Mathf.Round(value * 10f) / 10f;
         gameObject.GetComponent<Slider>().value = newValue;
+
+        // Range [2,9]
         newValue *= 7;
         newValue = Mathf.RoundToInt(newValue) + 2;
         this.currentDifficulty = (int) newValue;

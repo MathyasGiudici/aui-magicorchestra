@@ -17,7 +17,11 @@ public class TimeSlider : MonoBehaviour
         float value = gameObject.GetComponent<Slider>().value;
         float newValue = (float) Mathf.Round(value * 10f) / 10f;
         gameObject.GetComponent<Slider>().value = newValue;
+
+        // Range [1,5]
         newValue *= 5;
+        newValue += 1;
+
         gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<Text>().text = newValue.ToString();
         this.currentTime = newValue;
     }
