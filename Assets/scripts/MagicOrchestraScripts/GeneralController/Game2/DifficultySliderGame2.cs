@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DifficultySlider : MonoBehaviour
+public class DifficultySliderGame2 : MonoBehaviour
 {
-    private int currentDifficulty = 2;
+    private int currentDifficulty = 1;
 
     /* <summary>
      * Update is called once per frame
@@ -17,10 +17,10 @@ public class DifficultySlider : MonoBehaviour
         float newValue = (float)Mathf.Round(value * 10f) / 10f;
         gameObject.GetComponent<Slider>().value = newValue;
 
-        // Range [2,9]
-        newValue *= 7;
-        newValue = Mathf.RoundToInt(newValue) + 2;
-        this.currentDifficulty = (int) newValue;
+        // Range [1,9]
+        newValue *= 8;
+        newValue = Mathf.RoundToInt(newValue) + 1;
+        this.currentDifficulty = (int)newValue;
         gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<Text>().text = newValue.ToString();
 
     }

@@ -30,7 +30,7 @@ public class Game3PanelManager : MonoBehaviour
     public void FirstPanelGamePressed()
     {
         // Setting paramteres
-        Game3Parameters.Difficulty      = this.GetChildElement(0).GetComponent<DifficultySlider>().GetCurrentDifficulty();
+        Game3Parameters.Difficulty      = this.GetChildElement(0).GetComponent<DifficultySliderGame3>().GetCurrentDifficulty();
         Game3Parameters.TimeInShowing   = this.GetChildElement(1).GetComponent<TimeSlider>().GetCurrentTime();
         Game3Parameters.LightColor      = this.GetChildElement(2).GetComponent<ColourSlider>().GetCurrentColor();
         Game3Parameters.IsGestureMode   = this.GetChildElement(3).GetComponent<GestureToggle>().GetGestureMode();
