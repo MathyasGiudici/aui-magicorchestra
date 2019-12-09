@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GestureToggle : MonoBehaviour
+public class GeneralGameToggle : MonoBehaviour
 {
+    // Internal status
 	private bool status = true;
 
     public void ChangeStatus()

@@ -6,7 +6,12 @@ using UnityEngine.UI;
 
 public class TimeSlider : MonoBehaviour
 {
+    // Internal value of time
     private float currentTime = 0.0f;
+
+    // Time values setting from Unity
+    public float lowTime = 1.0f;
+    public float highTime = 5.0f;
 
     /* <summary>
      * Update is called once per frame
@@ -19,8 +24,8 @@ public class TimeSlider : MonoBehaviour
         gameObject.GetComponent<Slider>().value = newValue;
 
         // Range [1,5]
-        newValue *= 5;
-        newValue += 1;
+        newValue *= highTime;
+        newValue += lowTime;
 
         gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<Text>().text = newValue.ToString();
         this.currentTime = newValue;

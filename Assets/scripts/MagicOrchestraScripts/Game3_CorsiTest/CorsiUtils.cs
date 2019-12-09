@@ -17,6 +17,9 @@ public static class CorsiUtils
         if (color.IndexOf('#') != -1)
             color = color.Replace("#", "");
 
+        //Lowercasing the string
+        color = color.ToLower();
+
         //Retriving RGB
         int r, g, b = 0;
         r = int.Parse(color.Substring(0, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
@@ -24,7 +27,7 @@ public static class CorsiUtils
         b = int.Parse(color.Substring(4, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
 
         material.color = new Color(r,g,b);
-        material.SetColor("_EMISSION", material.color);
+        material.SetColor("_EmissionColor", material.color * 0.5f);
 
     }
 

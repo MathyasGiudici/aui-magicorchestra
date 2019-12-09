@@ -86,6 +86,7 @@ public static class Game3Parameters
     {
         string toReturn = "";
 
+        toReturn += ("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence) + "\n");
         toReturn += ("Difficoltà: " + Difficulty + "\n");
         toReturn += ("Tempo proiezione frontale: " + TimeInShowing + " secondi\n");
         // toReturn += ("Colore: " + LightColor + "\n");
@@ -98,6 +99,7 @@ public static class Game3Parameters
 
     public static void LogMe()
     {
+        Debug.Log("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence));
         Debug.Log("Difficulty: " + Difficulty);
         Debug.Log("TimeInShowing: " + TimeInShowing);
         Debug.Log("LightColor: " + LightColor);
