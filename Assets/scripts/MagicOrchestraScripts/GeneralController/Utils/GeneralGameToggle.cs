@@ -12,7 +12,7 @@ public class GeneralGameToggle : MonoBehaviour
 		this.status = !this.status;
 	}
 
-    public bool GetGestureMode()
+    public bool GetToggleStatus()
 	{
 		return this.status;
 	}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game2PanelManager : MonoBehaviour
@@ -78,6 +79,27 @@ public class Game2PanelManager : MonoBehaviour
 
     public void GamePressed()
     {
+        Game2Parameters.Difficulty = this.gameObject.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<DifficultySlider>().GetCurrentDifficulty();
+        Game2Parameters.IsReverse = this.gameObject.transform.GetChild(0).GetChild(1).GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
 
+        int arrayIndex = -1;
+
+        foreach (Toggle toggle in toggleGroup.GetComponent<ToggleGroup>().ActiveToggles())
+        {
+            if (toggle.GetComponent<Toggle>().isOn)
+            {
+                arrayIndex = toggle.GetComponent<SequenceToggle>().GetIndex();
+            }
+        }
+
+        if (arrayIndex == -1)
+        {
+            Debug.Log("Some problems in retriving toggle associated to a sequence");
+        }
+
+        Game2Parameters.Sequence = this.sequenceObjectFiles[Game2Parameters.Difficulty - 2].sequences[arrayIndex].ToArray();
+        Game2Parameters.LogMe();
+
+        SceneManager.LoadScene("Game2");
     }
 }
