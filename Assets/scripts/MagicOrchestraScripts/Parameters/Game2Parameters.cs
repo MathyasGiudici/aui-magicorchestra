@@ -7,6 +7,7 @@ public static class Game2Parameters
     private static int difficulty;
     private static int[] sequence;
     private static bool isReverse;
+    private static float timeInShowing;
 
     public static int Difficulty
     {
@@ -44,6 +45,18 @@ public static class Game2Parameters
         }
     }
 
+    public static float TimeInShowing
+    {
+        get
+        {
+            return timeInShowing;
+        }
+        set
+        {
+            timeInShowing = value;
+        }
+    }
+
     public static string StringifyMe()
     {
         string toReturn = "";
@@ -51,6 +64,7 @@ public static class Game2Parameters
         toReturn += ("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence) + "\n");
         toReturn += ("Difficoltà: " + Difficulty + "\n");
         toReturn += ("Modalità Reverse: " + IsReverse + "\n");
+        toReturn += ("Tempo proiezione frontale: " + TimeInShowing + " secondi\n");
 
         return toReturn;
     }
@@ -61,5 +75,6 @@ public static class Game2Parameters
         Debug.Log("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence));
         Debug.Log("Difficulty: " + Difficulty);
         Debug.Log("Modalità Reverse: " + IsReverse);
+        Debug.Log("TimeInShowing: " + TimeInShowing);
     }
 }

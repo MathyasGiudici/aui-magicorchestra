@@ -11,6 +11,8 @@ public class UserDigitSpan : MonoBehaviour
     private int[] sequence;
     private bool isReverse;
 
+    private bool recognitionOn = false;
+
     private int currentIndex;
 
     void Awake()
@@ -37,6 +39,9 @@ public class UserDigitSpan : MonoBehaviour
 
     public void SelectNumber(int number)
     {
+        if (!(recognitionOn))
+            return;
+
         if (sequence[currentIndex] != number)
         {
             SequenceShower.singleton.ShowEndMessage(false);
@@ -59,4 +64,13 @@ public class UserDigitSpan : MonoBehaviour
         }
     }
 
+    public void PutRecognitionOn()
+    {
+        this.recognitionOn = true;
+    }
+
+    public void PutRecognitionOff()
+    {
+        this.recognitionOn = false;
+    }
 }

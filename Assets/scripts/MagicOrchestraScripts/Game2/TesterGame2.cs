@@ -2,19 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tester : MonoBehaviour
+public class TesterGame2 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //Singleton of the SequenceShower class
+    public static TesterGame2 singleton = null;
+
+
+    public bool isRecognitionEnabled = false;
+
+    /* <summary>
+    * The function is called when the component is instantiated
+    * </summary>
+    */
+    void Awake()
     {
-        
+        //Code to manage the singleton uniqueness
+        if ((singleton != null) && (singleton != this))
+        {
+            Destroy(gameObject);
+            return;
+        }
+        singleton = this;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if(!(UserDigitSpan.singleton))
+        if(!(isRecognitionEnabled))
             return;
 
         if(Input.GetKeyUp(KeyCode.Alpha1) == true)

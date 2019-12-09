@@ -63,7 +63,6 @@ public class CorsiController : MonoBehaviour
      */
     public void EndFrontalPhase()
     {
-        Debug.Log("End of frontal sequence");
         CorsiCanvasController.singleton.DecisionPoint();
     }
 
@@ -97,8 +96,6 @@ public class CorsiController : MonoBehaviour
      */
     public void CorrectUserSequence()
     {
-        Debug.Log("Sequence reproduced by the user correctly");
-        // TODO: returning point. Must be checked to be better implemented
         SceneManager.LoadScene("MagicOrchestra");
     }
 
@@ -109,7 +106,6 @@ public class CorsiController : MonoBehaviour
      */
     public void WrongUserSequence()
     {
-        Debug.Log("Sequence reproduced by the user NOT correctly");
         this.StartFrontalPhase(); 
     }
 

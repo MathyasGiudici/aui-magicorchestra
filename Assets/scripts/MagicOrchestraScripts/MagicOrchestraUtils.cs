@@ -13,12 +13,6 @@ public static class MagicOrchestraUtils
     public const float generalPauseTime_short = 2.0f;
     public const float generalPauseTime_long = 4.0f;
 
-    public static void LoggerOfObjects(Object targetObject)
-    {
-        var output = JsonUtility.ToJson(targetObject, true);
-        Debug.Log(output);
-    }
-
     public static string StringifySequence(int[] sequence)
     {
         string sequenceString = "";
