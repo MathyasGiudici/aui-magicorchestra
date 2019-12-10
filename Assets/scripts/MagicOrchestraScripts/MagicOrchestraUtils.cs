@@ -16,7 +16,7 @@ public static class MagicOrchestraUtils
     public static string StringifySequence(int[] sequence)
     {
         string sequenceString = "";
-        foreach (int number in sequence)
+            foreach (int number in sequence)
             sequenceString = sequenceString + number.ToString() + " ";
 
         return sequenceString;
