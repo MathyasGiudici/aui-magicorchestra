@@ -10,6 +10,7 @@ public class Game2PanelManager : MonoBehaviour
     public GameObject togglePrefab = null;
     public GameObject toggleGroup = null;
     public Slider difficultySlider;
+    public GameObject hintPanel;
 
     // Internal seqence
     private List<SequenceObjectFile> sequenceObjectFiles = null;
@@ -21,6 +22,14 @@ public class Game2PanelManager : MonoBehaviour
     void Start()
     {
         this.LoadSequences();        
+    }
+
+    void Update()
+    {
+        if (MagicOrchestraParameters.IsContext)
+            hintPanel.SetActive(true);
+        else
+            hintPanel.SetActive(false);
     }
 
 
@@ -83,7 +92,10 @@ public class Game2PanelManager : MonoBehaviour
         Game2Parameters.IsReverse = this.gameObject.transform.GetChild(0).GetChild(1).GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
         Game2Parameters.TimeInShowing = this.gameObject.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<TimeSlider>().GetCurrentTime();
 
-        int arrayIndex = -1;
+        if (MagicOrchestraParameters.IsContext)
+            Game2Parameters.IsHintMode = hintPanel.transform.GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
+
+            int arrayIndex = -1;
 
         foreach (Toggle toggle in toggleGroup.GetComponent<ToggleGroup>().ActiveToggles())
         {
@@ -99,7 +111,6 @@ public class Game2PanelManager : MonoBehaviour
         }
 
         Game2Parameters.Sequence = this.sequenceObjectFiles[Game2Parameters.Difficulty - 2].sequences[arrayIndex].ToArray();
-        Game2Parameters.LogMe();
 
         SceneManager.LoadScene("Game2");
     }
