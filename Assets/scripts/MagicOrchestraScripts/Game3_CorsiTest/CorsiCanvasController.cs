@@ -35,7 +35,8 @@ public class CorsiCanvasController : MonoBehaviour
      */
     void Start()
     {
-        parametersSpace.text = Game3Parameters.StringifyMe(); 
+        if(Game3Parameters.Difficulty != 0)
+            parametersSpace.text = Game3Parameters.StringifyMe(); 
     }
 
     public void DecisionPoint()
