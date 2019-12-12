@@ -21,6 +21,9 @@ public class SequenceUser : MonoBehaviour
     private bool isGestureMode = true;
     private float captureTime = 2;
 
+    //Canvas
+    public GameObject[] userTurnPanel;
+
     //Current cube where the user is
     private GameObject currentCube = null;
     private int currentCubeNumber = 0;
@@ -76,6 +79,8 @@ public class SequenceUser : MonoBehaviour
         this.currentIndexSequence = 0;
 
         this.InstantiateControllerOnCubes();
+
+        this.coroutine = StartCoroutine(this.PanelCoroutine());
     }
 
     /* <summary>
@@ -137,6 +142,24 @@ public class SequenceUser : MonoBehaviour
 
         currentIndexSequence++;
     }
+
+    private IEnumerator PanelCoroutine()
+    {
+        //Showing the User turn Panel
+        foreach (GameObject go in userTurnPanel)
+        {
+            go.SetActive(true);
+        }
+        yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_short);
+        foreach (GameObject go in userTurnPanel)
+        {
+            go.SetActive(false);
+        }
+
+        //Abort coroutine
+        StopClassCoroutine();
+    }
+
 
     private IEnumerator LightCoroutine(GameObject cubeToLight, bool isFinal, GameObject panel, bool isSequenceCorrect)
     {

@@ -92,16 +92,16 @@ public class SequenceLighter : MonoBehaviour
             }        
         }
 
-        //Showing the User turn Panel
-        foreach( GameObject go in userTurnPanel)
-        {
-            go.SetActive(true);
-        }
-        yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_short);
-        foreach (GameObject go in userTurnPanel)
-        {
-            go.SetActive(false);
-        }
+        ////Showing the User turn Panel
+        //foreach( GameObject go in userTurnPanel)
+        //{
+        //    go.SetActive(true);
+        //}
+        //yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_short);
+        //foreach (GameObject go in userTurnPanel)
+        //{
+        //    go.SetActive(false);
+        //}
 
         CorsiController.singleton.EndFrontalPhase();
         StopCoroutine(this.lightCoroutine);
