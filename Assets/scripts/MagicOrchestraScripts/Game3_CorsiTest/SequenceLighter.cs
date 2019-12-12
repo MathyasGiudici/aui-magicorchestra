@@ -13,7 +13,7 @@ public class SequenceLighter : MonoBehaviour
 
     //Canvas
     public GameObject startingPanel;
-    public GameObject[] userTurnPanel;
+    // public GameObject[] userTurnPanel;
 
     //Time of the light
     private float showTime = 2;

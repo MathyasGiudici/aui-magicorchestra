@@ -22,7 +22,7 @@ public class SequenceUser : MonoBehaviour
     private float captureTime = 2;
 
     //Canvas
-    public GameObject[] userTurnPanel;
+    public GameObject userTurnPanel;
 
     //Current cube where the user is
     private GameObject currentCube = null;
@@ -146,15 +146,9 @@ public class SequenceUser : MonoBehaviour
     private IEnumerator PanelCoroutine()
     {
         //Showing the User turn Panel
-        foreach (GameObject go in userTurnPanel)
-        {
-            go.SetActive(true);
-        }
+        userTurnPanel.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_short);
-        foreach (GameObject go in userTurnPanel)
-        {
-            go.SetActive(false);
-        }
+        userTurnPanel.SetActive(false);
 
         //Abort coroutine
         StopClassCoroutine();
