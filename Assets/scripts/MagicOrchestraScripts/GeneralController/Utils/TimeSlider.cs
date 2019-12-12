@@ -24,10 +24,16 @@ public class TimeSlider : MonoBehaviour
         gameObject.GetComponent<Slider>().value = newValue;
 
         // Range [1,5]
-        newValue *= highTime;
+        newValue *= (highTime - lowTime);
         newValue += lowTime;
 
-        gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<Text>().text = newValue.ToString();
+        string toVisualize;
+        if (Mathf.RoundToInt(newValue) == 1)
+            toVisualize = newValue.ToString() + " secondo";
+        else
+            toVisualize = newValue.ToString() + " secondi";
+
+        gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<Text>().text = toVisualize;
         this.currentTime = newValue;
     }
 

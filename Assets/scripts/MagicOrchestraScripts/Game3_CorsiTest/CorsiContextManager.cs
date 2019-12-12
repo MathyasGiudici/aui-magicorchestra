@@ -40,6 +40,7 @@ public class CorsiContextManager : MonoBehaviour
     private void PutContextCurtain()
     {
         generalCanvas.SetActive(true);
-        plane.GetComponent<MeshRenderer>().enabled = false;
+        if(!Game3Parameters.ShowPlane)
+            plane.GetComponent<MeshRenderer>().enabled = false;
     }
 }

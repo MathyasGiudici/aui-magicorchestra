@@ -52,4 +52,18 @@ public class GuidedSliderController : MonoBehaviour
     {
         return this.isGuided;
     }
+
+    public void ClickDetection(GameObject slider)
+    {
+        float value = slider.GetComponent<Slider>().value;
+        if (value >= 0.5)
+        {
+            slider.GetComponent<Slider>().value = 0;
+        }
+        else
+        {
+            slider.GetComponent<Slider>().value = 1;
+        }
+
+    }
 }

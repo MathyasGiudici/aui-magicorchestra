@@ -26,4 +26,12 @@ public static class MagicOrchestraUtils
 
         return sequenceString;
     }
+
+    public static string TrueFalseConverter(bool boolStatus)
+    {
+        if (boolStatus)
+            return "Abilitato";
+        else
+            return "Disabilitato";
+    }
 }

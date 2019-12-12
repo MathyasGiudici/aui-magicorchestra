@@ -35,6 +35,7 @@ public class Game3PanelManager : MonoBehaviour
         Game3Parameters.LightColor      = this.GetChildElement(2).GetComponent<ColourSlider>().GetCurrentColor();
         Game3Parameters.IsGestureMode   = this.GetChildElement(3).GetComponent<GeneralGameToggle>().GetToggleStatus();
         Game3Parameters.TimeInDetecting = this.GetChildElement(4).GetComponent<TimeSlider>().GetCurrentTime();
+        Game3Parameters.ShowPlane       = this.GetChildElement(5).GetComponent<GeneralGameToggle>().GetToggleStatus();
 
         this.EnableSecondPanel();
         this.LoadSequences();
@@ -57,27 +58,38 @@ public class Game3PanelManager : MonoBehaviour
             // Getting a sequence
             List<int> currentArray = sequenceObjectFile.sequences[arrayIndex];
 
-            // Creating a new toggle
-            GameObject toggle = Instantiate(togglePrefab);
-            toggle.transform.SetParent(sequencePanel.transform);
-            toggle.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-            toggle.GetComponent<SequenceToggle>().SetIndex(arrayIndex);
-
-            // Setting toggle group
-            toggleGroup.GetComponent<ToggleGroup>().RegisterToggle(toggle.GetComponent<Toggle>());
-            toggle.GetComponent<Toggle>().group = toggleGroup.GetComponent<ToggleGroup>();
-
-            // In order to leave only one toggle on
-            if( arrayIndex != 0)
+            if (sequencePanel.transform.childCount != sequenceObjectFile.sequences.Count)
             {
-                toggle.GetComponent<Toggle>().isOn = false;
-            }
+                // Creating a new toggle
+                GameObject toggle = Instantiate(togglePrefab);
+                toggle.transform.SetParent(sequencePanel.transform);
+                toggle.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                toggle.GetComponent<SequenceToggle>().SetIndex(arrayIndex);
 
-            // Creating the visual sequence
-            string stringToWrite = "";
-            foreach(int number in currentArray)
-                stringToWrite = stringToWrite + number.ToString() + " ";
-            toggle.transform.GetChild(1).gameObject.GetComponent<Text>().text = stringToWrite;
+                // Setting toggle group
+                toggleGroup.GetComponent<ToggleGroup>().RegisterToggle(toggle.GetComponent<Toggle>());
+                toggle.GetComponent<Toggle>().group = toggleGroup.GetComponent<ToggleGroup>();
+
+                // In order to leave only one toggle on
+                if (arrayIndex != 0)
+                {
+                    toggle.GetComponent<Toggle>().isOn = false;
+                }
+
+                // Creating the visual sequence
+                string stringToWrite = "";
+                foreach (int number in currentArray)
+                    stringToWrite = stringToWrite + number.ToString() + " ";
+                toggle.transform.GetChild(1).gameObject.GetComponent<Text>().text = stringToWrite;
+            }
+            else
+            {
+                // Creating the visual sequence
+                string stringToWrite = "";
+                foreach (int number in currentArray)
+                    stringToWrite = stringToWrite + number.ToString() + " ";
+                sequencePanel.transform.GetChild(arrayIndex).gameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = stringToWrite;
+            }
         }
     }
 
@@ -101,6 +113,11 @@ public class Game3PanelManager : MonoBehaviour
         Game3Parameters.Sequence = this.sequenceObjectFiles[Game3Parameters.Difficulty - 2].sequences[arrayIndex].ToArray();
 
         SceneManager.LoadScene("CorsiTestScene");
+    }
+
+    public void BackToFirstPanel()
+    {
+        this.EnableFirstPanel();
     }
 
     private void EnableFirstPanel()

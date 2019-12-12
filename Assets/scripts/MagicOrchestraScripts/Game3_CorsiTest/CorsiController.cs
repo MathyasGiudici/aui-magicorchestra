@@ -106,7 +106,7 @@ public class CorsiController : MonoBehaviour
      */
     public void WrongUserSequence()
     {
-        this.StartFrontalPhase(); 
+        CorsiCanvasController.singleton.DecisionPoint(); 
     }
 
     /* <summary>

@@ -7,7 +7,7 @@ public static class Game3Parameters
     private static int difficulty;
     private static int[] sequence;
     private static string lightColor;
-    private static bool isGestureMode;
+    private static bool isGestureMode, showPlane;
     private static float timeInShowing, timeInDetecting;
 
     public static int Difficulty
@@ -82,28 +82,45 @@ public static class Game3Parameters
         }
     }
 
+    public static bool ShowPlane
+    {
+        get
+        {
+            return showPlane;
+        }
+        set
+        {
+            showPlane = value;
+        }
+    }
+
     public static string StringifyMe()
     {
         string toReturn = "";
 
-        toReturn += ("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence) + "\n");
         toReturn += ("Difficoltà: " + Difficulty + "\n");
-        toReturn += ("Tempo proiezione frontale: " + TimeInShowing + " secondi\n");
-        // toReturn += ("Colore: " + LightColor + "\n");
-        toReturn += ("Modalità Gesture: " + IsGestureMode + "\n");
-        toReturn += ("Tempo di riconoscimento: " + TimeInDetecting + " secondi\n");
+        toReturn += ("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence) + "\n");
+        toReturn += ("Tempo proiezione: " + TimeInShowing + " secondi\n");
+        toReturn += ("Modalità Gesture: " + MagicOrchestraUtils.TrueFalseConverter(IsGestureMode) + "\n");
+        if(!IsGestureMode)
+            toReturn += ("Tempo posizionamento: " + TimeInDetecting + " secondi\n");
+        if(MagicOrchestraParameters.IsContext)
+            toReturn += ("Modalità con piano: " + MagicOrchestraUtils.TrueFalseConverter(ShowPlane) + "\n");
 
         return toReturn;
     }
 
 
-    public static void LogMe()
+    public static void LogMe(bool isFirstPanel)
     {
-        Debug.Log("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence));
+        if(!isFirstPanel)
+            Debug.Log("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence));
+
         Debug.Log("Difficulty: " + Difficulty);
         Debug.Log("TimeInShowing: " + TimeInShowing);
         Debug.Log("LightColor: " + LightColor);
         Debug.Log("IsGestureMode: " + IsGestureMode);
         Debug.Log("TimeInDetecting: " + TimeInDetecting);
+        Debug.Log("ShowPlane: " + ShowPlane);
     }
 }
