@@ -35,7 +35,7 @@ public class Game2CanvasController : MonoBehaviour
      */
     void Start()
     {
-        parametersSpace.text = Game2Parameters.StringifyMe();
+        parametersSpace.text = MagicOrchestraParameters.StringifyMe() + Game2Parameters.StringifyMe();
     }
 
     public void DecisionPoint()

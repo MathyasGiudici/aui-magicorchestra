@@ -37,6 +37,7 @@ public class Game2Controller : MonoBehaviour
         this.sequence = Game2Parameters.Sequence;
         this.timeInShowing = Game2Parameters.TimeInShowing;
         this.isReverse = Game2Parameters.IsReverse;
+        Game2HitImageController.singleton.Init();
     }
 
     /* <summary>
@@ -53,7 +54,7 @@ public class Game2Controller : MonoBehaviour
         this.DisablePlayerMovement();
 
         UserDigitSpan.singleton.PutRecognitionOff();
-        SequenceShower.singleton.Show(this.sequence, this.timeInShowing, this.isReverse);
+        SequenceShower.singleton.Show(this.sequence, this.timeInShowing);
     }
 
     /* <summary>
@@ -67,6 +68,8 @@ public class Game2Controller : MonoBehaviour
 
     public void StartUserPhase()
     {
+        SequenceShower.singleton.ShowUserMessage(this.isReverse);
+
         UserDigitSpan.singleton.Init(this.sequence, this.isReverse);
         UserDigitSpan.singleton.PutRecognitionOn();
 

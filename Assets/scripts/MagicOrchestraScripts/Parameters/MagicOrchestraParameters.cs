@@ -43,6 +43,25 @@ public static class MagicOrchestraParameters
         }
     }
 
+    public static string StringifyMe()
+    {
+        string toReturn = "";
+
+        toReturn += "Magic Orchestra in ";
+        if (IsContext)
+        {
+            toReturn += "Modalità contesto";
+            if (isGuided)
+                toReturn += " guidata\n";
+            else
+                toReturn += "\n";
+        }
+        else
+            toReturn += "Modalità non contesto\n";
+
+        return toReturn;
+    }
+
     public static void LogMe()
     {
         Debug.Log("IsContext: " + IsContext);

@@ -23,12 +23,17 @@ public class Game2HitImageController : MonoBehaviour
             return;
         }
         singleton = this;
-    }    
+    }
 
-    public void ChangeImage()
+    public void Init()
     {
-        gameObject.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = sprites[0];
-        sprites.Remove(sprites[0]);
+        if (MagicOrchestraParameters.IsContext && Game2Parameters.IsHintMode && Game2Parameters.IsShuffle)
+            ShuffleSprites();
+    }
+
+    public void ChangeImage(int number)
+    {
+        gameObject.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = sprites[number-1];
     }
 
     public void SetActiveDisplayedHints(bool isActive)

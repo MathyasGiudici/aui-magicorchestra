@@ -10,7 +10,7 @@ public class Game2PanelManager : MonoBehaviour
     public GameObject togglePrefab = null;
     public GameObject toggleGroup = null;
     public Slider difficultySlider;
-    public GameObject hintPanel;
+    public GameObject contextPanel;
 
     // Internal seqence
     private List<SequenceObjectFile> sequenceObjectFiles = null;
@@ -27,9 +27,14 @@ public class Game2PanelManager : MonoBehaviour
     void Update()
     {
         if (MagicOrchestraParameters.IsContext)
-            hintPanel.SetActive(true);
+        {
+            contextPanel.SetActive(true);
+        }
+
         else
-            hintPanel.SetActive(false);
+        {
+            contextPanel.SetActive(false);
+        }
     }
 
 
@@ -41,7 +46,7 @@ public class Game2PanelManager : MonoBehaviour
         }
 
         // Getting the sequence panel
-        GameObject sequencePanel = gameObject.transform.GetChild(2).gameObject;
+        GameObject sequencePanel = gameObject.transform.GetChild(3).gameObject;
         SequenceObjectFile sequenceObjectFile = sequenceObjectFiles[difficultySlider.GetComponent<DifficultySlider>().GetCurrentDifficulty() - difficultySlider.GetComponent<DifficultySlider>().lowDifficulty];
 
 
@@ -77,6 +82,9 @@ public class Game2PanelManager : MonoBehaviour
             }
             else
             {
+                Debug.Log(sequencePanel.transform.childCount);
+                Debug.Log(sequenceObjectFile.sequences.Count);
+
                 // Creating the visual sequence
                 string stringToWrite = "";
                 foreach (int number in currentArray)
@@ -93,9 +101,16 @@ public class Game2PanelManager : MonoBehaviour
         Game2Parameters.TimeInShowing = this.gameObject.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<TimeSlider>().GetCurrentTime();
 
         if (MagicOrchestraParameters.IsContext)
-            Game2Parameters.IsHintMode = hintPanel.transform.GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
+        {
+            Game2Parameters.IsHintMode = this.gameObject.transform.GetChild(2).GetChild(0).GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
 
-            int arrayIndex = -1;
+            if (Game2Parameters.IsHintMode)
+                Game2Parameters.IsShuffle = this.gameObject.transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
+        }
+            
+
+
+        int arrayIndex = -1;
 
         foreach (Toggle toggle in toggleGroup.GetComponent<ToggleGroup>().ActiveToggles())
         {

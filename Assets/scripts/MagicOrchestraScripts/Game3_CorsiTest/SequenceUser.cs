@@ -118,6 +118,10 @@ public class SequenceUser : MonoBehaviour
     */
     public void CubeSelection()
     {
+        //To mitigate null pointer exception if the user play a selection where it is not on a cube
+        if (currentCube == null)
+            return;
+
         //Checking the correctness of the sequence
         if ( currentIndexSequence <= (sequence.Length - 1))
         {

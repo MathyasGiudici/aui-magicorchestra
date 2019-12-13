@@ -36,7 +36,7 @@ public class CorsiCanvasController : MonoBehaviour
     void Start()
     {
         if(Game3Parameters.Difficulty != 0)
-            parametersSpace.text = Game3Parameters.StringifyMe(); 
+            parametersSpace.text = MagicOrchestraParameters.StringifyMe() + Game3Parameters.StringifyMe(); 
     }
 
     public void DecisionPoint()

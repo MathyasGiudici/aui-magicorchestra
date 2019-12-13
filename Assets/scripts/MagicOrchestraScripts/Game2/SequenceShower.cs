@@ -38,17 +38,24 @@ public class SequenceShower : MonoBehaviour
     * <param name="sequence"> sequence is an array of numbers representing the numbers' sequence </param>
     * <remarks> sequence must contain the numbers and NOT as indexes </remarks>
     */
-    public void Show(int[] sequence, float showTime, bool isReverse)
+    public void Show(int[] sequence, float showTime)
     {
-        this.coroutine = StartCoroutine(this.SequenceRoutine(sequence, showTime, isReverse));
+        this.coroutine = StartCoroutine(this.SequenceRoutine(sequence, showTime));
+    }
+
+    public void ShowUserMessage(bool isReverse)
+    {
+        StopClassCoroutine();
+        this.coroutine = StartCoroutine(this.SequenceUserPanelRoutine(isReverse));
     }
 
     public void ShowEndMessage(bool hasWin)
     {
+        StopClassCoroutine();
         this.coroutine = StartCoroutine(this.FinalCoroutine(hasWin));
     }
 
-    private IEnumerator SequenceRoutine(int[] sequence, float showTime, bool isReverse)
+    private IEnumerator SequenceRoutine(int[] sequence, float showTime)
     {
         //Showing starting information
         frontalTextMessage.GetComponent<Text>().text = "Guarda la sequenza attentamente";
@@ -64,7 +71,6 @@ public class SequenceShower : MonoBehaviour
         SequenceContextManager.singleton.SetActiveDisplayedNumber(true);
         if (showHints)
         {
-            Game2HitImageController.singleton.ShuffleSprites();
             Game2HitImageController.singleton.SetActiveDisplayedHints(true);
         }
             
@@ -73,12 +79,12 @@ public class SequenceShower : MonoBehaviour
         {
             if (number >= 1 && number <= 9)
             {
+                if(showHints)
+                    Game2HitImageController.singleton.ChangeImage(number);
+
                 SequenceContextManager.singleton.ChangeDisplyedNumber(number.ToString());                
                 yield return new WaitForSeconds(showTime);
                 SequenceContextManager.singleton.ChangeDisplyedNumber("");
-
-                if (showHints)
-                    Game2HitImageController.singleton.ChangeImage();
             }
         }
 
@@ -86,6 +92,13 @@ public class SequenceShower : MonoBehaviour
         if (showHints)
             Game2HitImageController.singleton.SetActiveDisplayedHints(false);
 
+        Game2Controller.singleton.EndFrontalPhase();
+
+        this.StopClassCoroutine();
+    }
+
+    private IEnumerator SequenceUserPanelRoutine(bool isReverse)
+    {
         //Showing information about seqence
         if (!isReverse)
             frontalTextMessage.GetComponent<Text>().text = "Ripeti la sequenza";
@@ -98,10 +111,8 @@ public class SequenceShower : MonoBehaviour
         frontalTextMessage.GetComponent<Text>().text = "";
         yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
 
-        Game2Controller.singleton.EndFrontalPhase();
-
         this.StopClassCoroutine();
-    }    
+    }
 
     private IEnumerator FinalCoroutine(bool hasWin)
     {
@@ -109,7 +120,7 @@ public class SequenceShower : MonoBehaviour
         if (hasWin)
             frontalTextMessage.GetComponent<Text>().text = "Bravissimo!\nSequenza corretta";
         else
-            frontalTextMessage.GetComponent<Text>().text = "Ops... sequenza sbagliata";
+            frontalTextMessage.GetComponent<Text>().text = "Ops... hai sbagliato!";
 
         panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
