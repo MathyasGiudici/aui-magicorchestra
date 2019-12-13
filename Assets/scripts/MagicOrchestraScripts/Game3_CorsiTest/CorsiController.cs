@@ -96,7 +96,10 @@ public class CorsiController : MonoBehaviour
      */
     public void CorrectUserSequence()
     {
-        SceneManager.LoadScene("MagicOrchestra");
+        if (MagicOrchestraParameters.IsContext)
+            SceneManager.LoadScene("CutScenePlayer");
+        else
+            SceneManager.LoadScene("MagicOrchestra");
     }
 
     /* <summary>

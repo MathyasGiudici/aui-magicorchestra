@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MagicOrchestra.unity
     guid: aecc44f3c609b4212b99c623162eed2d
+  - enabled: 1
+    path: Assets/Scenes/CutScenePlayer.unity
+    guid: 7f444f60725124490a01baf6187b1291
   m_configObjects: {}
