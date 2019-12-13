@@ -50,8 +50,9 @@ public class Game2Controller : MonoBehaviour
     */
     public void StartFrontalPhase()
     {
+        this.DisablePlayerMovement();
+
         UserDigitSpan.singleton.PutRecognitionOff();
-        DisablePlayerMovement();
         SequenceShower.singleton.Show(this.sequence, this.timeInShowing, this.isReverse);
     }
 
@@ -82,7 +83,10 @@ public class Game2Controller : MonoBehaviour
     public void WrongUserSequence()
     {
         SequenceShower.singleton.StopClassCoroutine();
-        singleton.StartFrontalPhase();
+
+        UserDigitSpan.singleton.PutRecognitionOff();
+        DisablePlayerMovement();
+        Game2CanvasController.singleton.DecisionPoint();
     }
 
     /* <summary>

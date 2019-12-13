@@ -15,6 +15,10 @@ public class UserDigitSpan : MonoBehaviour
 
     private int currentIndex;
 
+    /* <summary>
+     * The function is called when the component is instantiated
+     * </summary>
+     */
     void Awake()
     {
         //Code to manage the singleton uniqueness

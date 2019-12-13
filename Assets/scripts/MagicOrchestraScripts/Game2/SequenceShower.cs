@@ -9,9 +9,8 @@ public class SequenceShower : MonoBehaviour
     public static SequenceShower singleton = null;
 
     //Text container
-    public Text frontalText;
-    public Text frontalNumberText;
-    public Text zenithText;
+    public GameObject panelMessage;
+    public GameObject frontalTextMessage;
 
     //Coroutine reference
     private Coroutine coroutine = null;
@@ -29,9 +28,6 @@ public class SequenceShower : MonoBehaviour
             return;
         }
         singleton = this;
-        this.frontalText.GetComponent<Text>().text = "";
-        this.frontalNumberText.GetComponent<Text>().text = "";
-        this.zenithText.GetComponent<Text>().text = "";
     }
 
     /* <summary>
@@ -49,54 +45,76 @@ public class SequenceShower : MonoBehaviour
 
     public void ShowEndMessage(bool hasWin)
     {
-        Destroy(gameObject.GetComponent<UserDigitSpan>());
         this.coroutine = StartCoroutine(this.FinalCoroutine(hasWin));
     }
-
 
     private IEnumerator SequenceRoutine(int[] sequence, float showTime, bool isReverse)
     {
         //Showing starting information
-        this.frontalText.GetComponent<Text>().text = "Guarda la sequenza attentamente";
+        frontalTextMessage.GetComponent<Text>().text = "Guarda la sequenza attentamente";
+        panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
-        this.frontalText.GetComponent<Text>().text = "";
+        panelMessage.SetActive(false);
+        frontalTextMessage.GetComponent<Text>().text = "";
         yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
+
+        bool showHints = MagicOrchestraParameters.IsContext && Game2Parameters.IsHintMode;
+
+        //Showing the sequence
+        SequenceContextManager.singleton.SetActiveDisplayedNumber(true);
+        if (showHints)
+        {
+            Game2HitImageController.singleton.ShuffleSprites();
+            Game2HitImageController.singleton.SetActiveDisplayedHints(true);
+        }
+            
 
         foreach (int number in sequence)
         {
             if (number >= 1 && number <= 9)
             {
-                this.frontalNumberText.GetComponent<Text>().text = number.ToString();
+                SequenceContextManager.singleton.ChangeDisplyedNumber(number.ToString());                
                 yield return new WaitForSeconds(showTime);
-                this.frontalNumberText.GetComponent<Text>().text = "";
+                SequenceContextManager.singleton.ChangeDisplyedNumber("");
+
+                if (showHints)
+                    Game2HitImageController.singleton.ChangeImage();
             }
         }
 
-        //Showing user turn information
-        if (!isReverse)
-            this.frontalText.GetComponent<Text>().text = "Ripeti la sequenza";
-        else
-            this.frontalText.GetComponent<Text>().text = "Ripeti la sequenza IN ORDINE INVERSO";
+        SequenceContextManager.singleton.SetActiveDisplayedNumber(false);
+        if (showHints)
+            Game2HitImageController.singleton.SetActiveDisplayedHints(false);
 
+        //Showing information about seqence
+        if (!isReverse)
+            frontalTextMessage.GetComponent<Text>().text = "Ripeti la sequenza";
+        else
+            frontalTextMessage.GetComponent<Text>().text = "Ripeti la sequenza IN ORDINE INVERSO";
+
+        panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
-        this.frontalText.GetComponent<Text>().text = "";
+        panelMessage.SetActive(false);
+        frontalTextMessage.GetComponent<Text>().text = "";
         yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
 
         Game2Controller.singleton.EndFrontalPhase();
 
         this.StopClassCoroutine();
-    }
+    }    
 
     private IEnumerator FinalCoroutine(bool hasWin)
     {
         //Showing user turn information
         if (hasWin)
-            this.frontalText.GetComponent<Text>().text = "Sequenza corretta!";
+            frontalTextMessage.GetComponent<Text>().text = "Bravissimo!\nSequenza corretta";
         else
-            this.frontalText.GetComponent<Text>().text = "Sequenza non corretta, riproviamo!";
+            frontalTextMessage.GetComponent<Text>().text = "Ops... sequenza sbagliata";
 
+        panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
-        this.frontalText.GetComponent<Text>().text = "";
+        panelMessage.SetActive(false);
+        frontalTextMessage.GetComponent<Text>().text = "";
         yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
 
         //Recalling correct function

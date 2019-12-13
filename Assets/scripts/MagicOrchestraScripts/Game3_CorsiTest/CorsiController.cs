@@ -72,11 +72,11 @@ public class CorsiController : MonoBehaviour
      */
     public void StartUserPhase()
     {
-        //Enabling the user movement
-        EnablingPlayerMovement();
-
         //Instantiating the User phase manager
         SequenceUser.singleton.StartSequence(lightColor,timeInDetecting,isGestureMode,sequence);
+
+        //Enabling the user movement
+        EnablingPlayerMovement();
     }
 
     /* <summary>
@@ -106,6 +106,7 @@ public class CorsiController : MonoBehaviour
      */
     public void WrongUserSequence()
     {
+        DisablePlayerMovement();
         CorsiCanvasController.singleton.DecisionPoint(); 
     }
 
