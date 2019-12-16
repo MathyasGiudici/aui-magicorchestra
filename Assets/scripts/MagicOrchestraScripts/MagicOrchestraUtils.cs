@@ -27,11 +27,38 @@ public static class MagicOrchestraUtils
         return sequenceString;
     }
 
+    public static string SecondsTextItalianSuffix(float number)
+    {
+        if (Mathf.RoundToInt(number) == 1)
+            return " secondo";
+        else
+            return " secondi";
+    }
+
     public static string TrueFalseConverter(bool boolStatus)
     {
         if (boolStatus)
             return "Abilitato";
         else
             return "Disabilitato";
+    }
+
+    public static float FiveMathRounder(float number)
+    {
+        const float multiple = 0.5f;
+        double less;
+        double more;
+
+        less = System.Math.Floor(number / multiple) * multiple;
+        more = System.Math.Ceiling(number / multiple) * multiple;
+
+        if (System.Math.Abs(less - number) < System.Math.Abs(more - less))
+        {
+            return (float)less;
+        }
+        else
+        {
+            return (float)more;
+        }
     }
 }

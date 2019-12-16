@@ -82,9 +82,6 @@ public class Game2PanelManager : MonoBehaviour
             }
             else
             {
-                Debug.Log(sequencePanel.transform.childCount);
-                Debug.Log(sequenceObjectFile.sequences.Count);
-
                 // Creating the visual sequence
                 string stringToWrite = "";
                 foreach (int number in currentArray)

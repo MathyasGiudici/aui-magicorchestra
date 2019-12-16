@@ -19,22 +19,25 @@ public class TimeSlider : MonoBehaviour
      */
     void Update()
     {
+        // Parsing value
         float value = gameObject.GetComponent<Slider>().value;
-        float newValue = (float) Mathf.Round(value * 10f) / 10f;
-        gameObject.GetComponent<Slider>().value = newValue;
+        value *= (highTime - lowTime);
+        value += lowTime;
+        float newValue = MagicOrchestraUtils.FiveMathRounder(value);
 
-        // Range [1,5]
-        newValue *= (highTime - lowTime);
-        newValue += lowTime;
-
-        string toVisualize;
-        if (Mathf.RoundToInt(newValue) == 1)
-            toVisualize = newValue.ToString() + " secondo";
-        else
-            toVisualize = newValue.ToString() + " secondi";
+        // Texting value
+        string toVisualize = newValue.ToString() + MagicOrchestraUtils.SecondsTextItalianSuffix(newValue);
 
         gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<Text>().text = toVisualize;
+
+        // Saving value
         this.currentTime = newValue;
+
+
+        // Correcting the slider
+        newValue -= lowTime;
+        newValue /= (highTime - lowTime);
+        gameObject.GetComponent<Slider>().value = newValue;
     }
 
     public float GetCurrentTime()

@@ -100,10 +100,10 @@ public static class Game3Parameters
 
         toReturn += ("Difficoltà: " + Difficulty + "\n");
         toReturn += ("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence) + "\n");
-        toReturn += ("Tempo proiezione: " + TimeInShowing + " secondi\n");
+        toReturn += ("Tempo proiezione: " + TimeInShowing + MagicOrchestraUtils.SecondsTextItalianSuffix(TimeInShowing));
         toReturn += ("Modalità Gesture: " + MagicOrchestraUtils.TrueFalseConverter(IsGestureMode) + "\n");
         if(!IsGestureMode)
-            toReturn += ("Tempo posizionamento: " + TimeInDetecting + " secondi\n");
+            toReturn += ("Tempo posizionamento: " + TimeInDetecting + MagicOrchestraUtils.SecondsTextItalianSuffix(TimeInDetecting));
         if(MagicOrchestraParameters.IsContext)
             toReturn += ("Modalità con piano: " + MagicOrchestraUtils.TrueFalseConverter(ShowPlane) + "\n");
 

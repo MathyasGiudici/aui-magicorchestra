@@ -88,7 +88,7 @@ public static class Game2Parameters
         toReturn += ("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence) + "\n");
         toReturn += ("Difficoltà: " + Difficulty + "\n");
         toReturn += ("Modalità ordine inverso: " + MagicOrchestraUtils.TrueFalseConverter(IsReverse) + "\n");
-        toReturn += ("Tempo proiezione frontale: " + TimeInShowing + " secondi\n");
+        toReturn += ("Tempo proiezione frontale: " + TimeInShowing + MagicOrchestraUtils.SecondsTextItalianSuffix(TimeInShowing));
         if (MagicOrchestraParameters.IsContext)
         {
             toReturn += ("Modalità Aiuto: " + MagicOrchestraUtils.TrueFalseConverter(isHintMode) + "\n");
