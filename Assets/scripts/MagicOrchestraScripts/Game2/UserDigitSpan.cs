@@ -43,15 +43,20 @@ public class UserDigitSpan : MonoBehaviour
 
     public void SelectNumber(int number)
     {
+        // Give to the user a feedback
+        Game2Controller.singleton.GiveNumberRecognitionFeedback();
+
         if (!(recognitionOn))
             return;
 
+        // Checking the sequence
         if (sequence[currentIndex] != number)
         {
             SequenceShower.singleton.ShowEndMessage(false);
             return;
         }
 
+        // Checking if  is the last number to remember
         if (isReverse)
         {
             currentIndex = currentIndex - 1;

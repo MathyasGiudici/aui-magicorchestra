@@ -18,15 +18,6 @@ public class CanvasManager : MonoBehaviour
     }
 
     /* <summary>
-     * Update is called once per frame
-     * </summary>
-     */
-    void Update()
-    {
-
-    }
-
-    /* <summary>
      * The function is called when the component is instantiated
      * </summary>
      */

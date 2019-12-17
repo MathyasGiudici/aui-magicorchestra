@@ -77,6 +77,11 @@ public class Game2Controller : MonoBehaviour
         EnablingPlayerMovement();
     }
 
+    public void GiveNumberRecognitionFeedback()
+    {
+        TesterGame2.singleton.TestLightOfCube();
+    }
+
     public void CorrectUserSequence()
     {
         SequenceShower.singleton.StopClassCoroutine();
