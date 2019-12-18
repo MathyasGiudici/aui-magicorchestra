@@ -19,6 +19,13 @@ public static class MagicOrchestraUtils
     public const float generalPauseTime_short = 2.0f;
     public const float generalPauseTime_long = 4.0f;
 
+    public const string beginSequenceMessage = "Guarda la sequenza attentamente";
+    public const string beginUserTurnMessage = "Ora è il tuo turno!";
+    public const string repeatSequenceMessage = "Ripeti la sequenza";
+    public const string repeatSequenceReverseMessage = repeatSequenceMessage + " IN ORDINE INVERSO";
+    public const string correctSequenceMessage = "Bravissimo!\nSequenza corretta";
+    public const string wrongSequenceMessage = "Ops... hai sbagliato!";
+
     public static string StringifySequence(int[] sequence)
     {
         string sequenceString = "";

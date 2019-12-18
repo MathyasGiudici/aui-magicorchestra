@@ -58,7 +58,7 @@ public class SequenceShower : MonoBehaviour
     private IEnumerator SequenceRoutine(int[] sequence, float showTime)
     {
         //Showing starting information
-        frontalTextMessage.GetComponent<Text>().text = "Guarda la sequenza attentamente";
+        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginSequenceMessage;
         panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         panelMessage.SetActive(false);
@@ -101,9 +101,9 @@ public class SequenceShower : MonoBehaviour
     {
         //Showing information about seqence
         if (!isReverse)
-            frontalTextMessage.GetComponent<Text>().text = "Ripeti la sequenza";
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.repeatSequenceMessage;
         else
-            frontalTextMessage.GetComponent<Text>().text = "Ripeti la sequenza IN ORDINE INVERSO";
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.repeatSequenceReverseMessage;
 
         panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
@@ -118,9 +118,9 @@ public class SequenceShower : MonoBehaviour
     {
         //Showing user turn information
         if (hasWin)
-            frontalTextMessage.GetComponent<Text>().text = "Bravissimo!\nSequenza corretta";
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
         else
-            frontalTextMessage.GetComponent<Text>().text = "Ops... hai sbagliato!";
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.wrongSequenceMessage;
 
         panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);

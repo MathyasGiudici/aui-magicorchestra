@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SequenceLighter : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class SequenceLighter : MonoBehaviour
     public Material defaultMaterial;
     public Material lightMaterial;
 
-    //Canvas
-    public GameObject startingPanel;
-    // public GameObject[] userTurnPanel;
+    //Text container
+    public GameObject panelMessage;
+    public GameObject frontalTextMessage;
 
     //Time of the light
     private float showTime = 2;
@@ -70,9 +71,11 @@ public class SequenceLighter : MonoBehaviour
         GameObject frontalCube;
 
         //Showing the Starting Panel
-        startingPanel.SetActive(true);
+        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginSequenceMessage;
+        panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
-        startingPanel.SetActive(false);
+        panelMessage.SetActive(false);
+        frontalTextMessage.GetComponent<Text>().text = "";
         yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
 
         //Looping on the sequence

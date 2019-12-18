@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SequenceUser : MonoBehaviour
 {
@@ -12,17 +13,14 @@ public class SequenceUser : MonoBehaviour
     public Material defaultMaterial;
     public Material lightMaterial;
 
-    //Panels
-    public GameObject correctSequencePanel;
-    public GameObject wrongSequencePanel;
+    //Text container
+    public GameObject panelMessage;
+    public GameObject frontalTextMessage;
 
     //User parameters custom
     private int[] sequence;
     private bool isGestureMode = true;
     private float captureTime = 2;
-
-    //Canvas
-    public GameObject userTurnPanel;
 
     //Current cube where the user is
     private GameObject currentCube = null;
@@ -97,22 +95,6 @@ public class SequenceUser : MonoBehaviour
     }
 
     /* <summary>
-     * InstantiateControllerOnCubes destroies the ZenithCubeController in the cubes
-     * </summary>
-     */
-    private void DestroyControllerOnCubes()
-    {
-        for (int i = 0; i < 9; i++)
-        {
-            if (gameObject.transform.GetChild(i).gameObject.transform.GetChild(1).gameObject.GetComponent<ZenithCubeController>() != null)
-            {
-                ZenithCubeController target = gameObject.transform.GetChild(i).gameObject.transform.GetChild(1).gameObject.GetComponent<ZenithCubeController>();
-                Destroy(target);
-            }
-        }
-    }
-
-    /* <summary>
     * The function allow the selection of a cube of the sequence
     * </summary>
     */
@@ -129,14 +111,14 @@ public class SequenceUser : MonoBehaviour
             {
                 //Checking if the last selected cube is the last number of the sequence to be catched
                 if (currentIndexSequence == (sequence.Length - 1))
-                    this.coroutine = StartCoroutine(this.LightCoroutine(currentCube, true, correctSequencePanel, true));
+                    this.coroutine = StartCoroutine(this.LightCoroutine(currentCube, true, true));
                 else
-                    this.coroutine = StartCoroutine(this.LightCoroutine(currentCube,false,null,true)); //Light the cube
+                    this.coroutine = StartCoroutine(this.LightCoroutine(currentCube,false,true)); //Light the cube
             }
             else
             {
                 //Sequence not correct
-                this.coroutine = StartCoroutine(this.LightCoroutine(currentCube, true, wrongSequencePanel, false));
+                this.coroutine = StartCoroutine(this.LightCoroutine(currentCube, true, false));
             }  
         }
         else
@@ -150,16 +132,19 @@ public class SequenceUser : MonoBehaviour
     private IEnumerator PanelCoroutine()
     {
         //Showing the User turn Panel
-        userTurnPanel.SetActive(true);
-        yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_short);
-        userTurnPanel.SetActive(false);
+        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginUserTurnMessage;
+        panelMessage.SetActive(true);
+        yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
+        panelMessage.SetActive(false);
+        frontalTextMessage.GetComponent<Text>().text = "";
+        yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
 
         //Abort coroutine
         StopClassCoroutine();
     }
 
 
-    private IEnumerator LightCoroutine(GameObject cubeToLight, bool isFinal, GameObject panel, bool isSequenceCorrect)
+    private IEnumerator LightCoroutine(GameObject cubeToLight, bool isFinal, bool isSequenceCorrect)
     {
         //Turn on the light
         CorsiUtils.ShowLightOnCube(cubeToLight, lightMaterial);
@@ -171,18 +156,29 @@ public class SequenceUser : MonoBehaviour
         //Final cube detected
         if (isFinal)
         {
-            DestroyControllerOnCubes();
-            //Showing the Panel
-            panel.SetActive(true);
-            yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
-            panel.SetActive(false);
-            yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
-
             //Recalling game manager
             if (isSequenceCorrect)
+            {
+                frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
+                panelMessage.SetActive(true);
+                yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
+                panelMessage.SetActive(false);
+                frontalTextMessage.GetComponent<Text>().text = "";
+                yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
+
                 CorsiController.singleton.CorrectUserSequence();
+            }
             else
+            {
+                frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.wrongSequenceMessage;
+                panelMessage.SetActive(true);
+                yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
+                panelMessage.SetActive(false);
+                frontalTextMessage.GetComponent<Text>().text = "";
+                yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
+
                 CorsiController.singleton.WrongUserSequence();
+            }
         }
 
         //Abort coroutine

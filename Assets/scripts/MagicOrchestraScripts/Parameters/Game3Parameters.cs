@@ -7,7 +7,7 @@ public static class Game3Parameters
     private static int difficulty;
     private static int[] sequence;
     private static string lightColor;
-    private static bool isGestureMode, showPlane;
+    private static bool isGestureMode, showPlane, isZenithOrthographic;
     private static float timeInShowing, timeInDetecting;
 
     public static int Difficulty
@@ -94,19 +94,34 @@ public static class Game3Parameters
         }
     }
 
+    public static bool IsZenithOrthographic
+    {
+        get
+        {
+            return isZenithOrthographic;
+        }
+        set
+        {
+            isZenithOrthographic = value;
+        }
+    }
+
     public static string StringifyMe()
     {
         string toReturn = "";
 
         toReturn += ("Difficoltà: " + Difficulty + "\n");
         toReturn += ("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence) + "\n");
-        toReturn += ("Tempo proiezione: " + TimeInShowing + MagicOrchestraUtils.SecondsTextItalianSuffix(TimeInShowing));
+        toReturn += ("Tempo proiezione: " + TimeInShowing + MagicOrchestraUtils.SecondsTextItalianSuffix(TimeInShowing) + "\n");
         toReturn += ("Modalità Gesture: " + MagicOrchestraUtils.TrueFalseConverter(IsGestureMode) + "\n");
         if(!IsGestureMode)
-            toReturn += ("Tempo posizionamento: " + TimeInDetecting + MagicOrchestraUtils.SecondsTextItalianSuffix(TimeInDetecting));
+            toReturn += ("Tempo posizionamento: " + TimeInDetecting + MagicOrchestraUtils.SecondsTextItalianSuffix(TimeInDetecting) + "\n");
         if(MagicOrchestraParameters.IsContext)
             toReturn += ("Modalità con piano: " + MagicOrchestraUtils.TrueFalseConverter(ShowPlane) + "\n");
-
+        if (IsZenithOrthographic)
+            toReturn += ("Camera Zenitale ortografica\n");
+        else
+            toReturn += ("Camera Zenitale prospettica\n");
         return toReturn;
     }
 
@@ -122,5 +137,6 @@ public static class Game3Parameters
         Debug.Log("IsGestureMode: " + IsGestureMode);
         Debug.Log("TimeInDetecting: " + TimeInDetecting);
         Debug.Log("ShowPlane: " + ShowPlane);
+        Debug.Log("Zenith camera orthographic" + IsZenithOrthographic);
     }
 }

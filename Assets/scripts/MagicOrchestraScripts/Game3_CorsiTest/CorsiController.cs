@@ -8,6 +8,8 @@ public class CorsiController : MonoBehaviour
     //Singleton of the CorsiController class
     public static CorsiController singleton = null;
 
+    public Camera zenithCamera;
+
     //Protected parameters that contains the main custom parameters of the game
     int[] sequence = { 2, 3, 6, 5, 8, 9 };
     string lightColor = "#ff0000";
@@ -45,6 +47,12 @@ public class CorsiController : MonoBehaviour
         this.timeInShowing = Game3Parameters.TimeInShowing;
         this.isGestureMode = Game3Parameters.IsGestureMode;
         this.timeInDetecting = Game3Parameters.TimeInDetecting;
+        this.ZenithCameraChoice(Game3Parameters.IsZenithOrthographic);
+    }
+
+    private void ZenithCameraChoice(bool isZenithOrthographic)
+    {
+        zenithCamera.orthographic = isZenithOrthographic;
     }
 
     /* <summary>
