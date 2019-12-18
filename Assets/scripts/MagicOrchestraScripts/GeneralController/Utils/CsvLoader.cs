@@ -16,7 +16,7 @@ public static class CsvLoader
         // Loading the sequence file
         string path = Application.streamingAssetsPath + pathFromStreamingAssets;
         string cvsFile = File.ReadAllText(path);
-        String[] lines = cvsFile.Split("\n"[0]);
+        String[] lines = cvsFile.Split(System.Environment.NewLine[0]);
 
         // Looping on lines of the file
         // KEEP ATTENTION:

@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public static class MagicOrchestraUtils
 {
-    public const string pathToCorsiSequences = "/corsi_sequences.csv";
-    public const string pathToGame2Sequence = "/digitspan_sequences.csv";
+    public static string pathToCorsiSequences = Path.DirectorySeparatorChar.ToString() + "corsi_sequences.csv";
+    public static string pathToGame2Sequence = Path.DirectorySeparatorChar.ToString() + "digitspan_sequences.csv";
 
     public const string backgroundColor = "56122A";
     public const string backgroundColorTextPanel = "93373F";
