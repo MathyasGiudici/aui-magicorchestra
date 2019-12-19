@@ -79,8 +79,10 @@ public class Game2Controller : MonoBehaviour
 
     public void GiveNumberRecognitionFeedback()
     {
-        TesterGame2.singleton.TestLightOfCube();
-        Game2Player.singleton.LightOfCube();
+        if (TesterGame2.singleton != null)
+            TesterGame2.singleton.TestLightOfCube();
+        if (Game2Player.singleton != null)
+            Game2Player.singleton.LightOfCube();
     }
 
     public void CorrectUserSequence()
@@ -104,8 +106,10 @@ public class Game2Controller : MonoBehaviour
      */
     public void EnablingPlayerMovement()
     {
-        TesterGame2.singleton.isRecognitionEnabled = true;
-        Game2Player.singleton.isRecognitionEnabled = true;
+        if(TesterGame2.singleton != null)
+            TesterGame2.singleton.isRecognitionEnabled = true;
+        if(Game2Player.singleton != null)
+            Game2Player.singleton.isRecognitionEnabled = true;
     }
 
     /* <summary>
@@ -114,7 +118,9 @@ public class Game2Controller : MonoBehaviour
      */
     public void DisablePlayerMovement()
     {
-        TesterGame2.singleton.isRecognitionEnabled = false;
-        Game2Player.singleton.isRecognitionEnabled = false;
+        if (TesterGame2.singleton != null)
+            TesterGame2.singleton.isRecognitionEnabled = false;
+        if (Game2Player.singleton != null)
+            Game2Player.singleton.isRecognitionEnabled = false;
     }
 }

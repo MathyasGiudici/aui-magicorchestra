@@ -127,7 +127,10 @@ public class CorsiController : MonoBehaviour
      */
     public void EnablingPlayerMovement()
     {
-        TesterMovement.singleton.isMovementEnabled = true;
+        if(TesterMovement.singleton != null)
+            TesterMovement.singleton.isMovementEnabled = true;
+        if (Game3Player.singleton != null)
+            Game3Player.singleton.isMovementEnabled = true;
     }
 
     /* <summary>
@@ -136,6 +139,9 @@ public class CorsiController : MonoBehaviour
      */
     public void DisablePlayerMovement()
     {
-        TesterMovement.singleton.isMovementEnabled = false;
+        if (TesterMovement.singleton != null)
+            TesterMovement.singleton.isMovementEnabled = false;
+        if (Game3Player.singleton != null)
+            Game3Player.singleton.isMovementEnabled = false;
     }
 }
