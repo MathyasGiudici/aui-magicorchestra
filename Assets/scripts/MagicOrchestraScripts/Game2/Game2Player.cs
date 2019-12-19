@@ -58,7 +58,7 @@ public class Game2Player : MonoBehaviour
 
         Debug.Log("Last read:" + passaPorta.GetComponent<RFIDReader>().lastread);
 
-        if (this.passaPorta.GetComponent<RFIDReader>().lastread != null) { 
+        if (this.passaPorta.GetComponent<RFIDReader>().lastread != null || this.passaPorta.GetComponent<RFIDReader>().lastread != "") { 
             try {
                 int parsed = int.Parse(this.passaPorta.GetComponent<RFIDReader>().lastread);
                 this.RecievedNumber(parsed);
