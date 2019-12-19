@@ -16,7 +16,7 @@ TagManager:
   - PostProcessing
   - FrontalCamLayer
   - ZenithCamLayer
-  - 
+  - HiddenLayer
   - 
   - 
   - 

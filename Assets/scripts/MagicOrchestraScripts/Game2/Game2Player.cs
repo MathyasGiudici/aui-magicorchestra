@@ -35,19 +35,20 @@ public class Game2Player : MonoBehaviour
         if (!(isRecognitionEnabled))
             return;
 
-        //GameObject magicRoom = GameObject.Find("Magic Room Adapter");
-        List<GameObject> toys = MagicRoomSmartToyManager.instance.getSmartToys();
-        GameObject rfid = null;
-
-        foreach (GameObject toy in toys)
-            if (toy.GetComponent<SmartToy>().rfidsensor)
-                rfid = toy;
-
-        if (rfid == null)
-                Debug.Log("Ball not connected");
-
+        // Looking for the magic ball
+        GameObject ball = GameObject.Find("Passaporta");
+        if (ball == null)
+        {
+            Debug.Log("Ball not connected");
+            return;
+        }
+                
         // TODO: vediamo se arriva fino a qui
-        Debug.Log(rfid.GetComponent<RFIDReader>().lastread);
+        Debug.Log(ball.GetComponent<RFIDReader>().lastread);
+        return;
+
+        if (ball.GetComponent<RFIDReader>().lastread != null)
+            this.RecievedNumber(int.Parse(ball.GetComponent<RFIDReader>().lastread));
     }
 
     /* <summary>
