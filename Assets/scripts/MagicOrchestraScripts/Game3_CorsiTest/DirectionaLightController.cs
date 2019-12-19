@@ -4,32 +4,32 @@ using UnityEngine;
 
 public class DirectionaLightController : MonoBehaviour
 {
-    public Color color = new Color(255,255,255);
+    public Color color = new Color(1,1,1,1);
     public float intensity = 1.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-		//ChangeColorAndIntensity();
+		ChangeColorAndIntensity();
     }
 
     // Update is called once per frame
     void Update()
     {
-		//ChangeColorAndIntensity();
+		ChangeColorAndIntensity();
 	}
 
     private void ChangeColorAndIntensity()
 	{
         if (MagicOrchestraParameters.IsContext)
         {
-            gameObject.GetComponent<Light>().color = new Color(255, 255, 255);
-            gameObject.GetComponent<Light>().intensity = 1.0f;
+            gameObject.GetComponent<Light>().color = new Color(0,0,0,1);
+            gameObject.GetComponent<Light>().bounceIntensity = 1.0f;
         }
         else
         {
             gameObject.GetComponent<Light>().color = color;
-            gameObject.GetComponent<Light>().intensity = intensity;
+            gameObject.GetComponent<Light>().bounceIntensity = intensity;
         }
 	}
 }
