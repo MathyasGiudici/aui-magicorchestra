@@ -44,8 +44,6 @@ public class Game2Player : MonoBehaviour
 
         // Enabling RFID reader
         MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Passaporta");
-        MagicRoomSmartToyManager.instance.openStreamSmartToy("Passaporta", 5.0f);
-        passaPorta.GetComponent<SmartToy>().switchOnRFIDSensor();
     }
 
     /* <summary>
@@ -55,18 +53,22 @@ public class Game2Player : MonoBehaviour
     public void Update()
     {
         // Checking recognition status
-        if (!(isRecognitionEnabled))
+        if (!isRecognitionEnabled)
             return;
 
-        // TODO: vediamo se arriva fino a qui        
-        Debug.Log("Passaporta enabled?" + this.passaPorta.GetComponent<RFIDReader>().sensorEnabled);
-        
         Debug.Log("Last read:" + passaPorta.GetComponent<RFIDReader>().lastread);
-        // passaPorta.GetComponent<RFIDReader>().updateState();
-        return;
 
-        if (this.passaPorta.GetComponent<RFIDReader>().lastread != null)
-            this.RecievedNumber(int.Parse(this.passaPorta.GetComponent<RFIDReader>().lastread));
+        if (this.passaPorta.GetComponent<RFIDReader>().lastread != null) { 
+            try {
+                int parsed = int.Parse(this.passaPorta.GetComponent<RFIDReader>().lastread);
+                this.RecievedNumber(parsed);
+                this.passaPorta.GetComponent<RFIDReader>().lastread = null;
+            }
+            catch
+            {
+                Debug.Log("Not parsed");
+            }
+        }
     }
 
     /* <summary>

@@ -65,7 +65,7 @@ public class Game3Player : MonoBehaviour
             foreach (KinectBodySkeleton skel in MagicRoomKinectV2Manager.instance.skeletons)
             {
                 // Position part
-                if (skel != null && skel.SpineBase != Vector3.zero && (System.Math.Abs(skelpos.z) < EPSILON || skelpos.z > skel.SpineBase.z))
+                if (skel != null && skel.SpineBase != Vector3.zero && (skelpos.z == 0 || skelpos.z > skel.SpineBase.z))
                 {
                     skelpos = skel.SpineBase;
 
@@ -73,14 +73,15 @@ public class Game3Player : MonoBehaviour
                     if (skel.FootLeft != Vector3.zero && skel.FootRight != Vector3.zero)
                     {
                         // Retrieving measures
-                        float deltaFeet = skel.FootLeft.z - skel.FootRight.z;
-                        float deltaKneeSpineBase = skel.SpineBase.z - Mathf.Max(skel.KneeRight.z, skel.KneeLeft.z);
+                        float deltaRight = Mathf.Abs(skel.HandRight.z) - Mathf.Abs(skel.FootRight.z);
+                        float deltaLeft = Mathf.Abs(skel.HandLeft.z) - Mathf.Abs(skel.FootLeft.z);
+                        float deltaFeetHands = Mathf.Max(deltaLeft, deltaRight);
 
-
-                        Debug.Log("deltaFeet:" + deltaFeet + " - deltaKneeSpineBase" + deltaKneeSpineBase);
+                        Debug.Log("deltaFeetHands: " + deltaFeetHands);
 
                         // Checking if player is trying a gesture
-                        if ((deltaFeet < 0.05) && (deltaKneeSpineBase  < 0.1))
+                        return;
+                        if (deltaFeetHands < 0.1)
                         {
                             Debug.Log("User gesture detected");
                             CorsiController.singleton.UserGesture();

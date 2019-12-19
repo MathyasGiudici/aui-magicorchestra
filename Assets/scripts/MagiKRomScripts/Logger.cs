@@ -67,6 +67,7 @@ public class Logger : MonoBehaviour {
     bool allowquittng = false;
     void OnApplicationQuit()
     {
+        return;
         addToLogNewLine("Activity", "Application ending after " + Time.time + " seconds");
         StartCoroutine(sendCommand());
         if (!allowquittng)
