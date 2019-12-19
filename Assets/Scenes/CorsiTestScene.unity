@@ -289,6 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 170076735}
   - component: {fileID: 170076734}
+  - component: {fileID: 170076736}
   m_Layer: 9
   m_Name: Directional Light
   m_TagString: Untagged
@@ -348,6 +349,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 65, y: 40, z: 0}
+--- !u!114 &170076736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170076733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98de8ac8eb69c4fd686c66375350cb74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 255, g: 255, b: 255, a: 1}
+  intensity: 1
 --- !u!1 &200055098
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &200055099
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -451,12 +466,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 200055098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ee65d897a7354761b4bd6595a0b0a04, type: 3}
+  m_Script: {fileID: 11500000, guid: 15742ae09731f42819404dfeb611f29b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
   isMovementEnabled: 1
-  speed: 5
-  roomsize: {x: 2.74, y: 2.88}
 --- !u!54 &200055104
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1504,13 +1518,14 @@ GameObject:
   - component: {fileID: 950966700}
   - component: {fileID: 950966699}
   - component: {fileID: 950966698}
+  - component: {fileID: 950966702}
   m_Layer: 10
-  m_Name: RoomTester
+  m_Name: RoomPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &950966697
 Transform:
   m_ObjectHideFlags: 0
@@ -1600,6 +1615,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950966696}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &950966702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950966696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee65d897a7354761b4bd6595a0b0a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovementEnabled: 1
+  speed: 5
+  roomsize: {x: 2.74, y: 2.88}
 --- !u!1 &969565198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,7 +2816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1381264606
 Transform:
   m_ObjectHideFlags: 0
