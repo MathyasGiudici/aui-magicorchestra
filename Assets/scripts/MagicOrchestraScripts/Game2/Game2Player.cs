@@ -43,6 +43,8 @@ public class Game2Player : MonoBehaviour
         }
 
         // Enabling RFID reader
+        MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Passaporta");
+        MagicRoomSmartToyManager.instance.openStreamSmartToy("Passaporta", 5.0f);
         passaPorta.GetComponent<SmartToy>().switchOnRFIDSensor();
     }
 
