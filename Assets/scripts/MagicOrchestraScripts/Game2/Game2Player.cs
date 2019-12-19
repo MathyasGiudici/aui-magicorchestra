@@ -6,9 +6,11 @@ public class Game2Player : MonoBehaviour
 {
     //Singleton of the SequenceShower class
     public static Game2Player singleton = null;
-
+    private GameObject passaPorta = null;
 
     public bool isRecognitionEnabled = false;
+
+
 
     /* <summary>
     * The function is called when the component is instantiated
@@ -26,6 +28,25 @@ public class Game2Player : MonoBehaviour
     }
 
     /* <summary>
+     * Start is called before the first frame update
+     * </summary>
+     */
+    void Start()
+    {
+        // Looking for the magic ball
+        this.passaPorta = GameObject.Find("Passaporta");
+
+        if (this.passaPorta == null)
+        {
+            Debug.Log("Some problem with \"Passaporta\"");
+            return;
+        }
+
+        // Enabling RFID reader
+        passaPorta.GetComponent<SmartToy>().switchOnRFIDSensor();
+    }
+
+    /* <summary>
     * Update is called once per frame
     * </summary>
     */
@@ -35,20 +56,15 @@ public class Game2Player : MonoBehaviour
         if (!(isRecognitionEnabled))
             return;
 
-        // Looking for the magic ball
-        GameObject ball = GameObject.Find("Passaporta");
-        if (ball == null)
-        {
-            Debug.Log("Ball not connected");
-            return;
-        }
-                
-        // TODO: vediamo se arriva fino a qui
-        Debug.Log(ball.GetComponent<RFIDReader>().lastread);
+        // TODO: vediamo se arriva fino a qui        
+        Debug.Log("Passaporta enabled?" + this.passaPorta.GetComponent<RFIDReader>().sensorEnabled);
+        
+        Debug.Log("Last read:" + passaPorta.GetComponent<RFIDReader>().lastread);
+        // passaPorta.GetComponent<RFIDReader>().updateState();
         return;
 
-        if (ball.GetComponent<RFIDReader>().lastread != null)
-            this.RecievedNumber(int.Parse(ball.GetComponent<RFIDReader>().lastread));
+        if (this.passaPorta.GetComponent<RFIDReader>().lastread != null)
+            this.RecievedNumber(int.Parse(this.passaPorta.GetComponent<RFIDReader>().lastread));
     }
 
     /* <summary>

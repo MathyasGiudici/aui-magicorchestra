@@ -15,7 +15,7 @@ public class Game3Player : MonoBehaviour
 
     public float speed = 5.0f;
     public Vector2 roomsize = new Vector2(2.74f, 2.88f);
-    private float shiftX = 0, shiftY = 0;
+    private float shiftX = 12.75f, shiftY = 0;
     private Vector2 _AdapterRoomSize;
     private Transform tr;
 
@@ -41,7 +41,7 @@ public class Game3Player : MonoBehaviour
      */
     void Start()
     {
-        roomsize = new Vector2(GameSettings.instance.screencofiguration.floorsize_X, GameSettings.instance.screencofiguration.floorsize_Y);
+        // roomsize = new Vector2(GameSettings.instance.screencofiguration.floorsize_X, GameSettings.instance.screencofiguration.floorsize_Y);
         MagicRoomKinectV2Manager.instance.setUpKinect(5, 1);
         MagicRoomKinectV2Manager.instance.startSamplingKinect(KinectSamplingMode.Streaming);
         _AdapterRoomSize = new Vector2(2.74f / roomsize.x, 2.88f / roomsize.y);
@@ -65,19 +65,26 @@ public class Game3Player : MonoBehaviour
             foreach (KinectBodySkeleton skel in MagicRoomKinectV2Manager.instance.skeletons)
             {
                 // Position part
-                if (skel != null && skel.SpineBase != Vector3.zero && (skelpos.z == 0 || skelpos.z > skel.SpineBase.z))
+                if (skel != null && skel.SpineBase != Vector3.zero && (System.Math.Abs(skelpos.z) < EPSILON || skelpos.z > skel.SpineBase.z))
                 {
                     skelpos = skel.SpineBase;
 
                     // Gesture part
                     if (skel.FootLeft != Vector3.zero && skel.FootRight != Vector3.zero)
                     {
-                        Debug.Log("Prints for gesture with Kinect: skel.FootLeft.z - skel.FootRight.z " + (skel.FootLeft.z - skel.FootRight.z));
-                        Debug.Log("Prints for gesture with Kinect: (skel.SpineBase.z - Mathf.Min(skel.FootLeft.z, skel.FootRight.z)) " + (skel.SpineBase.z - Mathf.Min(skel.FootLeft.z, skel.FootRight.z)));
+                        // Retrieving measures
+                        float deltaFeet = skel.FootLeft.z - skel.FootRight.z;
+                        float deltaKneeSpineBase = skel.SpineBase.z - Mathf.Max(skel.KneeRight.z, skel.KneeLeft.z);
+
+
+                        Debug.Log("deltaFeet:" + deltaFeet + " - deltaKneeSpineBase" + deltaKneeSpineBase);
+
                         // Checking if player is trying a gesture
-                        if (((skel.FootLeft.z - skel.FootRight.z) < 0.05) &&
-                            ((skel.SpineBase.z - Mathf.Min(skel.FootLeft.z, skel.FootRight.z)) < 0.2))
+                        if ((deltaFeet < 0.05) && (deltaKneeSpineBase  < 0.1))
+                        {
+                            Debug.Log("User gesture detected");
                             CorsiController.singleton.UserGesture();
+                        }   
                     }     
                 }
             }
