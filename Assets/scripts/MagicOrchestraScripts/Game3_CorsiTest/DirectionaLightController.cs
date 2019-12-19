@@ -23,7 +23,7 @@ public class DirectionaLightController : MonoBehaviour
 	{
         if (MagicOrchestraParameters.IsContext)
         {
-            gameObject.GetComponent<Light>().color = new Color(0,0,0,1);
+            gameObject.GetComponent<Light>().color = new Color(1,1,1,1);
             gameObject.GetComponent<Light>().bounceIntensity = 1.0f;
         }
         else
