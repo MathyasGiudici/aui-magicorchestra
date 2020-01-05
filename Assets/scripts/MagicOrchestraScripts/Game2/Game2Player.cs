@@ -83,10 +83,4 @@ public class Game2Player : MonoBehaviour
 
         UserDigitSpan.singleton.SelectNumber(number);
     }
-
-
-    public void LightOfCube()
-    {
-        Debug.Log("FEEDBACK: Light of the cube");
-    }
 }

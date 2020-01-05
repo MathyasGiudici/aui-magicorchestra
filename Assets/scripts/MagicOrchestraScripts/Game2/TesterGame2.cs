@@ -82,8 +82,4 @@ public class TesterGame2 : MonoBehaviour
         }
     }
 
-    public void TestLightOfCube()
-    {
-        Debug.Log("FEEDBACK: Light of the cube");
-    }
 }

@@ -43,9 +43,6 @@ public class UserDigitSpan : MonoBehaviour
 
     public void SelectNumber(int number)
     {
-        // Give to the user a feedback
-        Game2Controller.singleton.GiveNumberRecognitionFeedback();
-
         if (!(recognitionOn))
             return;
 
