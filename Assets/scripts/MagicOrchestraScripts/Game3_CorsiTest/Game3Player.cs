@@ -74,14 +74,15 @@ public class Game3Player : MonoBehaviour
                         float deltaLeft = skel.Neck.z - skel.FootLeft.z;
                         float deltaFeetNeck = Mathf.Max(deltaLeft, deltaRight);
 
-                        Debug.Log("deltaFeetNeck: " + deltaFeetNeck);
+                        // Debuggin delta of the user
+                        // Debug.Log("deltaFeetNeck: " + deltaFeetNeck);
 
                         // Checking if player is trying a gesture
-                        //if (deltaFeetNeck < 0.1)
-                        //{
-                        //    Debug.Log("User gesture detected");
-                        //    CorsiController.singleton.UserGesture();
-                        //}   
+                        if (deltaFeetNeck < 0.05)
+                        {
+                            Debug.Log("User gesture detected");
+                            // CorsiController.singleton.UserGesture();
+                        }   
                     }     
                 }
             }
