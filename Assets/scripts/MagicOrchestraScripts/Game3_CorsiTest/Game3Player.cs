@@ -7,9 +7,6 @@ public class Game3Player : MonoBehaviour
     //Singleton of the TesterMovement class
     public static Game3Player singleton = null;
 
-    //Constants
-    private const float EPSILON = 0;
-
     //Player parameter
     public bool isMovementEnabled = true;
 
@@ -73,22 +70,22 @@ public class Game3Player : MonoBehaviour
                     if (skel.FootLeft != Vector3.zero && skel.FootRight != Vector3.zero)
                     {
                         // Retrieving measures
-                        float deltaRight = Mathf.Abs(skel.HandRight.z) - Mathf.Abs(skel.FootRight.z);
-                        float deltaLeft = Mathf.Abs(skel.HandLeft.z) - Mathf.Abs(skel.FootLeft.z);
-                        float deltaFeetHands = Mathf.Max(deltaLeft, deltaRight);
+                        float deltaRight = skel.Neck.z - skel.FootRight.z;
+                        float deltaLeft = skel.Neck.z - skel.FootLeft.z;
+                        float deltaFeetNeck = Mathf.Max(deltaLeft, deltaRight);
 
-                        Debug.Log("deltaFeetHands: " + deltaFeetHands);
+                        Debug.Log("deltaFeetNeck: " + deltaFeetNeck);
 
                         // Checking if player is trying a gesture
-                        return;
-                        if (deltaFeetHands < 0.1)
-                        {
-                            Debug.Log("User gesture detected");
-                            CorsiController.singleton.UserGesture();
-                        }   
+                        //if (deltaFeetNeck < 0.1)
+                        //{
+                        //    Debug.Log("User gesture detected");
+                        //    CorsiController.singleton.UserGesture();
+                        //}   
                     }     
                 }
             }
+
             tr.position = new Vector3(skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, (-6 + shiftY) * -_AdapterRoomSize.y - skelpos.z * 3.5f * _AdapterRoomSize.y);
 
             // Moving pillar on the game
