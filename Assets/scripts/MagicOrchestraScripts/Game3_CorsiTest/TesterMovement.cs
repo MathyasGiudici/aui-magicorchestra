@@ -14,6 +14,9 @@ public class TesterMovement : MonoBehaviour
     public float speed = 3;
     public bool isMovementEnabled = true;
 
+    //Internal useful variables
+    private bool lastGestureDetected = false;
+
     /* <summary>
     * The function is called when the component is instantiated
     * </summary>
@@ -71,7 +74,19 @@ public class TesterMovement : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space) == true)
         {
-            CorsiController.singleton.UserGesture();
+            if (!lastGestureDetected)
+            {
+                //Calling the Controller only once
+                this.lastGestureDetected = true;
+
+                Debug.Log("User gesture detected");
+
+                CorsiController.singleton.UserGesture();
+            }
+        }
+        else
+        {
+            this.lastGestureDetected = false;
         }
     }
 }
