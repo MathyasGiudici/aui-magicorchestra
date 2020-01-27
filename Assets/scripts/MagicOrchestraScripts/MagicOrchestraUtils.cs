@@ -69,4 +69,43 @@ public static class MagicOrchestraUtils
             return (float)more;
         }
     }
+
+    public static KinectBodySkeleton GetNearestSkeleton()
+    {
+        if (MagicRoomKinectV2Manager.instance.MagicRoomKinectV2Manager_active)
+        {
+            // User position part
+            Vector3 skelpos = Vector3.zero;
+
+            float minZfounded = 0.0f;
+            KinectBodySkeleton minSkel = null;
+
+            foreach (KinectBodySkeleton skel in MagicRoomKinectV2Manager.instance.skeletons)
+            {
+                // Is the skel valid?
+                if (skel != null && skel.SpineBase != Vector3.zero && (skelpos.z == 0 || skelpos.z > skel.SpineBase.z))
+                {
+                    if(minSkel == null)
+                    {
+                        minZfounded = skel.SpineBase.z;
+                        minSkel = skel;
+                    }
+                    else
+                    {
+                        if(skel.SpineBase.z < minZfounded)
+                        {
+                            minZfounded = skel.SpineBase.z;
+                            minSkel = skel;
+                        }
+                    }
+                }
+            }
+
+            return minSkel;
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

@@ -10,11 +10,17 @@ public class Game3Player : MonoBehaviour
     //Player parameter
     public bool isMovementEnabled = true;
 
+    //Room parameters
     public float speed = 5.0f;
     public Vector2 roomsize = new Vector2(2.74f, 2.88f);
-    private float shiftX = 12.75f, shiftY = 0;
     private Vector2 _AdapterRoomSize;
     private Transform tr;
+
+    private float shiftX = 12.75f;
+    public  float shiftY = 0.0f;
+
+    //Internal useful variables
+    private bool lastGestureDetected = false;
 
     /* <summary>
     * The function is called when the component is instantiated
@@ -54,44 +60,52 @@ public class Game3Player : MonoBehaviour
         if (!isMovementEnabled)
             return;
 
-        // Looking for skeletons
-        if (MagicRoomKinectV2Manager.instance.MagicRoomKinectV2Manager_active)
+        // Looking to the nearest skelpos
+        KinectBodySkeleton skel = MagicOrchestraUtils.GetNearestSkeleton();
+
+        if (skel == null)
         {
-            // User position part
-            Vector3 skelpos = Vector3.zero;
-            foreach (KinectBodySkeleton skel in MagicRoomKinectV2Manager.instance.skeletons)
+            Debug.Log("No MagicRoomKinectV2Manager founded");
+            return;
+        }
+
+        Vector3 skelpos = skel.SpineBase;
+
+        // Gesture part detecting
+        if (skel.FootLeft != Vector3.zero && skel.FootRight != Vector3.zero)
+        {
+            // Retrieving measures
+            float deltaRight = skel.Neck.z - skel.FootRight.z;
+            float deltaLeft = skel.Neck.z - skel.FootLeft.z;
+            float deltaFeetNeck = Mathf.Max(deltaLeft, deltaRight);
+
+            // Debuggin delta of the user
+            // Debug.Log("deltaFeetNeck: " + deltaFeetNeck);
+
+            // Checking if player is trying a gesture
+            if (deltaFeetNeck < 0.05)
             {
-                // Position part
-                if (skel != null && skel.SpineBase != Vector3.zero && (skelpos.z == 0 || skelpos.z > skel.SpineBase.z))
+                if (!lastGestureDetected)
                 {
-                    skelpos = skel.SpineBase;
+                    //Calling the Controller only once
+                    this.lastGestureDetected = true;
 
-                    // Gesture part
-                    if (skel.FootLeft != Vector3.zero && skel.FootRight != Vector3.zero)
-                    {
-                        // Retrieving measures
-                        float deltaRight = skel.Neck.z - skel.FootRight.z;
-                        float deltaLeft = skel.Neck.z - skel.FootLeft.z;
-                        float deltaFeetNeck = Mathf.Max(deltaLeft, deltaRight);
+                    Debug.Log("User gesture detected");
 
-                        // Debuggin delta of the user
-                        // Debug.Log("deltaFeetNeck: " + deltaFeetNeck);
-
-                        // Checking if player is trying a gesture
-                        if (deltaFeetNeck < 0.05)
-                        {
-                            Debug.Log("User gesture detected");
-                            // CorsiController.singleton.UserGesture();
-                        }   
-                    }     
+                    // CorsiController.singleton.UserGesture();
                 }
             }
-
-            tr.position = new Vector3(skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, (-6 + shiftY) * -_AdapterRoomSize.y - skelpos.z * 3.5f * _AdapterRoomSize.y);
-
-            // Moving pillar on the game
-            gameObject.transform.position = tr.position;
+            else
+            {
+                this.lastGestureDetected = false;
+            }
         }
+
+        // Computing new Vector3 position
+        tr.position = new Vector3(skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, (-6 + shiftY) * -_AdapterRoomSize.y - skelpos.z * 3.5f * _AdapterRoomSize.y);
+
+        // Moving pillar on the game
+        gameObject.transform.position = tr.position; 
     }
 }
 
