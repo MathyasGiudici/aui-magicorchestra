@@ -18,10 +18,10 @@ public class Game3Player : MonoBehaviour
 
     //Calibration parameters
     public float shiftX = 12.75f;
-    public float shiftY = 0.0f;
+    public float shiftY = -1.53f;
 
-    public float multX = 1.0f;
-    public float multY = 1.0f;
+    public float multX = 1.8f;
+    public float multY = 3.2f;
 
     //Internal useful variables
     private bool lastGestureDetected = false;
@@ -105,9 +105,11 @@ public class Game3Player : MonoBehaviour
             }
         }
 
+        //Debug.Log("skel position:" + skelpos.ToString());
+
         // Computing new Vector3 position
         //tr.position = new Vector3(skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, (-6 + shiftY) * -_AdapterRoomSize.y - skelpos.z * 3.5f * _AdapterRoomSize.y);
-        tr.position = new Vector3(multX * skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, (-6 + shiftY) * -_AdapterRoomSize.y - skelpos.z * 3.5f * _AdapterRoomSize.y * multY);
+        tr.position = new Vector3(multX * skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, (-6 + shiftY) * -_AdapterRoomSize.y * multY - skelpos.z * 3.5f * _AdapterRoomSize.y * multY);
 
         // Moving pillar on the game
         gameObject.transform.position = tr.position; 
