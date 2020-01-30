@@ -11,7 +11,6 @@ public class Game3Player : MonoBehaviour
     public bool isMovementEnabled = true;
 
     //Room parameters
-    public float speed = 5.0f;
     public Vector2 roomsize = new Vector2(2.74f, 2.88f);
     private Vector2 _AdapterRoomSize;
     private Transform tr;
@@ -74,38 +73,6 @@ public class Game3Player : MonoBehaviour
         }
 
         Vector3 skelpos = skel.SpineBase;
-
-        // Gesture part detecting
-        if (skel.FootLeft != Vector3.zero && skel.FootRight != Vector3.zero)
-        {
-            // Retrieving measures
-            float deltaRight = skel.Neck.z - skel.FootRight.z;
-            float deltaLeft = skel.Neck.z - skel.FootLeft.z;
-            float deltaFeetNeck = Mathf.Max(deltaLeft, deltaRight);
-
-            // Debuggin delta of the user
-            // Debug.Log("deltaFeetNeck: " + deltaFeetNeck);
-
-            // Checking if player is trying a gesture
-            if (deltaFeetNeck < 0.05)
-            {
-                if (!lastGestureDetected)
-                {
-                    //Calling the Controller only once
-                    this.lastGestureDetected = true;
-
-                    Debug.Log("User gesture detected");
-
-                    // CorsiController.singleton.UserGesture();
-                }
-            }
-            else
-            {
-                this.lastGestureDetected = false;
-            }
-        }
-
-        //Debug.Log("skel position:" + skelpos.ToString());
 
         // Computing new Vector3 position
         //tr.position = new Vector3(skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, (-6 + shiftY) * -_AdapterRoomSize.y - skelpos.z * 3.5f * _AdapterRoomSize.y);

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44129786, g: 0.49010104, b: 0.5701521, a: 1}
+  m_IndirectSpecularColor: {r: 0.44129816, g: 0.49010164, b: 0.5701526, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 200055104}
   - component: {fileID: 200055103}
   m_Layer: 10
-  m_Name: UnityTester
+  m_Name: Tester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1628,7 +1628,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMovementEnabled: 1
-  speed: 5
   roomsize: {x: 2.74, y: 2.88}
   shiftX: 12.75
   shiftY: -1.53
