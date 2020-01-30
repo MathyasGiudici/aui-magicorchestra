@@ -3603,6 +3603,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArenaObject7
       objectReference: {fileID: 0}
+    - target: {fileID: 6809349691001537598, guid: f0d473766ed681a408b3da0e5e89a830,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5446841492773031729, guid: f0d473766ed681a408b3da0e5e89a830,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3663,6 +3668,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a23c683c20ddb9f4c87175c513832e70, type: 2}
+    - target: {fileID: 7475427997900927446, guid: f0d473766ed681a408b3da0e5e89a830,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0d473766ed681a408b3da0e5e89a830, type: 3}
 --- !u!4 &1492994237 stripped

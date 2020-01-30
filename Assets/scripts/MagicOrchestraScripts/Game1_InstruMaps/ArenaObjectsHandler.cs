@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ArenaObjectsHandler : MonoBehaviour
 {
@@ -53,6 +54,9 @@ public class ArenaObjectsHandler : MonoBehaviour
             //Assign a name to the object in context mode -> than also an image.
             newInstr.name = instrNames[index].ToString();
             instrNames.RemoveAt(index);
+            
+            //TODO
+            //newInstr.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Design/Game1/" + newInstr.name);
 
             this.arenaObjects.Add(newInstr);
         }
