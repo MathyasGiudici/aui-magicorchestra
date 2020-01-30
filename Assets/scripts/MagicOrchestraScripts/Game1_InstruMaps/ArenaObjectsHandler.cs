@@ -56,7 +56,7 @@ public class ArenaObjectsHandler : MonoBehaviour
             instrNames.RemoveAt(index);
             
             //TODO
-            //newInstr.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Design/Game1/" + newInstr.name);
+            newInstr.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(newInstr.name);
 
             this.arenaObjects.Add(newInstr);
         }
