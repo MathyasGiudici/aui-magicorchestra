@@ -50,7 +50,7 @@ public class Game1PhasesManager : MonoBehaviour
         StartCoroutine(ReorderItemsCoroutine());
 
         this.ActiveCollisionDetection();
-        DragAndDropHandler.singleton.EnableRaycaster();
+        this.EnableRaycaster();
     }
 
     /// <summary>
@@ -77,6 +77,8 @@ public class Game1PhasesManager : MonoBehaviour
 
         if (this.score == Game1Parameters.Difficulty)
         {
+            this.DisableRaycaster();
+            
             // TODO: Schermata vittoria! 
         }
     }
@@ -139,6 +141,40 @@ public class Game1PhasesManager : MonoBehaviour
         frontalTextMessage.GetComponent<Text>().text = "";
 
         yield return new WaitForEndOfFrame();
+    }
+
+    /// <summary>
+    /// Enable raycaster in the different game mode
+    /// </summary>
+    private void EnableRaycaster()
+    {
+        if (DragAndDropHandler.singleton != null)
+        {
+            DragAndDropHandler.singleton.EnableRaycaster();
+        }
+        
+        if (KinectLeftHand.singleton != null && KinectRightHand.singleton != null)
+        {
+            KinectLeftHand.singleton.EnableRaycaster();
+            KinectRightHand.singleton.EnableRaycaster();
+        }
+    }
+
+    /// <summary>
+    /// Disable raycaster in the different game mode
+    /// </summary>
+    private void DisableRaycaster()
+    {
+        if (DragAndDropHandler.singleton != null)
+        {
+            DragAndDropHandler.singleton.DisableRaycaster();
+        }
+
+        if (KinectLeftHand.singleton != null && KinectRightHand.singleton != null)
+        {
+            KinectLeftHand.singleton.DisableRaycaster();
+            KinectRightHand.singleton.DisableRaycaster();
+        }
     }
 
 }
