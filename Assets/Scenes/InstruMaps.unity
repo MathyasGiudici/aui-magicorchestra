@@ -739,11 +739,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67fae2f7e0363704fad044ee51ebc380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 534669904}
   roomsize: {x: 2.74, y: 2.88}
-  shiftX: 12.75
+  shiftX: 0
   shiftZ: 1
-  multX: 1.8
+  multX: 1
   multZ: 1
 --- !u!1 &233629803
 GameObject:
@@ -4049,11 +4049,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c42e70d69d3e5945ab1602ffa29885f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 534669904}
   roomsize: {x: 2.74, y: 2.88}
-  shiftX: 12.75
+  shiftX: 0
   shiftZ: 1
-  multX: 1.8
+  multX: 1
   multZ: 1
 --- !u!212 &1639743295
 SpriteRenderer:
@@ -4352,7 +4352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1717513775
 Transform:
   m_ObjectHideFlags: 0
@@ -4553,7 +4553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1858224516
 Transform:
   m_ObjectHideFlags: 0

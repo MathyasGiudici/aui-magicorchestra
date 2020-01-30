@@ -18,10 +18,10 @@ public class KinectLeftHand : MonoBehaviour
     private Transform tr;
 
     //Calibration parameters
-    public float shiftX = 12.75f;
+    public float shiftX = 0f;
     public float shiftZ = 1f;
 
-    public float multX = 1.8f;
+    public float multX = 1f;
     public float multZ = 1f;
 
     // Singleton of the KinectRightHand class
