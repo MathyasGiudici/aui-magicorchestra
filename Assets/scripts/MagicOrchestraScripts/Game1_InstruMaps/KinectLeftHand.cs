@@ -66,10 +66,9 @@ public class KinectLeftHand : MonoBehaviour
                 return;
             }
 
-            Vector3 skelpos = skel.SpineBase;
-
             // Computing new Vector3 position
-            tr.position = new Vector3(multX * skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * (Screen.height / skel.Head.z) * skel.HandLeft.z + shiftZ);
+            // tr.position = new Vector3(skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, (-6 + shiftY) * -_AdapterRoomSize.y - skelpos.z * 3.5f * _AdapterRoomSize.y);
+            tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.z + shiftZ);
 
             // Moving pillar on the game
             gameObject.transform.position = tr.position;

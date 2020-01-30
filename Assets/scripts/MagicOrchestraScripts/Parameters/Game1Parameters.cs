@@ -31,25 +31,12 @@ public static class Game1Parameters {
         }
     }
 
-    public static bool IsGestureMode
-    {
-        get
-        {
-            return isGestureMode;
-        }
-        set
-        {
-            isGestureMode = value;
-        }
-    }
-
     public static string StringifyMe()
     {
         string toReturn = "";
 
         toReturn += ("Difficoltà: " + Difficulty + "\n");
         toReturn += ("Tempo proiezione frontale: " + TimeInShowing + " secondi\n");
-        // toReturn += ("Modalità Gesture: " + IsGestureMode + "\n");
 
         return toReturn;
     }
@@ -59,7 +46,6 @@ public static class Game1Parameters {
     {
         Debug.Log("Difficulty: " + Difficulty);
         Debug.Log("TimeInShowing: " + TimeInShowing);
-        // Debug.Log("IsGestureMode: " + IsGestureMode);
     }
 
 }

@@ -34,16 +34,8 @@ public class InstruMapsController : MonoBehaviour
     {
         Debug.Log("Starting InstruMaps execution...");
 
-        if (Game1Parameters.Difficulty == 0)
-        {
-            Game1Parameters.Difficulty = 12;
-            return;
-        }
         this.timeInShowing = Game1Parameters.TimeInShowing;
-        this.isGestureMode = Game1Parameters.IsGestureMode;        
-
-        //InstruMapsCanvasController.singleton.WatchTheArenaDisposition();
-        new WaitForSeconds(5.0f);
+        //new WaitForSeconds(5.0f);
     }
 
 
@@ -51,13 +43,13 @@ public class InstruMapsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isGameStarted)
-        {
-            if (Input.GetKeyUp("space"))
-            {
-                isGameStarted = true;
-            }
-        }
+        //if (!isGameStarted)
+        //{
+        //    if (Input.GetKeyUp("space"))
+        //    {
+        //        isGameStarted = true;
+        //    }
+        //}
     }
     
 
