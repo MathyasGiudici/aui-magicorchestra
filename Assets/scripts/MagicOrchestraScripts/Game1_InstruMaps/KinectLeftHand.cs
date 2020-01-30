@@ -19,10 +19,10 @@ public class KinectLeftHand : MonoBehaviour
 
     //Calibration parameters
     public float shiftX = 0f;
-    public float shiftZ = 1f;
+    public float shiftZ = 2f;
 
-    public float multX = 1f;
-    public float multZ = 1f;
+    public float multX = 9f;
+    public float multZ = 13f;
 
     // Singleton of the KinectRightHand class
     public static KinectLeftHand singleton = null;
@@ -68,7 +68,7 @@ public class KinectLeftHand : MonoBehaviour
 
             // Computing new Vector3 position
             // tr.position = new Vector3(skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, (-6 + shiftY) * -_AdapterRoomSize.y - skelpos.z * 3.5f * _AdapterRoomSize.y);
-            tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.z + shiftZ);
+            tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.y + shiftZ);
 
             // Moving pillar on the game
             gameObject.transform.position = tr.position;
@@ -76,8 +76,11 @@ public class KinectLeftHand : MonoBehaviour
             // Select the object to drag
             if (skel.isLeftHandClosed())
             {
+                
                 RaycastHit hitInfo;
                 this.target = GetHitTargetObject(out hitInfo);
+
+                Debug.Log("Here + " + this.target);
 
                 if (this.target != null)
                 {

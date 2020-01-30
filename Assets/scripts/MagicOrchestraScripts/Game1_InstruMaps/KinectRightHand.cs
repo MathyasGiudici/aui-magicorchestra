@@ -19,10 +19,10 @@ public class KinectRightHand : MonoBehaviour
 
     //Calibration parameters
     public float shiftX = 0f;
-    public float shiftZ = 1f;
+    public float shiftZ = 2f;
 
-    public float multX = 1f;
-    public float multZ = 1f;
+    public float multX = 9f;
+    public float multZ = 13f;
 
     // Singleton of the KinectRightHand class
     public static KinectRightHand singleton = null;
@@ -68,7 +68,7 @@ public class KinectRightHand : MonoBehaviour
 
 
             // Computing new Vector3 position
-            tr.position = new Vector3(multX * skel.HandRight.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandRight.z + shiftZ);
+            tr.position = new Vector3(multX * skel.HandRight.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandRight.y + shiftZ);
 
             // Moving pillar on the game
             gameObject.transform.position = tr.position;
