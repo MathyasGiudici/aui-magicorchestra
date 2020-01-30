@@ -43,7 +43,6 @@ public static class Game1Parameters {
         }
     }
 
-
     public static string StringifyMe()
     {
         string toReturn = "";
@@ -62,7 +61,5 @@ public static class Game1Parameters {
         Debug.Log("TimeInShowing: " + TimeInShowing);
         // Debug.Log("IsGestureMode: " + IsGestureMode);
     }
-
-
 
 }

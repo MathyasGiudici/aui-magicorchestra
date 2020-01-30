@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Game2Controller : MonoBehaviour
 {
-    //Singleton of the GameController class
+    //Singleton of the Game1PhasesManager class
     public static Game2Controller singleton = null;
 
     //Private setting variables

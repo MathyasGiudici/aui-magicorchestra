@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game1PanelManager : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class Game1PanelManager : MonoBehaviour
 		Game1Parameters.Difficulty = this.gameObject.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<DifficultySlider>().GetCurrentDifficulty();
 		Game1Parameters.TimeInShowing = this.gameObject.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<TimeSlider>().GetCurrentTime();
 
-        Game1Parameters.LogMe();
-        
-		//SceneManager.LoadScene("Instrumap");
+		Game1Parameters.LogMe();
+
+		SceneManager.LoadScene("InstruMaps");
 	}
 }

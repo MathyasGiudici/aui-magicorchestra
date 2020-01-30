@@ -20,7 +20,10 @@ public static class MagicOrchestraUtils
     public const float generalPauseTime_long = 4.0f;
 
     public const string beginSequenceMessage = "Guarda la sequenza attentamente";
+    public const string watchArenaMessage = "Osserva attentamente la disposizione degli oggetti!"; //Instrumaps
+    public const string endWatchArenaMessage = "Sei stato attento?\nTi ricordi tutto?"; //InstruMaps 
     public const string beginUserTurnMessage = "Ora è il tuo turno!";
+    public const string reorderObjectsMessage = "Rimetti gli oggetti al loro posto!";
     public const string repeatSequenceMessage = "Ripeti la sequenza";
     public const string repeatSequenceReverseMessage = repeatSequenceMessage + " IN ORDINE INVERSO";
     public const string correctSequenceMessage = "Bravissimo!\nSequenza corretta";
