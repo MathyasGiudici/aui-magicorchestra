@@ -49,6 +49,7 @@ public class DragAndDropHandler : MonoBehaviour
                 if(this.target != null)
                 {
                     this.isMouseDrag = true;
+                    this.CallTargetScript();
                     // Debug.Log("target position : " + this.target.transform.position);
 
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 0.7f, this.target.transform.position.z);
@@ -119,5 +120,15 @@ public class DragAndDropHandler : MonoBehaviour
     public void DisableRaycaster()
     {
         this.isRaycasterEnabled = false;
+    }
+
+    /// <summary>
+    /// Notify the target that it is no more the dragged object and set the firstCollision to null, to avoid multiple collisions
+    /// </summary>
+    private void CallTargetScript()
+    {
+        CollisionDetector script;
+        script = (CollisionDetector) this.target.GetComponent(typeof(CollisionDetector));
+        script.StopDragOnThis();
     }
 }

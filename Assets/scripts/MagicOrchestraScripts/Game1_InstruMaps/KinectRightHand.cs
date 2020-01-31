@@ -82,6 +82,7 @@ public class KinectRightHand : MonoBehaviour
                 if (this.target != null)
                 {
                     this.isDrag = true;
+                    this.CallTargetScript();
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 0.7f, this.target.transform.position.z);
                 }
             }
@@ -148,5 +149,15 @@ public class KinectRightHand : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         this.isRaycasterEnabled = false;
+    }
+
+    /// <summary>
+    /// Notify the target that it is no more the dragged object and set the firstCollision to null, to avoid multiple collisions
+    /// </summary>
+    private void CallTargetScript()
+    {
+        CollisionDetector script;
+        script = (CollisionDetector)this.target.GetComponent(typeof(CollisionDetector));
+        script.StopDragOnThis();
     }
 }

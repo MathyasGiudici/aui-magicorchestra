@@ -9,6 +9,8 @@ public class CollisionDetector : MonoBehaviour
     private Vector3 wrongDragPosition;
     private Vector3 correctDragPosition;
 
+    private GameObject firstCollision;
+
     /// <summary>
     /// Enables the detection of collisions
     /// </summary>
@@ -50,24 +52,54 @@ public class CollisionDetector : MonoBehaviour
     {
         if (this.isColliderActive)
         {
-            if (this.targetSlice == other.gameObject)
+            if(this.isFirstCollision(other.gameObject))
             {
-                Debug.Log(gameObject.name + " collided with the CORRECT slice");
+                if (this.targetSlice == other.gameObject)
+                {
+                    Debug.Log(gameObject.name + " collided with the CORRECT slice");
 
-                gameObject.transform.position = this.correctDragPosition;
-                this.DisableCollisionDetector();
+                    gameObject.transform.position = this.correctDragPosition;
+                    this.DisableCollisionDetector();
 
-                // Disable raycast on this object changing the layer
-                gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-                Game1PhasesManager.singleton.UpdateCurrentScore();
+                    // Disable raycast on this object changing the layer
+                    gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                    Game1PhasesManager.singleton.UpdateCurrentScore();
+                    firstCollision = null;
+                }
+                else
+                {
+                    Debug.Log(gameObject.name + " collided with the WRONG slice");
+                    gameObject.transform.position = this.wrongDragPosition;
+                }
             }
-            else
-            {
-                Debug.Log(gameObject.name + " collided with the WRONG slice");
-                gameObject.transform.position = this.wrongDragPosition;
-            }
+        }            
+    }
+
+    /// <summary>
+    /// Check if the collision is the first  
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
+    private bool isFirstCollision(GameObject other)
+    {
+        if (firstCollision == null)
+        {
+            firstCollision = other;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
+
+    /// <summary>
+    /// Set firstCollision to null to avoid multiple collision
+    /// </summary>
+    public void StopDragOnThis()
+    {
+        firstCollision = null;
+    }
 
 }
