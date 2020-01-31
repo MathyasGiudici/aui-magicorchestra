@@ -68,13 +68,18 @@ public class KinectLeftHand : MonoBehaviour
 
             // Computing new Vector3 position
             this.tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.y + shiftZ);
-
+            // Moving cursor on the game
+            gameObject.transform.position = tr.position;
+            
             // Select the object to drag
             if (skel.isLeftHandClosed())
             {                
-                RaycastHit hitInfo;
-                this.target = GetHitTargetObject(out hitInfo);
-
+                if (!this.isDrag)
+                {
+                    RaycastHit hitInfo;
+                    this.target = GetHitTargetObject(out hitInfo);
+                }
+                
                 if (this.target != null)
                 {
                     this.isDrag = true;
@@ -85,20 +90,19 @@ public class KinectLeftHand : MonoBehaviour
             if (!skel.isLeftHandClosed())
             {
                 this.isDrag = false;
+
                 if (this.target != null)
                 {
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 0, this.target.transform.position.z);
                 }
             }
 
-            Debug.Log("sjabsab!:" + skel.isLeftHandClosed());
-
             // Dragging the object
             if (this.isDrag)
             {   
                 if (this.target == null)
                 {
-                    Debug.Log("SONO PASSATO");
+                   Debug.Log("quiiiiiiiiiiiiiiiii");
                 }
                 else
                 {
@@ -107,7 +111,7 @@ public class KinectLeftHand : MonoBehaviour
             }
 
             // Moving cursor on the game
-            gameObject.transform.position = tr.position;
+            // gameObject.transform.position = tr.position;
         }
     }
 
