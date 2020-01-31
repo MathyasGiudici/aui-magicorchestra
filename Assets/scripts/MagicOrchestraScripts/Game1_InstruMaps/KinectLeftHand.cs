@@ -9,20 +9,18 @@ public class KinectLeftHand : MonoBehaviour
     private bool isDrag = false;
 
     GameObject target;
-    Vector3 screenPosition;
-    Vector3 offset;
+    private Transform tr;
 
     //Room parameters
     public Vector2 roomsize = new Vector2(2.74f, 2.88f);
     private Vector2 _AdapterRoomSize;
-    private Transform tr;
-
+    
     //Calibration parameters
     public float shiftX = 0f;
     public float shiftZ = 2f;
 
-    public float multX = 9f;
-    public float multZ = 13f;
+    public float multX = 20f;
+    public float multZ = 22f;
 
     // Singleton of the KinectRightHand class
     public static KinectLeftHand singleton = null;
@@ -68,6 +66,7 @@ public class KinectLeftHand : MonoBehaviour
 
             // Computing new Vector3 position
             this.tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.y + shiftZ);
+
             // Moving cursor on the game
             gameObject.transform.position = tr.position;
             
@@ -102,7 +101,7 @@ public class KinectLeftHand : MonoBehaviour
             {   
                 if (this.target == null)
                 {
-                   Debug.Log("quiiiiiiiiiiiiiiiii");
+                   Debug.Log("Something strange");
                 }
                 else
                 {
