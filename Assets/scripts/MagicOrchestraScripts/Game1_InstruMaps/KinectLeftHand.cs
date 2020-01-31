@@ -76,7 +76,7 @@ public class KinectLeftHand : MonoBehaviour
             if (skel.isLeftHandClosed())
             {                
                 RaycastHit hitInfo;
-                this.target = GetHitTargetObject(out hitInfo);
+                this.target = GetHitTargetObject(out hitInfo, tr.position);
 
                 Debug.Log("Here + " + this.target);
 
@@ -128,11 +128,12 @@ public class KinectLeftHand : MonoBehaviour
     /// </summary>
     /// <param name="hit"></param>
     /// <returns> GameObject that has been hit </returns>
-    public GameObject GetHitTargetObject(out RaycastHit hit)
+    public GameObject GetHitTargetObject(out RaycastHit hit, Vector3 startingPoint)
     {
         GameObject hitTarget = null;
 
-        Ray lastRay = cam.ScreenPointToRay(Input.mousePosition);
+        Ray lastRay = new Ray(startingPoint, new Vector3(0,-1,0));
+        Debug.DrawRay(lastRay.origin, lastRay.direction * 100, Color.green, 30);
 
         if (Physics.Raycast(lastRay, out hit))
         {
