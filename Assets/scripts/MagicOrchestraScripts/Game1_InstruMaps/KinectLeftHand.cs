@@ -67,35 +67,21 @@ public class KinectLeftHand : MonoBehaviour
             }
 
             // Computing new Vector3 position
-            tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.y + shiftZ);
-
-            // Moving pillar on the game
-            gameObject.transform.position = tr.position;
+            this.tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.y + shiftZ);
 
             // Select the object to drag
             if (skel.isLeftHandClosed())
             {                
                 RaycastHit hitInfo;
-                this.target = GetHitTargetObject(out hitInfo, tr.position);
-
-                Debug.Log("Here + " + this.target);
+                this.target = GetHitTargetObject(out hitInfo);
 
                 if (this.target != null)
                 {
                     this.isDrag = true;
-                    // Debug.Log("target position : " + this.target.transform.position);
-
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 0.7f, this.target.transform.position.z);
-
-                    this.screenPosition = cam.WorldToScreenPoint(this.target.transform.position);
-                    this.offset = this.target.transform.position - cam.ScreenToWorldPoint(new Vector3(tr.position.x, tr.position.y, this.screenPosition.z));
-
-                    // Debug.Log("screen position is : " + this.screenPosition);
-                    // Debug.Log("offst is : " + this.offset);
                 }
             }
-
-            // Drop the object
+            
             if (!skel.isLeftHandClosed())
             {
                 this.isDrag = false;
@@ -105,21 +91,23 @@ public class KinectLeftHand : MonoBehaviour
                 }
             }
 
+            Debug.Log("sjabsab!:" + skel.isLeftHandClosed());
+
             // Dragging the object
             if (this.isDrag)
-            {
-                // Computing new Vector3 position
-                tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.y + shiftZ);
-
-                // Track mouse position
-                Vector3 currentScreenSpace = new Vector3(tr.position.x, tr.position.y, this.screenPosition.z);
-
-                // Convert screen position to world position with offset changes.
-                Vector3 currentPosition = cam.ScreenToWorldPoint(currentScreenSpace) + this.offset;
-
-                // It will update target gameobject's current postion.
-                this.target.transform.position = currentPosition;
+            {   
+                if (this.target == null)
+                {
+                    Debug.Log("SONO PASSATO");
+                }
+                else
+                {
+                    this.target.transform.position = new Vector3(tr.position.x,this.target.transform.position.y,tr.position.z);
+                }
             }
+
+            // Moving cursor on the game
+            gameObject.transform.position = tr.position;
         }
     }
 
@@ -128,11 +116,11 @@ public class KinectLeftHand : MonoBehaviour
     /// </summary>
     /// <param name="hit"></param>
     /// <returns> GameObject that has been hit </returns>
-    public GameObject GetHitTargetObject(out RaycastHit hit, Vector3 startingPoint)
+    public GameObject GetHitTargetObject(out RaycastHit hit)
     {
         GameObject hitTarget = null;
 
-        Ray lastRay = new Ray(startingPoint, new Vector3(0,-1,0));
+        Ray lastRay = new Ray(this.tr.position, new Vector3(0,-1,0));
         Debug.DrawRay(lastRay.origin, lastRay.direction * 100, Color.green, 30);
 
         if (Physics.Raycast(lastRay, out hit))
