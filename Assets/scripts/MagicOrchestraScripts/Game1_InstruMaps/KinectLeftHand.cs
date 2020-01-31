@@ -67,7 +67,6 @@ public class KinectLeftHand : MonoBehaviour
             }
 
             // Computing new Vector3 position
-            // tr.position = new Vector3(skelpos.x * 8 * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, (-6 + shiftY) * -_AdapterRoomSize.y - skelpos.z * 3.5f * _AdapterRoomSize.y);
             tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.y + shiftZ);
 
             // Moving pillar on the game
@@ -75,8 +74,7 @@ public class KinectLeftHand : MonoBehaviour
 
             // Select the object to drag
             if (skel.isLeftHandClosed())
-            {
-                
+            {                
                 RaycastHit hitInfo;
                 this.target = GetHitTargetObject(out hitInfo);
 
@@ -110,6 +108,9 @@ public class KinectLeftHand : MonoBehaviour
             // Dragging the object
             if (this.isDrag)
             {
+                // Computing new Vector3 position
+                tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.y + shiftZ);
+
                 // Track mouse position
                 Vector3 currentScreenSpace = new Vector3(tr.position.x, tr.position.y, this.screenPosition.z);
 

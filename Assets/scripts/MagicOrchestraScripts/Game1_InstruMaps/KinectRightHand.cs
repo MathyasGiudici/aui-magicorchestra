@@ -66,7 +66,6 @@ public class KinectRightHand : MonoBehaviour
                 return;
             }
 
-
             // Computing new Vector3 position
             tr.position = new Vector3(multX * skel.HandRight.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandRight.y + shiftZ);
 
@@ -107,6 +106,9 @@ public class KinectRightHand : MonoBehaviour
             // Dragging the object
             if (this.isDrag)
             {
+                // Computing new Vector3 position
+                tr.position = new Vector3(multX * skel.HandLeft.x * _AdapterRoomSize.x + shiftX, gameObject.transform.position.y, multZ * skel.HandLeft.y + shiftZ);
+
                 // Track mouse position
                 Vector3 currentScreenSpace = new Vector3(tr.position.x, tr.position.y, this.screenPosition.z);
 

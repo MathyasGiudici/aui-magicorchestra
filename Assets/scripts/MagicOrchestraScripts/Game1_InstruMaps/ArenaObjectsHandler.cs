@@ -55,13 +55,13 @@ public class ArenaObjectsHandler : MonoBehaviour
             newInstr.name = instrNames[index].ToString();
             instrNames.RemoveAt(index);
             
-            //TODO
+            //Load the sprite associated with the instruments
             newInstr.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(newInstr.name);
 
             this.arenaObjects.Add(newInstr);
         }
         
-        this.arenaObjects = ShuffleObjects(this.arenaObjects);
+        this.arenaObjects = ShuffleObjectsArraListt(this.arenaObjects);
         CombineObjectsWithSlices();
         SetArenaPositions();
         
@@ -94,7 +94,7 @@ public class ArenaObjectsHandler : MonoBehaviour
             this.arenaObjects.Add(newInstr);
         }
 
-        this.arenaObjects = ShuffleObjects(this.arenaObjects);
+        this.arenaObjects = ShuffleObjectsArraListt(this.arenaObjects);
         CombineObjectsWithSlices();
         SetArenaPositions();
     }
@@ -168,7 +168,7 @@ public class ArenaObjectsHandler : MonoBehaviour
     /// </summary>
     /// <param name="listToShuffle"></param>
     /// <returns></returns>
-    private ArrayList ShuffleObjects(ArrayList listToShuffle)
+    private ArrayList ShuffleObjectsArraListt(ArrayList listToShuffle)
     {
         ArrayList randomList = new ArrayList();
 
@@ -182,6 +182,25 @@ public class ArenaObjectsHandler : MonoBehaviour
         }
 
         return randomList; //return the new random list
+    }
+
+
+    private List<Vector3Ser> ShufflePositionDictionary(Dictionary<int, Vector3Ser> dictToShuffle)
+    {
+        List<Vector3Ser> valuesToShuffle = new List<Vector3Ser>(dictToShuffle.Values);
+        var rnd = new System.Random();
+        int randomIndex = 0;
+
+        List<Vector3Ser> randomValues = new List<Vector3Ser>();
+
+        while (valuesToShuffle.Count > 0)
+        { 
+            randomIndex = rnd.Next(0, valuesToShuffle.Count); //Choose a random couple in the dict    
+            randomValues.Add(valuesToShuffle[randomIndex]); //add it to the new, random dict
+            valuesToShuffle.RemoveAt(randomIndex); //remove the index to avoid duplicates
+        }
+
+        return randomValues;
     }
 
 
@@ -273,12 +292,13 @@ public class ArenaObjectsHandler : MonoBehaviour
     public void SetDragAndDropPositions()
     {
         Dictionary<int, Vector3Ser> positions = ArenaObjectsRetriever.RetrievePositions(false);
+        List<Vector3Ser> positionValues = this.ShufflePositionDictionary(positions);
 
-        for (int i = 0; i < this.objectSliceCouples.Count; i++)
+        for (int i = 0; i < this.arenaObjects.Count; i++)
         {
-            float x = positions[i + 1].x;
-            float y = positions[i + 1].y;
-            float z = positions[i + 1].z;
+            float x = positionValues[i].x;
+            float y = positionValues[i].y;
+            float z = positionValues[i].z;
 
             ((GameObject)this.arenaObjects[i]).transform.position = new Vector3(x, y, z);
 

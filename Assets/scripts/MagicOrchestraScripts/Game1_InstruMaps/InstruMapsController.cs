@@ -26,8 +26,7 @@ public class InstruMapsController : MonoBehaviour
         }
         singleton = this;
     }
-
-
+       
 
     // Start is called before the first frame update
     void Start()
@@ -37,22 +36,8 @@ public class InstruMapsController : MonoBehaviour
         this.timeInShowing = Game1Parameters.TimeInShowing;
         //new WaitForSeconds(5.0f);
     }
-
-
     
-    // Update is called once per frame
-    void Update()
-    {
-        //if (!isGameStarted)
-        //{
-        //    if (Input.GetKeyUp("space"))
-        //    {
-        //        isGameStarted = true;
-        //    }
-        //}
-    }
     
-
     /// <summary>
     /// Start the game with the first phase in which the user has to visualize and memorize
     /// the disposition of the objects in the arena.
@@ -63,6 +48,9 @@ public class InstruMapsController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Stop the watch arena phase
+    /// </summary>
     public void EndWatchArenaPhase()
     {
         InstruMapsCanvasController.singleton.DecisionPoint();

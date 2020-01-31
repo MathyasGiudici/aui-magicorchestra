@@ -78,7 +78,8 @@ public class Game1PhasesManager : MonoBehaviour
         if (this.score == Game1Parameters.Difficulty)
         {
             this.DisableRaycaster();
-            
+
+            Debug.Log("GREAT, you have won!");
             // TODO: Schermata vittoria! 
         }
     }
