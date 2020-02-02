@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class KinectRightHand : MonoBehaviour
 {
+    // UI parameters
+    public Sprite[] spritesHands;
+
+    // Drag and Drop parameters
     public Camera cam;
     private bool isRaycasterEnabled = true;
     private bool isDrag = false;
@@ -73,6 +77,8 @@ public class KinectRightHand : MonoBehaviour
             // Select the object to drag
             if (skel.isRightHandClosed())
             {
+                gameObject.GetComponent<SpriteRenderer>().sprite = spritesHands[1];
+
                 if (!this.isDrag)
                 {
                     RaycastHit hitInfo;
@@ -90,6 +96,8 @@ public class KinectRightHand : MonoBehaviour
             // Drop the object
             if (!skel.isRightHandClosed())
             {
+                gameObject.GetComponent<SpriteRenderer>().sprite = spritesHands[0];
+
                 this.isDrag = false;
 
                 if (this.target != null)

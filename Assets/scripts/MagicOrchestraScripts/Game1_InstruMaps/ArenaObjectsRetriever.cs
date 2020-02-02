@@ -137,4 +137,4 @@ public class Vector3Ser
 
 public enum Instruments {Trumpet, Violin, Drums, Piano, Maracas, Clarinet, DoubleBass, Guitar, Harp, SaxoPhone, Cymbals, Triangle}
 
-public enum GeometricalShapes {Square, Circle, Rhombus, Nabla, Heart, Cross, Star, Hashtag, Slash, Arrow, Tilde, Dollar}
+public enum GeometricalShapes { Asterisk, Circle, Cloud, Cross, Heart, Moon, Square, Star, TriangleFigure } //, Rhombus, Nabla, Hashtag, Slash, Arrow, Tilde, Dollar}
