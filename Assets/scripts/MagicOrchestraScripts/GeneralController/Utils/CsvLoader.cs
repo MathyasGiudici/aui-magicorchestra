@@ -10,6 +10,7 @@ public static class CsvLoader
     
     public static List<SequenceObjectFile> LoadingFromFile(string pathFromStreamingAssets)
     {
+        
         // Instanciting the sequences list
         List<SequenceObjectFile> sequenceObjectFiles = new List<SequenceObjectFile>();
 
@@ -17,7 +18,6 @@ public static class CsvLoader
         string path = Application.streamingAssetsPath + pathFromStreamingAssets;
         string cvsFile = File.ReadAllText(path);
         String[] lines = cvsFile.Split(System.Environment.NewLine[0]);
-
         // Looping on lines of the file
         // KEEP ATTENTION:
         // - line starts from 1 in order to skip the header line
@@ -55,6 +55,7 @@ public static class CsvLoader
             sequenceObjectFiles.Add(objectFile);
         }
 
+        Debug.Log(sequenceObjectFiles[0].difficulty);
         return sequenceObjectFiles;
     }
 

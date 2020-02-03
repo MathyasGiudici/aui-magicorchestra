@@ -62,7 +62,7 @@ public class Game3PanelManager : MonoBehaviour
             if (sequencePanel.transform.childCount != sequenceObjectFile.sequences.Count)
             {
                 // Creating a new toggle
-                GameObject toggle = Instantiate(togglePrefab);
+                GameObject toggle = Instantiate(togglePrefab, sequencePanel.transform, false);
                 toggle.transform.SetParent(sequencePanel.transform);
                 toggle.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
                 toggle.GetComponent<SequenceToggle>().SetIndex(arrayIndex);
