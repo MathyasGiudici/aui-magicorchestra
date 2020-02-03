@@ -44,10 +44,13 @@ public class Game2Controller : MonoBehaviour
         this.isReverse = Game2Parameters.IsReverse;
         Game2HitImageController.singleton.Init();
 
-        MagicOrchestraBuilderManager.singleton.frontalCamera = this.frontalCamera;
-        MagicOrchestraBuilderManager.singleton.zenithCamera = this.zenithCamera;
-        MagicOrchestraBuilderManager.singleton.controllerCamera = this.controllerCamera;
-        MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
+        if (MagicOrchestraBuilderManager.singleton != null)
+        {
+            MagicOrchestraBuilderManager.singleton.frontalCamera = this.frontalCamera;
+            MagicOrchestraBuilderManager.singleton.zenithCamera = this.zenithCamera;
+            MagicOrchestraBuilderManager.singleton.controllerCamera = this.controllerCamera;
+            MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
+        }
     }
 
     /* <summary>

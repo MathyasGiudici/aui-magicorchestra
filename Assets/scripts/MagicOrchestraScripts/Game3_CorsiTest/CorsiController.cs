@@ -8,7 +8,10 @@ public class CorsiController : MonoBehaviour
     //Singleton of the CorsiController class
     public static CorsiController singleton = null;
 
-    public Camera zenithCamera;
+    // Cameras
+    public GameObject frontalCamera;
+    public GameObject zenithCamera;
+    public GameObject controllerCamera;    
 
     //Protected parameters that contains the main custom parameters of the game
     int[] sequence = { 2, 3, 6, 5, 8, 9 };
@@ -48,11 +51,19 @@ public class CorsiController : MonoBehaviour
         this.isGestureMode = Game3Parameters.IsGestureMode;
         this.timeInDetecting = Game3Parameters.TimeInDetecting;
         this.ZenithCameraChoice(Game3Parameters.IsZenithOrthographic);
+
+        if (MagicOrchestraBuilderManager.singleton != null)
+        {
+            MagicOrchestraBuilderManager.singleton.frontalCamera = this.frontalCamera;
+            MagicOrchestraBuilderManager.singleton.zenithCamera = this.zenithCamera;
+            MagicOrchestraBuilderManager.singleton.controllerCamera = this.controllerCamera;
+            MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
+        }
     }
 
     private void ZenithCameraChoice(bool isZenithOrthographic)
     {
-        zenithCamera.orthographic = isZenithOrthographic;
+        zenithCamera.GetComponent<Camera>().orthographic = isZenithOrthographic;
     }
 
     /* <summary>

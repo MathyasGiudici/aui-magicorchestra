@@ -61,20 +61,18 @@ public class MagicOrchestraBuilderManager : MonoBehaviour
 
     private void ChangeDisplay()
     {
-        if(this.frontalCamera.GetComponent<Camera>().targetDisplay == 1)
-        {
-            this.frontalCamera.GetComponent<Camera>().targetDisplay = 3;
-            this.controllerCamera.GetComponent<Camera>().targetDisplay = 1;
-        }
-        else
-        {
-            this.frontalCamera.GetComponent<Camera>().targetDisplay = 1;
-            this.controllerCamera.GetComponent<Camera>().targetDisplay = 3;
-        }
+        int hint;
+        hint = this.controllerCamera.GetComponent<Camera>().targetDisplay;        
+        this.controllerCamera.GetComponent<Camera>().targetDisplay = this.frontalCamera.GetComponent<Camera>().targetDisplay;
+        this.frontalCamera.GetComponent<Camera>().targetDisplay = hint;
     }
 
     private void QuitGame()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }

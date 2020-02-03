@@ -7,10 +7,23 @@ using UnityEngine.Video;
 
 public class CustomVideoController : MonoBehaviour
 {
+    // Cameras
+    public GameObject frontalCamera;
+    public GameObject zenithCamera;
+    public GameObject controllerCamera;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(this.VideoCoroutine());
+
+        if (MagicOrchestraBuilderManager.singleton != null)
+        {
+            MagicOrchestraBuilderManager.singleton.frontalCamera = this.frontalCamera;
+            MagicOrchestraBuilderManager.singleton.zenithCamera = this.zenithCamera;
+            MagicOrchestraBuilderManager.singleton.controllerCamera = this.controllerCamera;
+            MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
+        }
     }
 
      void ReturnToHome(VideoPlayer videoPlayer)

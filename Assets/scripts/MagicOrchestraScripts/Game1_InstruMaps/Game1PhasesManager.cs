@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class Game1PhasesManager : MonoBehaviour
 {
+    // Cameras
+    public GameObject frontalCamera;
+    public GameObject zenithCamera;
+    public GameObject controllerCamera;
+
     //Text container
     public GameObject panelMessage;
     public GameObject frontalTextMessage;
@@ -31,6 +36,18 @@ public class Game1PhasesManager : MonoBehaviour
             return;
         }
         singleton = this;
+    }
+
+
+    void Start()
+    {
+        if (MagicOrchestraBuilderManager.singleton != null)
+        {
+            MagicOrchestraBuilderManager.singleton.frontalCamera = this.frontalCamera;
+            MagicOrchestraBuilderManager.singleton.zenithCamera = this.zenithCamera;
+            MagicOrchestraBuilderManager.singleton.controllerCamera = this.controllerCamera;
+            MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
+        }
     }
 
     /// <summary>

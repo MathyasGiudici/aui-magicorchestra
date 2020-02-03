@@ -18,10 +18,13 @@ public class CanvasManager : MonoBehaviour
      */
     void Start()
     {
-        MagicOrchestraBuilderManager.singleton.frontalCamera = this.frontalCamera;
-        MagicOrchestraBuilderManager.singleton.zenithCamera = this.zenithCamera;
-        MagicOrchestraBuilderManager.singleton.controllerCamera = this.controllerCamera;
-        MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
+        if (MagicOrchestraBuilderManager.singleton != null)
+        {
+            MagicOrchestraBuilderManager.singleton.frontalCamera = this.frontalCamera;
+            MagicOrchestraBuilderManager.singleton.zenithCamera = this.zenithCamera;
+            MagicOrchestraBuilderManager.singleton.controllerCamera = this.controllerCamera;
+            MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
+        }
 
         ShowIntro();
     }
