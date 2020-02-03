@@ -56,7 +56,7 @@ public class CollisionDetector : MonoBehaviour
             {
                 if (this.targetSlice == other.gameObject)
                 {
-                    Debug.Log(gameObject.name + " collided with the CORRECT slice");
+                    // Debug.Log(gameObject.name + " collided with the CORRECT slice");
 
                     gameObject.transform.position = this.correctDragPosition;
                     this.DisableCollisionDetector();
@@ -68,7 +68,7 @@ public class CollisionDetector : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log(gameObject.name + " collided with the WRONG slice");
+                    // Debug.Log(gameObject.name + " collided with the WRONG slice");
                     gameObject.transform.position = this.wrongDragPosition;
                 }
             }

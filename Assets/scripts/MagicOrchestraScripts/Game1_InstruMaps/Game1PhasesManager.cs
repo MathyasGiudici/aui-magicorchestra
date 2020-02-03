@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game1PhasesManager : MonoBehaviour
@@ -13,6 +14,7 @@ public class Game1PhasesManager : MonoBehaviour
 
     private int score = 0;
 
+    public Coroutine coroutine = null;
 
     //Singleton of the Game1PhasesManager class
     public static Game1PhasesManager singleton = null;
@@ -79,11 +81,31 @@ public class Game1PhasesManager : MonoBehaviour
         {
             this.DisableRaycaster();
 
-            Debug.Log("GREAT, you have won!");
-            // TODO: Schermata vittoria! 
+            this.coroutine = StartCoroutine(this.FinalCoroutine());
         }
     }
 
+    IEnumerator FinalCoroutine()
+    {
+        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
+        MagicOrchestraUtils.PositiveLightFeedback();
+        panelMessage.SetActive(true);
+        yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
+        panelMessage.SetActive(false);
+        frontalTextMessage.GetComponent<Text>().text = "";
+        yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
+        MagicOrchestraUtils.SwitchOffLightFeedback();
+
+        this.ReturnToStart();
+
+
+        StopClassCoroutine();
+    }
+
+    private void ReturnToStart()
+    {
+        SceneManager.LoadScene("MagicOrchestra");
+    }
 
     /// <summary>
     /// Courutine of the first panel that tells to show the object disposition in the arena.
@@ -176,6 +198,15 @@ public class Game1PhasesManager : MonoBehaviour
             KinectLeftHand.singleton.DisableRaycaster();
             KinectRightHand.singleton.DisableRaycaster();
         }
+    }
+
+    /* <summary>
+     * StopClassCoroutine stops the corutine instanciated by this class
+     * </summary>
+     */
+    private void StopClassCoroutine()
+    {
+        StopCoroutine(this.coroutine);
     }
 
 }

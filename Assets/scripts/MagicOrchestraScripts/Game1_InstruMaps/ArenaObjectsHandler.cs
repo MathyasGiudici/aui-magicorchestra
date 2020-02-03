@@ -130,10 +130,10 @@ public class ArenaObjectsHandler : MonoBehaviour
         }
 
         //Print only for verification...
-        for(int i = 0; i < this.objectSliceCouples.Count; i++)
-        {
-           Debug.Log("Elemento " + i + ": " + ((ObjectSliceCouple)this.objectSliceCouples[i]).arenaObject.ToString() + " in " + ((ObjectSliceCouple)this.objectSliceCouples[i]).slice.ToString());
-        }
+        //for(int i = 0; i < this.objectSliceCouples.Count; i++)
+        //{
+        //   Debug.Log("Elemento " + i + ": " + ((ObjectSliceCouple)this.objectSliceCouples[i]).arenaObject.ToString() + " in " + ((ObjectSliceCouple)this.objectSliceCouples[i]).slice.ToString());
+        //}
     }
 
 
@@ -146,7 +146,7 @@ public class ArenaObjectsHandler : MonoBehaviour
     {
         ArrayList adjacentSlices = ArenaSetup.singleton.GetDoubleSlices();
 
-        Debug.Log("Adjacent slices are " + adjacentSlices.Count);
+        // Debug.Log("Adjacent slices are " + adjacentSlices.Count);
 
         //Control of the adjacent slices.
         for (int j = 0; j < adjacentSlices.Count; j++)

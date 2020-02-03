@@ -160,22 +160,26 @@ public class SequenceUser : MonoBehaviour
             if (isSequenceCorrect)
             {
                 frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
+                MagicOrchestraUtils.PositiveLightFeedback();
                 panelMessage.SetActive(true);
                 yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
                 panelMessage.SetActive(false);
                 frontalTextMessage.GetComponent<Text>().text = "";
                 yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
+                MagicOrchestraUtils.SwitchOffLightFeedback();
 
                 CorsiController.singleton.CorrectUserSequence();
             }
             else
             {
                 frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.wrongSequenceMessage;
+                MagicOrchestraUtils.NegativeLightFeedback();
                 panelMessage.SetActive(true);
                 yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
                 panelMessage.SetActive(false);
                 frontalTextMessage.GetComponent<Text>().text = "";
                 yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
+                MagicOrchestraUtils.SwitchOffLightFeedback();
 
                 CorsiController.singleton.WrongUserSequence();
             }
