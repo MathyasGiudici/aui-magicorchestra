@@ -8,6 +8,11 @@ public class Game2Controller : MonoBehaviour
     //Singleton of the Game1PhasesManager class
     public static Game2Controller singleton = null;
 
+    // Cameras
+    public GameObject frontalCamera;
+    public GameObject zenithCamera;
+    public GameObject controllerCamera;
+
     //Private setting variables
     private int[] sequence = { 6, 1, 9, 4, 7, 3 };
     private float timeInShowing = 3.0f;
@@ -30,7 +35,7 @@ public class Game2Controller : MonoBehaviour
      */
     void Start()
     {
-        if(Game2Parameters.Difficulty == 0)
+        if (Game2Parameters.Difficulty == 0)
         {
             return;
         }
@@ -38,6 +43,11 @@ public class Game2Controller : MonoBehaviour
         this.timeInShowing = Game2Parameters.TimeInShowing;
         this.isReverse = Game2Parameters.IsReverse;
         Game2HitImageController.singleton.Init();
+
+        MagicOrchestraBuilderManager.singleton.frontalCamera = this.frontalCamera;
+        MagicOrchestraBuilderManager.singleton.zenithCamera = this.zenithCamera;
+        MagicOrchestraBuilderManager.singleton.controllerCamera = this.controllerCamera;
+        MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
     }
 
     /* <summary>
