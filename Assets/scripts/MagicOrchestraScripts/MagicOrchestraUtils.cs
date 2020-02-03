@@ -111,4 +111,34 @@ public static class MagicOrchestraUtils
             return null;
         }
     }
+
+    public static void PositiveLightFeedback()
+    {
+        if(MagicRoomLightManager.instance == null)
+        {
+            return;
+        }
+
+        MagicRoomLightManager.instance.sendColour("#00FF00", 80);
+    }
+
+    public static void NegativeLightFeedback()
+    {
+        if (MagicRoomLightManager.instance == null)
+        {
+            return;
+        }
+
+        MagicRoomLightManager.instance.sendColour("#FF0000", 80);
+    }
+
+    public static void SwitchOffLightFeedback()
+    {
+        if (MagicRoomLightManager.instance == null)
+        {
+            return;
+        }
+
+        MagicRoomLightManager.instance.sendColour("#000000", 0);
+    }
 }

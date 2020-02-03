@@ -118,15 +118,22 @@ public class SequenceShower : MonoBehaviour
     {
         //Showing user turn information
         if (hasWin)
+        {
             frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
+            MagicOrchestraUtils.PositiveLightFeedback();
+        }
         else
+        {
             frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.wrongSequenceMessage;
+            MagicOrchestraUtils.NegativeLightFeedback();
+        }
 
         panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         panelMessage.SetActive(false);
         frontalTextMessage.GetComponent<Text>().text = "";
         yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
+        MagicOrchestraUtils.SwitchOffLightFeedback();
 
         //Recalling correct function
         if (hasWin)

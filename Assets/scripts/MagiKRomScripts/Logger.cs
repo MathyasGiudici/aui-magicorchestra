@@ -65,16 +65,16 @@ public class Logger : MonoBehaviour {
         autoincrement++;
     }
     bool allowquittng = false;
-    void OnApplicationQuit()
-    {
-        return;
-        addToLogNewLine("Activity", "Application ending after " + Time.time + " seconds");
-        StartCoroutine(sendCommand());
-        if (!allowquittng)
-        {
-            Application.CancelQuit();
-        }
-    }
+    //void OnApplicationQuit()
+    //{
+    //    return;
+    //    addToLogNewLine("Activity", "Application ending after " + Time.time + " seconds");
+    //    StartCoroutine(sendCommand());
+    //    if (!allowquittng)
+    //    {
+    //        Application.CancelQuit();
+    //    }
+    //}
 
     IEnumerator sendCommand()
     {
