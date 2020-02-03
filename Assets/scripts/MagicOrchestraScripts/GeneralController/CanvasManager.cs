@@ -7,13 +7,22 @@ public class CanvasManager : MonoBehaviour
     //Singleton of the CanvasManager class
     public static CanvasManager singleton = null;
 
+    // Cameras
+    public GameObject frontalCamera;
+    public GameObject zenithCamera;
+    public GameObject controllerCamera;
 
     /* <summary>
      * Start is called before the first frame update
      * </summary>
      */
     void Start()
-    { 
+    {
+        MagicOrchestraBuilderManager.singleton.frontalCamera = this.frontalCamera;
+        MagicOrchestraBuilderManager.singleton.zenithCamera = this.zenithCamera;
+        MagicOrchestraBuilderManager.singleton.controllerCamera = this.controllerCamera;
+        MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
+
         ShowIntro();
     }
 

@@ -3544,6 +3544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9ef3fb7bd9a4c709b421a3aba0da7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frontalCamera: {fileID: 1262466588}
+  zenithCamera: {fileID: 570656357}
+  controllerCamera: {fileID: 1870239644}
 --- !u!114 &2009181490
 MonoBehaviour:
   m_ObjectHideFlags: 0
