@@ -13,11 +13,9 @@ public static class MagicOrchestraUtils
     public const string primaryColor = "F0A84D";
     public const string secondaryColor = "FFFFFF" ;
 
-    public const float generalTextTimeShow_short = 2.0f;
-    public const float generalTextTimeShow_long = 4.0f;
+    public const float generalTextTimeShow_long = 6.0f;
 
-    public const float generalPauseTime_short = 2.0f;
-    public const float generalPauseTime_long = 4.0f;
+    public const float generalPauseTime_short = 1.0f;
 
     public const string beginSequenceMessage = "Guarda la sequenza attentamente";
     public const string watchArenaMessage = "Osserva attentamente la disposizione degli oggetti!"; //Instrumaps

@@ -79,8 +79,6 @@ public class Game1PhasesManager : MonoBehaviour
         this.DisableRaycaster();
         this.DisableCollisionDetection();
 
-        panelMessage.transform.GetChild(1).gameObject.SetActive(true);
-
         // Showing the Pause panel 
         frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.pauseMessage;
         panelMessage.SetActive(true);
@@ -89,8 +87,6 @@ public class Game1PhasesManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        panelMessage.transform.GetChild(1).gameObject.SetActive(false);
-
         // Showing the Pause panel 
         frontalTextMessage.GetComponent<Text>().text = "";
         panelMessage.SetActive(false);
@@ -154,8 +150,6 @@ public class Game1PhasesManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator WatchDispositionCoroutine()
     {
-        panelMessage.transform.GetChild(1).gameObject.SetActive(true);
-
         // Showing the Starting Panel with the instructions
         frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.watchArenaMessage;
         panelMessage.SetActive(true);
@@ -183,7 +177,7 @@ public class Game1PhasesManager : MonoBehaviour
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
 
         // Showing thr arena disposition that the user has to remember
-        panelMessage.transform.GetChild(1).gameObject.SetActive(false);
+        panelMessage.SetActive(false);
         frontalTextMessage.GetComponent<Text>().text = "";
 
         InstruMapsController.singleton.EndWatchArenaPhase();
@@ -195,8 +189,6 @@ public class Game1PhasesManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator ReorderItemsCoroutine()
     {
-        panelMessage.transform.GetChild(1).gameObject.SetActive(true);
-
         // Showing the Starting Panel with the instructions
         frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.reorderObjectsMessage;
         panelMessage.SetActive(true);
