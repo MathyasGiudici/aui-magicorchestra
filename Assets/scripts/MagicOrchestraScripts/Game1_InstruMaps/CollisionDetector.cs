@@ -5,18 +5,22 @@ using UnityEngine;
 public class CollisionDetector : MonoBehaviour
 {
     private bool isColliderActive = false;
-    private ArrayList targetSlices = new ArrayList();
+    private ArrayList targetSlices = null;
     private Vector3 dragAndDropPosition;
     private Vector3 arenaPosition;
 
     private GameObject firstCollision;
+    public bool isPlaced = false;
 
     /// <summary>
     /// Enables the detection of collisions
     /// </summary>
     public void EnableCollisionDetector()
     {
-        this.isColliderActive = true;
+        if (!isPlaced)
+        {
+            this.isColliderActive = true;
+        }
     }
 
     /// <summary>
@@ -32,6 +36,13 @@ public class CollisionDetector : MonoBehaviour
     /// </summary>
     public void AssignTheTargetSlice()
     {
+        if (this.targetSlices != null)
+        {
+            return;
+        }
+
+        this.targetSlices = new ArrayList();
+        
         foreach (ObjectSliceCouple couple in ArenaObjectsHandler.singleton.objectSliceCouples)
         {
             if (couple.arenaObject == gameObject)
@@ -98,6 +109,8 @@ public class CollisionDetector : MonoBehaviour
                     // Debug.Log(gameObject.name + " collided with the CORRECT slice");
 
                     gameObject.transform.position = this.arenaPosition;
+                    this.isPlaced = true;
+
                     this.DisableCollisionDetector();
 
                     StartCoroutine(correctAnswerCoroutine());

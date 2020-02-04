@@ -55,11 +55,10 @@ public class Game1PhasesManager : MonoBehaviour
     /// that the user has to replicate
     /// </summary>
     /// <param name="numItems"> Number of items depending on the chosen difficulty </param>
-    public void ShowArenaDisposition(int numItems)
+    public void ShowArenaDisposition()
     {
         StartCoroutine(WatchDispositionCoroutine());
     }
-
 
     /// <summary>
     /// It activate the courutine 
@@ -70,6 +69,34 @@ public class Game1PhasesManager : MonoBehaviour
 
         this.ActiveCollisionDetection();
         this.EnableRaycaster();
+    }
+
+    /// <summary>
+    /// Stop the game for a while
+    /// </summary>
+    public void PauseGame()
+    {
+        this.DisableRaycaster();
+        this.DisableCollisionDetection();
+
+        panelMessage.transform.GetChild(1).gameObject.SetActive(true);
+
+        // Showing the Pause panel 
+        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.pauseMessage;
+        panelMessage.SetActive(true);
+    }
+
+
+    public void ResumeGame()
+    {
+        panelMessage.transform.GetChild(1).gameObject.SetActive(false);
+
+        // Showing the Pause panel 
+        frontalTextMessage.GetComponent<Text>().text = "";
+        panelMessage.SetActive(false);
+
+        this.EnableRaycaster();
+        this.ActiveCollisionDetection();
     }
 
     /// <summary>
@@ -87,6 +114,21 @@ public class Game1PhasesManager : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Activate the detection of collisions between slices and objects and assignment of the target slice to the game object
+    /// </summary>
+    private void DisableCollisionDetection()
+    {
+        CollisionDetector script;
+
+        foreach (ObjectSliceCouple couple in ArenaObjectsHandler.singleton.objectSliceCouples)
+        {
+            script = (CollisionDetector)couple.arenaObject.GetComponent(typeof(CollisionDetector));
+            script.DisableCollisionDetector();
+        }
+    }
+
     /// <summary>
     /// Update the current score until the user entirely complete the task
     /// </summary>
@@ -97,31 +139,15 @@ public class Game1PhasesManager : MonoBehaviour
         if (this.score == Game1Parameters.Difficulty)
         {
             this.DisableRaycaster();
-
             this.coroutine = StartCoroutine(this.FinalCoroutine());
         }
     }
 
-    /// <summary>
-    /// Coroutine of end game, after the completion of the task
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator FinalCoroutine()
-    {
-        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
-        MagicOrchestraUtils.PositiveLightFeedback();
-        panelMessage.SetActive(true);
-        yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
-        panelMessage.SetActive(false);
-        frontalTextMessage.GetComponent<Text>().text = "";
-        yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
-        MagicOrchestraUtils.SwitchOffLightFeedback();
-
-        InstruMapsController.singleton.EndGame();
-        StopClassCoroutine();
-    }
-
-
+    /* 
+     * ***********************************************************************************************************************************************
+     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  COROUTINES * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+     * ***********************************************************************************************************************************************
+    */
     /// <summary>
     /// Courutine of the first panel that tells to show the object disposition in the arena.
     /// </summary>
@@ -184,6 +210,31 @@ public class Game1PhasesManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Coroutine of end game, after the completion of the task
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator FinalCoroutine()
+    {
+        InstruMapsCanvasController.singleton.DisableAllButtons();
+        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctArenaDisposition;
+        MagicOrchestraUtils.PositiveLightFeedback();
+        panelMessage.SetActive(true);
+        yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
+        panelMessage.SetActive(false);
+        frontalTextMessage.GetComponent<Text>().text = "";
+        yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
+        MagicOrchestraUtils.SwitchOffLightFeedback();
+
+        InstruMapsController.singleton.EndGame();
+        StopClassCoroutine();
+    }
+
+    /* ***********************************************************************************************************************************************
+     * ***********************************************************************************************************************************************
+    */
+
+
+    /// <summary>
     /// Enable raycaster in the different game mode
     /// </summary>
     private void EnableRaycaster()
@@ -199,6 +250,7 @@ public class Game1PhasesManager : MonoBehaviour
             KinectRightHand.singleton.EnableRaycaster();
         }
     }
+
 
     /// <summary>
     /// Disable raycaster in the different game mode

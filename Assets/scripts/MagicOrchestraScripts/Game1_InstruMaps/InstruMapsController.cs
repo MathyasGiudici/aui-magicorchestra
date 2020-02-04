@@ -35,7 +35,7 @@ public class InstruMapsController : MonoBehaviour
     /// </summary>
     public void WatchArenaPhase()
     {
-        Game1PhasesManager.singleton.ShowArenaDisposition(Game1Parameters.Difficulty);
+        Game1PhasesManager.singleton.ShowArenaDisposition();
     }
 
 
@@ -54,6 +54,23 @@ public class InstruMapsController : MonoBehaviour
     public void StartUserPhase()
     {
         Game1PhasesManager.singleton.ReorderItems();
+    }
+
+
+    /// <summary>
+    /// Pause the game: this will allow the therapist to better control the game phases 
+    /// </summary>
+    public void PauseGame()
+    {
+        Game1PhasesManager.singleton.PauseGame();
+    }
+
+    /// <summary>
+    /// Resume the game from a pause state
+    /// </summary>
+    public void ResumeGame()
+    {
+        Game1PhasesManager.singleton.ResumeGame();
     }
 
 

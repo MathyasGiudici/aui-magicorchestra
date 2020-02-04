@@ -12,6 +12,9 @@ public class ArenaObjectsHandler : MonoBehaviour
     // Arraylist of elements of type ObjectSliceCouple
     public ArrayList objectSliceCouples;
 
+    // To know if positions have been already given
+    private bool arePositionAlreadyAssigned = false;
+
     // Singleton of the ArenaObjectsHandler class
     public static ArenaObjectsHandler singleton = null;
 
@@ -224,33 +227,65 @@ public class ArenaObjectsHandler : MonoBehaviour
     /// </summary>
     public void SetArenaPositions()
     {        
-        Dictionary<int, Vector3Ser> positions = ArenaObjectsRetriever.RetrievePositions(true);
-
-        ArrayList adjacents = ArenaSetup.singleton.GetDoubleSlices();
-
-        this.SetZeroPosition();
-
-        int currentSliceIndex = 1;
-        int adjacentSliceIndex = 0;
-        int objectIndex = 0;
-
-        for (int i = 0; i < this.objectSliceCouples.Count; i++)
-        {   
-            if(adjacents.Count != 0)
+        // If positions have been already assigned we simply recover them
+        if (this.arePositionAlreadyAssigned)
+        {
+            foreach (ObjectSliceCouple couple in this.objectSliceCouples)
             {
-                if (((ObjectSliceCouple)this.objectSliceCouples[i]).slice == ((Slice)adjacents[adjacentSliceIndex]).slice)
+                couple.arenaObject.transform.position = couple.arenaPosition;
+            }
+        }
+        else
+        {
+            Dictionary<int, Vector3Ser> positions = ArenaObjectsRetriever.RetrievePositions(true);
+
+            ArrayList adjacents = ArenaSetup.singleton.GetDoubleSlices();
+
+            this.SetZeroPosition();
+
+            int currentSliceIndex = 1;
+            int adjacentSliceIndex = 0;
+            int objectIndex = 0;
+
+            for (int i = 0; i < this.objectSliceCouples.Count; i++)
+            {
+                if (adjacents.Count != 0)
                 {
-                    float x = (positions[currentSliceIndex].x + positions[currentSliceIndex + 1].x) / 3;
-                    float y = (positions[currentSliceIndex].y + positions[currentSliceIndex + 1].y) / 3;
-                    float z = (positions[currentSliceIndex].z + positions[currentSliceIndex + 1].z) / 3;
+                    if (((ObjectSliceCouple)this.objectSliceCouples[i]).slice == ((Slice)adjacents[adjacentSliceIndex]).slice)
+                    {
+                        float x = (positions[currentSliceIndex].x + positions[currentSliceIndex + 1].x) / 3;
+                        float y = (positions[currentSliceIndex].y + positions[currentSliceIndex + 1].y) / 3;
+                        float z = (positions[currentSliceIndex].z + positions[currentSliceIndex + 1].z) / 3;
 
-                    ((GameObject)this.arenaObjects[objectIndex]).transform.position = new Vector3(x, y, z);
-                    ((ObjectSliceCouple)this.objectSliceCouples[i]).arenaPosition = new Vector3(x, y, z);
-                    ((ObjectSliceCouple)this.objectSliceCouples[i + 1]).arenaPosition = new Vector3(x, y, z);
+                        ((GameObject)this.arenaObjects[objectIndex]).transform.position = new Vector3(x, y, z);
+                        ((ObjectSliceCouple)this.objectSliceCouples[i]).arenaPosition = new Vector3(x, y, z);
+                        ((ObjectSliceCouple)this.objectSliceCouples[i + 1]).arenaPosition = new Vector3(x, y, z);
 
-                    currentSliceIndex += 2;
-                    adjacentSliceIndex += 2;
-                    i++;
+                        currentSliceIndex += 2;
+                        adjacentSliceIndex += 2;
+                        i++;
+                    }
+                    else
+                    {
+                        float x = positions[currentSliceIndex].x;
+                        float y = positions[currentSliceIndex].y;
+                        float z = positions[currentSliceIndex].z;
+
+                        ((GameObject)this.arenaObjects[objectIndex]).transform.position += new Vector3(x, y, z);
+
+                        if (Game1Parameters.Difficulty <= 4)
+                        {
+                            ((GameObject)this.arenaObjects[objectIndex]).transform.position /= 1.5f;
+                        }
+
+                        if (Game1Parameters.Difficulty > 4 && Game1Parameters.Difficulty <= 8 && currentSliceIndex > 4)
+                        {
+                            ((GameObject)this.arenaObjects[objectIndex]).transform.position /= 1.2f;
+                        }
+
+                        ((ObjectSliceCouple)this.objectSliceCouples[i]).arenaPosition = ((GameObject)this.arenaObjects[objectIndex]).transform.position;
+                        currentSliceIndex++;
+                    }
                 }
                 else
                 {
@@ -273,31 +308,9 @@ public class ArenaObjectsHandler : MonoBehaviour
                     ((ObjectSliceCouple)this.objectSliceCouples[i]).arenaPosition = ((GameObject)this.arenaObjects[objectIndex]).transform.position;
                     currentSliceIndex++;
                 }
+
+                objectIndex++;
             }
-            else
-            {
-                float x = positions[currentSliceIndex].x;
-                float y = positions[currentSliceIndex].y;
-                float z = positions[currentSliceIndex].z;
-
-                ((GameObject)this.arenaObjects[objectIndex]).transform.position += new Vector3(x, y, z);
-
-                if (Game1Parameters.Difficulty <= 4)
-                {
-                    ((GameObject)this.arenaObjects[objectIndex]).transform.position /= 1.5f;
-                }
-
-                if (Game1Parameters.Difficulty > 4 && Game1Parameters.Difficulty <= 8 && currentSliceIndex > 4)
-                {
-                    ((GameObject)this.arenaObjects[objectIndex]).transform.position /= 1.2f;
-                }
-
-                ((ObjectSliceCouple)this.objectSliceCouples[i]).arenaPosition = ((GameObject)this.arenaObjects[objectIndex]).transform.position;
-                currentSliceIndex++;
-            }
-
-            objectIndex++;
-
         }
     }
 
@@ -306,25 +319,44 @@ public class ArenaObjectsHandler : MonoBehaviour
     /// </summary>
     public void SetDragAndDropPositions()
     {
-        Dictionary<int, Vector3Ser> positions = ArenaObjectsRetriever.RetrievePositions(false);
-        List<Vector3Ser> positionValues = this.ShufflePositionDictionary(positions);
+        this.checkAlreadyPlacedObjects();
 
-        for (int i = 0; i < this.arenaObjects.Count; i++)
+        // This in case positions have been already assigned
+        if (this.arePositionAlreadyAssigned)
         {
-            float x = positionValues[i].x;
-            float y = positionValues[i].y;
-            float z = positionValues[i].z;
-
-            ((GameObject)this.arenaObjects[i]).transform.position = new Vector3(x, y, z);
-
             foreach (ObjectSliceCouple couple in this.objectSliceCouples)
             {
-                if (couple.arenaObject == (GameObject)this.arenaObjects[i])
+                if (!couple.isPlaced)
                 {
-                    couple.dragAndDropPosition = ((GameObject) this.arenaObjects[i]).transform.position;
+                    couple.arenaObject.transform.position = couple.dragAndDropPosition;
                 }
             }
         }
+        else
+        {
+            Dictionary<int, Vector3Ser> positions = ArenaObjectsRetriever.RetrievePositions(false);
+            List<Vector3Ser> positionValues = this.ShufflePositionDictionary(positions);
+
+            for (int i = 0; i < this.arenaObjects.Count; i++)
+            {
+                float x = positionValues[i].x;
+                float y = positionValues[i].y;
+                float z = positionValues[i].z;
+
+                ((GameObject)this.arenaObjects[i]).transform.position = new Vector3(x, y, z);
+
+                foreach (ObjectSliceCouple couple in this.objectSliceCouples)
+                {
+                    if (couple.arenaObject == (GameObject)this.arenaObjects[i])
+                    {
+                        couple.dragAndDropPosition = ((GameObject)this.arenaObjects[i]).transform.position;
+                    }
+                }
+            }
+
+            this.arePositionAlreadyAssigned = true;
+        }
+        
     }
 
     /// <summary>
@@ -337,6 +369,25 @@ public class ArenaObjectsHandler : MonoBehaviour
             ((GameObject)this.arenaObjects[i]).transform.position = new Vector3(0, 0, 0);
         }       
     }
+
+
+    /// <summary>
+    /// Check already placed objects and update the arraylist objectSliceCouples
+    /// </summary>
+    private void checkAlreadyPlacedObjects()
+    {
+        CollisionDetector script;
+
+        foreach (ObjectSliceCouple couple in this.objectSliceCouples)
+        {
+            script = (CollisionDetector)couple.arenaObject.GetComponent(typeof(CollisionDetector));
+            if (script.isPlaced)
+            {
+                couple.isPlaced = true;
+            }
+        }
+    }
+
 }
 
 
@@ -350,6 +401,7 @@ class ObjectSliceCouple
     public GameObject arenaObject;
     public Vector3 arenaPosition;
     public Vector3 dragAndDropPosition;
+    public bool isPlaced = false;
 
     public ObjectSliceCouple(GameObject slice, GameObject arenaObject)
     {
