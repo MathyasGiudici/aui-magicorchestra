@@ -55,7 +55,7 @@ public class DragAndDropHandler : MonoBehaviour
                     this.CallTargetScript();
                     // Debug.Log("target position : " + this.target.transform.position);
 
-                    this.target.transform.position = new Vector3(this.target.transform.position.x, 1f, this.target.transform.position.z);
+                    this.target.transform.position = new Vector3(this.target.transform.position.x, 1, this.target.transform.position.z);
                     
                     this.screenPosition = cam.WorldToScreenPoint(this.target.transform.position);
                     this.offset = this.target.transform.position - cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.screenPosition.z));

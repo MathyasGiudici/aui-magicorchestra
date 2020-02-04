@@ -20,8 +20,7 @@ public class ArenaSetup : MonoBehaviour
     public Material white;
     public Material black;
 
-    bool isContext = true;
-    //bool isContext = MagicOrchestraParameters.IsContext;
+    bool isContext = MagicOrchestraParameters.IsContext;
 
     // Singleton of the InstruMapsController class
     public static ArenaSetup singleton = null;

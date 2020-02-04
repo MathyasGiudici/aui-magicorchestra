@@ -26,6 +26,10 @@ public class KinectLeftHand : MonoBehaviour
     public float multX = 20f;
     public float multZ = 22f;
 
+    private Vector3 dragScale = new Vector3(1.5f, 1.5f, 1.5f);
+    private Vector3 oldScale;
+
+
     // Singleton of the KinectRightHand class
     public static KinectLeftHand singleton = null;
 
@@ -89,7 +93,10 @@ public class KinectLeftHand : MonoBehaviour
                 {
                     this.isDrag = true;
                     this.CallTargetScript();
-                    this.target.transform.position = new Vector3(this.target.transform.position.x, 0.7f, this.target.transform.position.z);
+                    this.target.transform.position = new Vector3(this.target.transform.position.x, 1, this.target.transform.position.z);
+
+                    this.oldScale = this.target.transform.localScale;
+                    this.target.transform.localScale = this.dragScale;
                 }
             }
             
@@ -102,6 +109,7 @@ public class KinectLeftHand : MonoBehaviour
                 if (this.target != null)
                 {
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 0, this.target.transform.position.z);
+                    this.target.transform.localScale = this.oldScale;
                 }
             }
 

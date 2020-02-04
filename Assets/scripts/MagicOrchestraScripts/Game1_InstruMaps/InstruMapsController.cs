@@ -1,18 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InstruMapsController : MonoBehaviour
 {
     // Singleton of the InstruMapsController class
     public static InstruMapsController singleton = null;
-
-    // To know id the game is started or not
-    private bool isGameStarted = false;
-
-    // Protected parameters that contains the main custom parameters of the game
-    float timeInShowing = 5;
-    bool isGestureMode = false;
 
     /* <summary>
      * The function is called when the component is instantiated
@@ -32,9 +26,6 @@ public class InstruMapsController : MonoBehaviour
     void Start()
     {
         Debug.Log("Starting InstruMaps execution...");
-
-        this.timeInShowing = Game1Parameters.TimeInShowing;
-        //new WaitForSeconds(5.0f);
     }
     
     
@@ -63,6 +54,15 @@ public class InstruMapsController : MonoBehaviour
     public void StartUserPhase()
     {
         Game1PhasesManager.singleton.ReorderItems();
+    }
+
+
+    /// <summary>
+    /// Decision point after the end of the game
+    /// </summary>
+    public void EndGame()
+    {
+        SceneManager.LoadScene("MagicOrchestra");
     }
 
     

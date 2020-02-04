@@ -102,6 +102,10 @@ public class Game1PhasesManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Coroutine of end game, after the completion of the task
+    /// </summary>
+    /// <returns></returns>
     IEnumerator FinalCoroutine()
     {
         frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
@@ -113,16 +117,10 @@ public class Game1PhasesManager : MonoBehaviour
         yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
         MagicOrchestraUtils.SwitchOffLightFeedback();
 
-        this.ReturnToStart();
-
-
+        InstruMapsController.singleton.EndGame();
         StopClassCoroutine();
     }
 
-    private void ReturnToStart()
-    {
-        SceneManager.LoadScene("MagicOrchestra");
-    }
 
     /// <summary>
     /// Courutine of the first panel that tells to show the object disposition in the arena.
@@ -150,8 +148,7 @@ public class Game1PhasesManager : MonoBehaviour
         // Showing thr arena disposition that the user has to remember
         panelMessage.SetActive(false);
         frontalTextMessage.GetComponent<Text>().text = "";
-        //yield return new WaitForSeconds((float)Game1Parameters.TimeInShowing);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds((float)Game1Parameters.TimeInShowing);
 
         frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.endWatchArenaMessage;
         panelMessage.SetActive(true);
@@ -166,7 +163,10 @@ public class Game1PhasesManager : MonoBehaviour
         InstruMapsController.singleton.EndWatchArenaPhase();
     }
 
-
+    /// <summary>
+    /// Corotine of the user phase, when it has to start playing
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ReorderItemsCoroutine()
     {
         panelMessage.transform.GetChild(1).gameObject.SetActive(true);

@@ -83,15 +83,18 @@ public class ArenaObjectsHandler : MonoBehaviour
 
         for (int i = 1; i <= numElems; i++)
         {
-            GameObject newInstr = Instantiate(prefab);
+            GameObject newShape = Instantiate(prefab);
 
             int index = randomShapes.Next(0, shapeNames.Count);
 
             //Assign a name to the object in context mode -> than also an image.
-            newInstr.name = shapeNames[index].ToString();
+            newShape.name = shapeNames[index].ToString();
             shapeNames.RemoveAt(index);
 
-            this.arenaObjects.Add(newInstr);
+            //Load the sprite associated with the instruments
+            newShape.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(newShape.name);
+
+            this.arenaObjects.Add(newShape);
         }
 
         this.arenaObjects = ShuffleObjectsArraListt(this.arenaObjects);

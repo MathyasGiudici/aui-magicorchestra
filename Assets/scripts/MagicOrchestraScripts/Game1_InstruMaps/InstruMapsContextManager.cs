@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game1ContextManager : MonoBehaviour
+public class InstruMapsContextManager : MonoBehaviour
 {
     //Singleton of the CorsiContextManager class
-    public static Game1ContextManager singleton = null;
+    public static InstruMapsContextManager singleton = null;
 
     public GameObject contextizeObject;
     public GameObject zenithCanvas;

@@ -100,6 +100,8 @@ public class CollisionDetector : MonoBehaviour
                     gameObject.transform.position = this.arenaPosition;
                     this.DisableCollisionDetector();
 
+                    StartCoroutine(correctAnswerCoroutine());
+
                     // Disable raycast on this object changing the layer
                     gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
                     Game1PhasesManager.singleton.UpdateCurrentScore();
@@ -108,9 +110,26 @@ public class CollisionDetector : MonoBehaviour
                 {
                     // Debug.Log(gameObject.name + " collided with the WRONG slice");
                     gameObject.transform.position = this.dragAndDropPosition;
+                    StartCoroutine(wrongAnswerCoroutine());
                 }
             } 
         }
     }
+
+
+    IEnumerator correctAnswerCoroutine()
+    {
+        MagicOrchestraUtils.PositiveLightFeedback();
+        yield return new WaitForSeconds(0.5f);
+        MagicOrchestraUtils.SwitchOffLightFeedback();
+    }
+
+    IEnumerator wrongAnswerCoroutine()
+    {
+        MagicOrchestraUtils.NegativeLightFeedback();
+        yield return new WaitForSeconds(0.5f);
+        MagicOrchestraUtils.SwitchOffLightFeedback();
+    }
+
 
 }

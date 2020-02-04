@@ -141,4 +141,5 @@ public static class MagicOrchestraUtils
 
         MagicRoomLightManager.instance.sendColour("#000000", 0);
     }
+
 }
