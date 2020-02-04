@@ -55,7 +55,6 @@ public static class CsvLoader
             sequenceObjectFiles.Add(objectFile);
         }
 
-        Debug.Log(sequenceObjectFiles[0].difficulty);
         return sequenceObjectFiles;
     }
 

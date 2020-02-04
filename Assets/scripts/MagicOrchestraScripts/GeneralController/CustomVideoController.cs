@@ -12,11 +12,13 @@ public class CustomVideoController : MonoBehaviour
     public GameObject zenithCamera;
     public GameObject controllerCamera;
 
-    // Start is called before the first frame update
+    /* <summary>
+     * Start is called before the first frame update
+     * </summary>
+     */
     void Start()
     {
-        StartCoroutine(this.VideoCoroutine());
-
+        // MagicOrchestraBuilderManager update of cameras
         if (MagicOrchestraBuilderManager.singleton != null)
         {
             MagicOrchestraBuilderManager.singleton.frontalCamera = this.frontalCamera;
@@ -24,13 +26,47 @@ public class CustomVideoController : MonoBehaviour
             MagicOrchestraBuilderManager.singleton.controllerCamera = this.controllerCamera;
             MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
         }
+
+        // Checking if there is a video to play
+        if(CutSceneParameters.TargetVideoIndex == -1)
+        {
+            this.ReturnToHome(null);
+        }
+
+        // Loading the Target video 
+        VideoPlayer video = gameObject.GetComponent<VideoPlayer>();
+
+        video.source = VideoSource.Url;
+
+        video.url = Application.streamingAssetsPath + "/Videos/" +
+                    CutSceneParameters.Videos[CutSceneParameters.TargetVideoIndex] + ".mp4";
+
+        // Starting the Coroutine
+        StartCoroutine(this.VideoCoroutine());
+
+        this.CheckingLightRoutine();
     }
 
-     void ReturnToHome(VideoPlayer videoPlayer)
+    /* <summary>
+     * Called before return to MagicOrchestra scene
+     * </summary>
+     */
+    private void ReturnToHome(VideoPlayer videoPlayer)
     {
+        // Stopping all the coroutines
+        this.StopAllCoroutines();
+
+        // Checking if there are light to switch off
+        if (MagicRoomLightManager.instance != null)
+            MagicOrchestraUtils.SwitchOffLightFeedback();
+
         SceneManager.LoadScene("MagicOrchestra");
     }
 
+    /* <summary>
+     * Video routine in order to play
+     * </summary>
+     */
     private IEnumerator VideoCoroutine()
     {
         RawImage rawTexture = gameObject.GetComponent<RawImage>();
@@ -46,5 +82,33 @@ public class CustomVideoController : MonoBehaviour
         rawTexture.texture = video.texture;
         video.Play();
 
+    }
+
+    private void CheckingLightRoutine()
+    {
+        if (MagicRoomLightManager.instance == null)
+            return;
+
+        switch (CutSceneParameters.TargetVideoIndex)
+        {
+            case 0:
+                StartCoroutine(this.CorsiMelodyLights());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private IEnumerator CorsiMelodyLights()
+    {
+        MagicRoomLightManager.instance.sendColour("#390d16", 90);
+        yield return new WaitForSeconds(1f);
+        MagicRoomLightManager.instance.sendColour("#581027", 90);
+        yield return new WaitForSeconds(1f);
+        MagicRoomLightManager.instance.sendColour("#6c1d37", 90);
+        yield return new WaitForSeconds(1f);
+        MagicRoomLightManager.instance.sendColour("#f1a75d", 90);
+        yield return new WaitForSeconds(2f);
+        MagicRoomLightManager.instance.sendColour("#000000", 0);
     }
 }
