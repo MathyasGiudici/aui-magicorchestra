@@ -5,9 +5,9 @@ using UnityEngine;
 public class CollisionDetector : MonoBehaviour
 {
     private bool isColliderActive = false;
-    private GameObject targetSlice;
-    private Vector3 wrongDragPosition;
-    private Vector3 correctDragPosition;
+    private ArrayList targetSlices = new ArrayList();
+    private Vector3 dragAndDropPosition;
+    private Vector3 arenaPosition;
 
     private GameObject firstCollision;
 
@@ -36,61 +36,36 @@ public class CollisionDetector : MonoBehaviour
         {
             if (couple.arenaObject == gameObject)
             {
-                this.targetSlice = couple.slice;
-                this.wrongDragPosition = couple.dragAndDropPosition;
-                this.correctDragPosition = couple.arenaPosition;
-                break;
+                this.targetSlices.Add(couple.slice);
+                this.dragAndDropPosition = couple.dragAndDropPosition;
+                this.arenaPosition = couple.arenaPosition;
             }
         }
-    }
 
-    /// <summary>
-    /// Detect the collision between the object and the slice
-    /// </summary>
-    /// <param name="other"></param>
-    void OnTriggerEnter(Collider other)
-    {
-        if (this.isColliderActive)
+        foreach (GameObject slice in targetSlices)
         {
-            if(this.isFirstCollision(other.gameObject))
-            {
-                if (this.targetSlice == other.gameObject)
-                {
-                    // Debug.Log(gameObject.name + " collided with the CORRECT slice");
-
-                    gameObject.transform.position = this.correctDragPosition;
-                    this.DisableCollisionDetector();
-
-                    // Disable raycast on this object changing the layer
-                    gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-                    Game1PhasesManager.singleton.UpdateCurrentScore();
-                    firstCollision = null;
-                }
-                else
-                {
-                    // Debug.Log(gameObject.name + " collided with the WRONG slice");
-                    gameObject.transform.position = this.wrongDragPosition;
-                }
-            }
-        }            
+            Debug.Log(gameObject.name + "'s slice is: " + slice.name);
+        }
+        Debug.Log(gameObject.name + "'s drag and drop position is: " + this.dragAndDropPosition);
+        Debug.Log(gameObject.name + "'s arena position is: " + this.arenaPosition);
     }
 
+
     /// <summary>
-    /// Check if the collision is the first  
+    /// Check if the hit slice is in the target slice arraylist
     /// </summary>
     /// <param name="other"></param>
     /// <returns></returns>
-    private bool isFirstCollision(GameObject other)
+    private bool isSliceTarget(GameObject other)
     {
-        if (firstCollision == null)
+        foreach (GameObject slice in this.targetSlices)
         {
-            firstCollision = other;
-            return true;
+            if (other.gameObject == slice)
+            {
+                return true;
+            }
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
 
@@ -100,6 +75,42 @@ public class CollisionDetector : MonoBehaviour
     public void StopDragOnThis()
     {
         firstCollision = null;
+    }
+
+
+    /// <summary>
+    /// The method is called when a collision is detected. It records the first collision happened (from the smaller slices to the bigger)
+    /// and check if the slice is correct or not, handling the following steps.
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        if (this.isColliderActive)
+        {
+            if (this.firstCollision == null)
+            {
+                this.firstCollision = other.gameObject;
+
+                Debug.Log(gameObject.name + " collided with " + other.gameObject.name);
+
+                if (this.isSliceTarget(other.gameObject))
+                {
+                    // Debug.Log(gameObject.name + " collided with the CORRECT slice");
+
+                    gameObject.transform.position = this.arenaPosition;
+                    this.DisableCollisionDetector();
+
+                    // Disable raycast on this object changing the layer
+                    gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                    Game1PhasesManager.singleton.UpdateCurrentScore();
+                }
+                else
+                {
+                    // Debug.Log(gameObject.name + " collided with the WRONG slice");
+                    gameObject.transform.position = this.dragAndDropPosition;
+                }
+            } 
+        }
     }
 
 }

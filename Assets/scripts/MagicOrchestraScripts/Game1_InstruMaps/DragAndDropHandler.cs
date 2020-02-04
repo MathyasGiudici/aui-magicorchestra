@@ -12,6 +12,9 @@ public class DragAndDropHandler : MonoBehaviour
     Vector3 screenPosition;
     Vector3 offset;
 
+    private Vector3 dragScale = new Vector3(1.5f, 1.5f, 1.5f);
+    private Vector3 oldScale;
+
     // Singleton of the DragAndDropHandler class
     public static DragAndDropHandler singleton = null;
 
@@ -52,10 +55,13 @@ public class DragAndDropHandler : MonoBehaviour
                     this.CallTargetScript();
                     // Debug.Log("target position : " + this.target.transform.position);
 
-                    this.target.transform.position = new Vector3(this.target.transform.position.x, 0.7f, this.target.transform.position.z);
+                    this.target.transform.position = new Vector3(this.target.transform.position.x, 1f, this.target.transform.position.z);
                     
                     this.screenPosition = cam.WorldToScreenPoint(this.target.transform.position);
                     this.offset = this.target.transform.position - cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.screenPosition.z));
+
+                    this.oldScale = this.target.transform.localScale;
+                    this.target.transform.localScale = this.dragScale;
 
                     // Debug.Log("screen position is : " + this.screenPosition);
                     // Debug.Log("offst is : " + this.offset);
@@ -69,6 +75,7 @@ public class DragAndDropHandler : MonoBehaviour
                 if(this.target != null)
                 {
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 0, this.target.transform.position.z);
+                    this.target.transform.localScale = this.oldScale;
                 }
             }
 

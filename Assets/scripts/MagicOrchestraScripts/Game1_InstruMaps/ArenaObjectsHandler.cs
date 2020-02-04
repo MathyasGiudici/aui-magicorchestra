@@ -184,12 +184,23 @@ public class ArenaObjectsHandler : MonoBehaviour
         return randomList; //return the new random list
     }
 
-
+    /// <summary>
+    /// Shuffle drag and drop positions to not have always the same position outside the arena associated to the same slice.
+    /// Moreover it takes only the positions based on the difficulty, so not all the positions.
+    /// </summary>
+    /// <param name="dictToShuffle"></param>
+    /// <returns></returns>
     private List<Vector3Ser> ShufflePositionDictionary(Dictionary<int, Vector3Ser> dictToShuffle)
     {
-        List<Vector3Ser> valuesToShuffle = new List<Vector3Ser>(dictToShuffle.Values);
+        List<Vector3Ser> allValuesToShuffle = new List<Vector3Ser>(dictToShuffle.Values);
+        List<Vector3Ser> valuesToShuffle = new List<Vector3Ser>();
         var rnd = new System.Random();
         int randomIndex = 0;
+
+        for (int i = 0; i < Game1Parameters.Difficulty; i++)
+        {
+            valuesToShuffle.Add(allValuesToShuffle[i]);
+        }
 
         List<Vector3Ser> randomValues = new List<Vector3Ser>();
 
@@ -232,6 +243,7 @@ public class ArenaObjectsHandler : MonoBehaviour
 
                     ((GameObject)this.arenaObjects[objectIndex]).transform.position = new Vector3(x, y, z);
                     ((ObjectSliceCouple)this.objectSliceCouples[i]).arenaPosition = new Vector3(x, y, z);
+                    ((ObjectSliceCouple)this.objectSliceCouples[i + 1]).arenaPosition = new Vector3(x, y, z);
 
                     currentSliceIndex += 2;
                     adjacentSliceIndex += 2;
@@ -307,7 +319,6 @@ public class ArenaObjectsHandler : MonoBehaviour
                 if (couple.arenaObject == (GameObject)this.arenaObjects[i])
                 {
                     couple.dragAndDropPosition = ((GameObject) this.arenaObjects[i]).transform.position;
-                    break;
                 }
             }
         }
