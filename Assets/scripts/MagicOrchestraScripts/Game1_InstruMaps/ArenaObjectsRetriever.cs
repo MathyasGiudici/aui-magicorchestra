@@ -24,7 +24,7 @@ static class ArenaObjectsRetriever
         dictPositions.Add(dictSecondPositions);        
 
         IFormatter formatter = new BinaryFormatter();
-        Stream stream = new FileStream("Assets/scripts/MagicOrchestraScripts/Game1_InstruMaps/objectsPosition.txt", FileMode.Create, FileAccess.Write);
+        Stream stream = new FileStream(Application.streamingAssetsPath + MagicOrchestraUtils.pathToInstrumapSequences, FileMode.Create, FileAccess.Write);
         
         formatter.Serialize(stream, dictPositions);
         stream.Close();
@@ -36,7 +36,7 @@ static class ArenaObjectsRetriever
         ArrayList dictPositions;
 
         IFormatter formatter = new BinaryFormatter();
-        Stream stream = new FileStream("Assets/scripts/MagicOrchestraScripts/Game1_InstruMaps/objectsPosition.txt", FileMode.Open, FileAccess.Read);
+        Stream stream = new FileStream(Application.streamingAssetsPath + MagicOrchestraUtils.pathToInstrumapSequences, FileMode.Open, FileAccess.Read);
 
         stream.Position = 0;
         dictPositions = (ArrayList)formatter.Deserialize(stream);

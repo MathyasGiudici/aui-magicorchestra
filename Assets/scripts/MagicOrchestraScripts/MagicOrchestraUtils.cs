@@ -7,13 +7,14 @@ public static class MagicOrchestraUtils
 {
     public static string pathToCorsiSequences = Path.DirectorySeparatorChar.ToString() + "corsi_sequences.csv";
     public static string pathToGame2Sequence = Path.DirectorySeparatorChar.ToString() + "digitspan_sequences.csv";
+    public static string pathToInstrumapSequences = Path.DirectorySeparatorChar.ToString() + "objectsPosition.txt";
 
     public const string backgroundColor = "56122A";
     public const string backgroundColorTextPanel = "93373F";
     public const string primaryColor = "F0A84D";
     public const string secondaryColor = "FFFFFF" ;
 
-    public const float generalTextTimeShow_long = 6.0f;
+    public const float generalTextTimeShow_long = 5.0f;
 
     public const float generalPauseTime_short = 1.0f;
 
