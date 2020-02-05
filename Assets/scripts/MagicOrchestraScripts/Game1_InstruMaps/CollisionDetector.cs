@@ -112,6 +112,7 @@ public class CollisionDetector : MonoBehaviour
                     this.isPlaced = true;
 
                     this.DisableCollisionDetector();
+                    other.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("busySlice");
 
                     StartCoroutine(correctAnswerCoroutine());
 
