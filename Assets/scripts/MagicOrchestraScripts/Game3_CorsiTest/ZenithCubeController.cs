@@ -25,6 +25,9 @@ public class ZenithCubeController : MonoBehaviour
         //Informing the SequenceUser of the current position
         int cubeNumber = int.Parse(parent.name[parent.name.Length - 1].ToString());
         SequenceUser.singleton.NewCurrentCube(cubeNumber, this.gameObject);
+
+        //Starting light
+        CorsiUtils.ShowLightOnCube(this.gameObject, SequenceUser.singleton.lightMaterial);
     }
 
     /* <summary>
@@ -40,7 +43,10 @@ public class ZenithCubeController : MonoBehaviour
         if ((parent != null) && ((this.timer%60) >= timeToGong) && ((this.timer % 60) < (timeToGong + Time.deltaTime)))
         {
             //Reproducing a sound
-            //parent.GetComponent<AudioSource>().Play();
+            parent.GetComponent<AudioSource>().Play();
+
+            // Reset the color
+            CorsiUtils.RestoreIntialCube(this.gameObject,SequenceUser.singleton.defaultMaterial);
 
             //Checking if the gestureMode is enabled
             if (!isGestureMode)
@@ -60,6 +66,9 @@ public class ZenithCubeController : MonoBehaviour
     {
         //Reset the timer
         this.timer = 0;
+
+        //Reset the color
+        CorsiUtils.RestoreIntialCube(this.gameObject, SequenceUser.singleton.defaultMaterial);
 
         //Informing the SequenceUser of the current position
         SequenceUser.singleton.DeleteCurrentCube();

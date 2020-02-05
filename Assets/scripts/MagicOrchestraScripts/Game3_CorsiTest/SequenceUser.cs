@@ -146,13 +146,6 @@ public class SequenceUser : MonoBehaviour
 
     private IEnumerator LightCoroutine(GameObject cubeToLight, bool isFinal, bool isSequenceCorrect)
     {
-        //Turn on the light
-        CorsiUtils.ShowLightOnCube(cubeToLight, lightMaterial);
-        yield return new WaitForSeconds(CorsiUtils.reactionLightTime);
-
-        //Turn off the light
-        CorsiUtils.RestoreIntialCube(cubeToLight, defaultMaterial);
-
         //Final cube detected
         if (isFinal)
         {
