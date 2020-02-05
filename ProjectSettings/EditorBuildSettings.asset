@@ -9,17 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Launcher.unity
     guid: 205fc305d22154bfe8a7c55dc19e16de
   - enabled: 1
-    path: Assets/Scenes/CorsiTestScene.unity
-    guid: efcfad7eec8f742ccba94021fc897271
-  - enabled: 1
-    path: Assets/Scenes/Game2.unity
-    guid: dcb5ba759a22b44d69b7f843c174c182
+    path: Assets/Scenes/MagicOrchestra.unity
+    guid: aecc44f3c609b4212b99c623162eed2d
   - enabled: 1
     path: Assets/Scenes/InstruMaps.unity
     guid: 8afb3d56239adc64c92a7f3fada4878c
   - enabled: 1
-    path: Assets/Scenes/MagicOrchestra.unity
-    guid: aecc44f3c609b4212b99c623162eed2d
+    path: Assets/Scenes/Game2.unity
+    guid: dcb5ba759a22b44d69b7f843c174c182
+  - enabled: 1
+    path: Assets/Scenes/CorsiTestScene.unity
+    guid: efcfad7eec8f742ccba94021fc897271
   - enabled: 1
     path: Assets/Scenes/CutScenePlayer.unity
     guid: 7f444f60725124490a01baf6187b1291

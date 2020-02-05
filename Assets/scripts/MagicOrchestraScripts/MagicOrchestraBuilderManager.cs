@@ -51,6 +51,9 @@ public class MagicOrchestraBuilderManager : MonoBehaviour
         this.CameraActivator(this.frontalCamera);
         this.CameraActivator(this.zenithCamera);
         this.CameraActivator(this.controllerCamera);
+
+        foreach (Display display in Display.displays)
+            display.Activate();
     }
 
     private void CameraActivator(GameObject gameObject)
@@ -63,8 +66,8 @@ public class MagicOrchestraBuilderManager : MonoBehaviour
     {
         int hint;
         hint = this.controllerCamera.GetComponent<Camera>().targetDisplay;        
-        this.controllerCamera.GetComponent<Camera>().targetDisplay = this.frontalCamera.GetComponent<Camera>().targetDisplay;
-        this.frontalCamera.GetComponent<Camera>().targetDisplay = hint;
+        this.controllerCamera.GetComponent<Camera>().targetDisplay = this.zenithCamera.GetComponent<Camera>().targetDisplay;
+        this.zenithCamera.GetComponent<Camera>().targetDisplay = hint;
     }
 
     private void QuitGame()
