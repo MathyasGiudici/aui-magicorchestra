@@ -89,8 +89,7 @@ public class SequenceShower : MonoBehaviour
 
                 // Changing displayed number
                 SequenceContextManager.singleton.ChangeDisplyedNumber(number.ToString());
-                // Playing audio
-                Debug.Log(MagicOrchestraUtils.pathToTextOfNumbers + "number" + number.ToString());
+                // Playing audio                
                 gameObject.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextOfNumbers + "number" + number.ToString());
                 gameObject.GetComponent<AudioSource>().Play();
 
