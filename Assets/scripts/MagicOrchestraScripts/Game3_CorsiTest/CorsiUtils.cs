@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class CorsiUtils
 {
-    public const float reactionLightTime = 0.5f;
+    public const float reactionLightTime = 1f;
 
     /* <summary>
      * The function create a new Material from a given (light one) with a given new color
