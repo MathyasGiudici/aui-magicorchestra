@@ -151,7 +151,11 @@ public class Game1PhasesManager : MonoBehaviour
     IEnumerator WatchDispositionCoroutine()
     {
         // Showing the Starting Panel with the instructions
-        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.watchArenaMessage;
+        if(MagicOrchestraParameters.IsContext)
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.watchArenaMessage_context;
+        else
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.watchArenaMessage;
+
         panelMessage.SetActive(true);
 
         if (!this.isArenaPresent)
@@ -190,7 +194,11 @@ public class Game1PhasesManager : MonoBehaviour
     IEnumerator ReorderItemsCoroutine()
     {
         // Showing the Starting Panel with the instructions
-        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.reorderObjectsMessage;
+        if(MagicOrchestraParameters.IsContext)
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.reorderObjectsMessage_context;
+        else
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.reorderObjectsMessage;
+
         panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
 

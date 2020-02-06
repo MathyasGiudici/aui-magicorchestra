@@ -59,7 +59,7 @@ public class ArenaObjectsHandler : MonoBehaviour
             instrNames.RemoveAt(index);
             
             //Load the sprite associated with the instruments
-            newInstr.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(newInstr.name);
+            newInstr.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.pathToSpritesInstrumaps + newInstr.name);
 
             this.arenaObjects.Add(newInstr);
         }
@@ -95,7 +95,7 @@ public class ArenaObjectsHandler : MonoBehaviour
             shapeNames.RemoveAt(index);
 
             //Load the sprite associated with the instruments
-            newShape.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(newShape.name);
+            newShape.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.pathToSpritesInstrumaps_shapes + newShape.name);
 
             this.arenaObjects.Add(newShape);
         }

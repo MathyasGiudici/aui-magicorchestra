@@ -40,7 +40,7 @@ public class ZenithCubeController : MonoBehaviour
         if ((parent != null) && ((this.timer%60) >= timeToGong) && ((this.timer % 60) < (timeToGong + Time.deltaTime)))
         {
             //Reproducing a sound
-            parent.GetComponent<AudioSource>().Play();
+            // parent.GetComponent<AudioSource>().Play();
 
             //Checking if the gestureMode is enabled
             if (!isGestureMode)

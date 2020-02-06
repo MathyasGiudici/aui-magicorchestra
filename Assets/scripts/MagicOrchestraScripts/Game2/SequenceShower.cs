@@ -58,7 +58,11 @@ public class SequenceShower : MonoBehaviour
     private IEnumerator SequenceRoutine(int[] sequence, float showTime)
     {
         //Showing starting information
-        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginSequenceMessage;
+        if(MagicOrchestraParameters.IsContext)
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginGame2SequenceMessage_context;
+        else
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginGame2SequenceMessage;
+
         panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         panelMessage.SetActive(false);
@@ -79,10 +83,17 @@ public class SequenceShower : MonoBehaviour
         {
             if (number >= 1 && number <= 9)
             {
+                //Checking for hints
                 if(showHints)
                     Game2HitImageController.singleton.ChangeImage(number);
 
-                SequenceContextManager.singleton.ChangeDisplyedNumber(number.ToString());                
+                // Changing displayed number
+                SequenceContextManager.singleton.ChangeDisplyedNumber(number.ToString());
+                // Playing audio
+                Debug.Log(MagicOrchestraUtils.pathToTextOfNumbers + "number" + number.ToString());
+                gameObject.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextOfNumbers + "number" + number.ToString());
+                gameObject.GetComponent<AudioSource>().Play();
+
                 yield return new WaitForSeconds(showTime);
                 SequenceContextManager.singleton.ChangeDisplyedNumber("");
             }

@@ -71,7 +71,11 @@ public class SequenceLighter : MonoBehaviour
         GameObject frontalCube;
 
         //Showing the Starting Panel
-        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginSequenceMessage;
+        if(MagicOrchestraParameters.IsContext)
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginCorsiSequenceMessage_context;
+        else
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginCorsiSequenceMessage;
+
         panelMessage.SetActive(true);
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         panelMessage.SetActive(false);
