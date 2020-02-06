@@ -63,8 +63,12 @@ public class ArenaSetup : MonoBehaviour
                 secondLevel.SetActive(false);
                 thirdLevel.SetActive(true);
 
-                this.AggregateAdjacent(thirdLevel.transform.GetChild(indexSlice1).gameObject, thirdLevel.transform.GetChild(indexSlice2).gameObject, this.white);
-                this.AggregateAdjacent(thirdLevel.transform.GetChild(indexSlice3).gameObject, thirdLevel.transform.GetChild(indexSlice4).gameObject, this.black);
+                this.AggregateAdjacent(thirdLevel.transform.GetChild(indexSlice1).gameObject, thirdLevel.transform.GetChild(indexSlice2).gameObject);
+                this.AggregateAdjacent(thirdLevel.transform.GetChild(indexSlice3).gameObject, thirdLevel.transform.GetChild(indexSlice4).gameObject);
+
+                // Active double slices
+                thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(1).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.SetActive(true);
 
                 if (isContext)
                 {
@@ -88,7 +92,12 @@ public class ArenaSetup : MonoBehaviour
                 secondLevel.SetActive(false);
                 thirdLevel.SetActive(true);
 
-                this.AggregateAdjacent(thirdLevel.transform.GetChild(indexSlice3).gameObject, thirdLevel.transform.GetChild(indexSlice4).gameObject, this.white);
+                this.AggregateAdjacent(thirdLevel.transform.GetChild(indexSlice3).gameObject, thirdLevel.transform.GetChild(indexSlice4).gameObject);
+
+                // Active single and double slices
+                thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.SetActive(true);
 
                 if (isContext)
                 {
@@ -112,6 +121,12 @@ public class ArenaSetup : MonoBehaviour
                 secondLevel.SetActive(false);
                 thirdLevel.SetActive(true);
 
+                // Active single and double slices
+                thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
                 if (isContext)
                 {
                     ArenaObjectsHandler.singleton.CreateInstruments(difficulty);
@@ -134,8 +149,18 @@ public class ArenaSetup : MonoBehaviour
                 secondLevel.SetActive(true);
                 thirdLevel.SetActive(true);
 
-                this.AggregateAdjacent(secondLevel.transform.GetChild(indexSlice1).gameObject, secondLevel.transform.GetChild(indexSlice2).gameObject, this.black);
-                this.AggregateAdjacent(secondLevel.transform.GetChild(indexSlice3).gameObject, secondLevel.transform.GetChild(indexSlice4).gameObject, this.white);
+                this.AggregateAdjacent(secondLevel.transform.GetChild(indexSlice1).gameObject, secondLevel.transform.GetChild(indexSlice2).gameObject);
+                this.AggregateAdjacent(secondLevel.transform.GetChild(indexSlice3).gameObject, secondLevel.transform.GetChild(indexSlice4).gameObject);
+
+                // Active single and double slices
+                thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
+                // Double slices in second level
+                secondLevel.transform.GetChild(indexSlice1).transform.GetChild(1).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.SetActive(true);
 
                 if (isContext)
                 {
@@ -159,7 +184,18 @@ public class ArenaSetup : MonoBehaviour
                 secondLevel.SetActive(true);
                 thirdLevel.SetActive(true);
 
-                this.AggregateAdjacent(secondLevel.transform.GetChild(indexSlice3).gameObject, secondLevel.transform.GetChild(indexSlice4).gameObject, this.black);
+                this.AggregateAdjacent(secondLevel.transform.GetChild(indexSlice3).gameObject, secondLevel.transform.GetChild(indexSlice4).gameObject);
+
+                // Active single and double slices
+                thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
+                // Single and double slices in second level
+                secondLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.SetActive(true);
 
                 if (isContext)
                 {
@@ -183,6 +219,18 @@ public class ArenaSetup : MonoBehaviour
                 secondLevel.SetActive(true);
                 thirdLevel.SetActive(true);
 
+                // Active single and double slices
+                thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
+                // Single and double slices in second level
+                secondLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
                 if (isContext)
                 {
                     ArenaObjectsHandler.singleton.CreateInstruments(difficulty);
@@ -205,8 +253,24 @@ public class ArenaSetup : MonoBehaviour
                 secondLevel.SetActive(true);
                 thirdLevel.SetActive(true);
 
-                this.AggregateAdjacent(firstLevel.transform.GetChild(indexSlice1).gameObject, firstLevel.transform.GetChild(indexSlice2).gameObject, this.white);
-                this.AggregateAdjacent(firstLevel.transform.GetChild(indexSlice3).gameObject, firstLevel.transform.GetChild(indexSlice4).gameObject, this.black);
+                this.AggregateAdjacent(firstLevel.transform.GetChild(indexSlice1).gameObject, firstLevel.transform.GetChild(indexSlice2).gameObject);
+                this.AggregateAdjacent(firstLevel.transform.GetChild(indexSlice3).gameObject, firstLevel.transform.GetChild(indexSlice4).gameObject);
+
+                // Active single and double slices
+                thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
+                // Single and double slices in second level
+                secondLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
+                // Double slices in first level
+                firstLevel.transform.GetChild(indexSlice1).transform.GetChild(1).gameObject.SetActive(true);
+                firstLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.SetActive(true);
 
                 if (isContext)
                 {
@@ -230,7 +294,24 @@ public class ArenaSetup : MonoBehaviour
                 secondLevel.SetActive(true);
                 thirdLevel.SetActive(true);
 
-                this.AggregateAdjacent(firstLevel.transform.GetChild(indexSlice3).gameObject, firstLevel.transform.GetChild(indexSlice4).gameObject, this.white);
+                this.AggregateAdjacent(firstLevel.transform.GetChild(indexSlice3).gameObject, firstLevel.transform.GetChild(indexSlice4).gameObject);
+
+                // Active single and double slices
+                thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
+                // Single and double slices in second level
+                secondLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
+                // Double slices in first level
+                firstLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                firstLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                firstLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.SetActive(true);
 
                 if (isContext)
                 {
@@ -253,6 +334,24 @@ public class ArenaSetup : MonoBehaviour
                 firstLevel.SetActive(true);
                 secondLevel.SetActive(true);
                 thirdLevel.SetActive(true);
+
+                // Active single and double slices
+                thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
+                // Single and double slices in second level
+                secondLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                secondLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
+
+                // Double slices in first level
+                firstLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.SetActive(true);
+                firstLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.SetActive(true);
+                firstLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.SetActive(true);
+                firstLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.SetActive(true);
 
                 if (isContext)
                 {
@@ -298,7 +397,7 @@ public class ArenaSetup : MonoBehaviour
      * The function give the same color to adjacent slices which have to take the same object during the game.
      * </summary>*/
      //TODO: fix this or delete it. 
-    public void AggregateAdjacent(GameObject firstSlice, GameObject secondSlice, Material material)
+    public void AggregateAdjacent(GameObject firstSlice, GameObject secondSlice)
     {
         if(IsAdjacent(firstSlice, secondSlice))
         {

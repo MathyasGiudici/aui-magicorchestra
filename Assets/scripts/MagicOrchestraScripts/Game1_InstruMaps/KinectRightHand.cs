@@ -87,6 +87,7 @@ public class KinectRightHand : MonoBehaviour
                 {
                     RaycastHit hitInfo;
                     this.target = GetHitTargetObject(out hitInfo);
+                    this.oldScale = this.target.transform.localScale;
                 }
 
                 if (this.target != null)
@@ -95,7 +96,6 @@ public class KinectRightHand : MonoBehaviour
                     this.CallTargetScript();
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 1, this.target.transform.position.z);
 
-                    this.oldScale = this.target.transform.localScale;
                     this.target.transform.localScale = this.dragScale;
                 }
             }
