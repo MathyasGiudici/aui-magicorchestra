@@ -90,7 +90,7 @@ public class KinectLeftHand : MonoBehaviour
                     this.oldScale = this.target.transform.localScale;
 
                     if (Game1Parameters.ConfirmSound)
-                        this.transform.parent.gameObject.GetComponent<AudioSource>().Play();
+                        this.transform.parent.gameObject.transform.parent.gameObject.GetComponent<AudioSource>().Play();
                 }
                 
                 if (this.target != null)
