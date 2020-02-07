@@ -94,7 +94,7 @@ public class KinectLeftHand : MonoBehaviour
                 {
                     this.isDrag = true;
                     this.CallTargetScript();
-                    this.target.transform.position = new Vector3(this.target.transform.position.x, 1, this.target.transform.position.z);
+                    this.target.transform.position = new Vector3(this.target.transform.position.x, 1.5f, this.target.transform.position.z);
 
                     this.target.transform.localScale = this.dragScale;
                 }
