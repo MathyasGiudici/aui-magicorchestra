@@ -118,7 +118,7 @@ public class CanvasManager : MonoBehaviour
     }
 
     /* <summary>
-    * Light routine for room
+    * Light routine of the room
     * </summary>
     */
     private IEnumerator CorsiMelodyLights()
@@ -127,16 +127,22 @@ public class CanvasManager : MonoBehaviour
         {
             foreach (string color in this.lights)
             {
-                MagicRoomLightManager.instance.sendColour(color, 50);
+                if(MagicRoomLightManager.instance != null)
+                    MagicRoomLightManager.instance.sendColour(color, 50);
                 yield return new WaitForSeconds(5f);
             }
             
         }
     }
 
+    /* <summary>
+    * Stop the light routine of the room
+    * </summary>
+    */
     public void StopLightRoutine()
     {
         StopCoroutine(this.lightCoroutine);
-        MagicRoomLightManager.instance.sendColour("#000000", 0);
+        if (MagicRoomLightManager.instance != null)
+            MagicRoomLightManager.instance.sendColour("#000000", 0);
     }
 }
