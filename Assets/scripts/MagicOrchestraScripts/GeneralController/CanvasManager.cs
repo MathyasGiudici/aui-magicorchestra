@@ -127,8 +127,8 @@ public class CanvasManager : MonoBehaviour
         {
             foreach (string color in this.lights)
             {
-                MagicRoomLightManager.instance.sendColour(color, 100);
-                yield return new WaitForSeconds(1f);
+                MagicRoomLightManager.instance.sendColour(color, 50);
+                yield return new WaitForSeconds(5f);
             }
             
         }

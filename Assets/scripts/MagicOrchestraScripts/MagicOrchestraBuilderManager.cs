@@ -72,6 +72,8 @@ public class MagicOrchestraBuilderManager : MonoBehaviour
 
     private void QuitGame()
     {
+        MagicOrchestraUtils.SwitchOffLightFeedback();
+
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #else
