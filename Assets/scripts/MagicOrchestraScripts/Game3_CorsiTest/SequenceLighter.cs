@@ -70,13 +70,21 @@ public class SequenceLighter : MonoBehaviour
     {
         GameObject frontalCube;
 
-        //Showing the Starting Panel
-        if(MagicOrchestraParameters.IsContext)
-            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginCorsiSequenceMessage_context;
-        else
-            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginCorsiSequenceMessage;
-
         panelMessage.SetActive(true);
+
+        //Showing the Starting Panel
+        if (MagicOrchestraParameters.IsContext)
+        {
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginCorsiSequenceMessage_context;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "beginCorsiSequenceMessage_context");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
+        }
+        else
+        {
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginCorsiSequenceMessage;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "beginCorsiSequenceMessage");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
+        }
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         panelMessage.SetActive(false);
         frontalTextMessage.GetComponent<Text>().text = "";

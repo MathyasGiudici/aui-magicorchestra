@@ -132,8 +132,10 @@ public class SequenceUser : MonoBehaviour
     private IEnumerator PanelCoroutine()
     {
         //Showing the User turn Panel
-        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginUserTurnMessage;
         panelMessage.SetActive(true);
+        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginUserTurnMessage;
+        frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "beginUserTurnMessage");
+        frontalTextMessage.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         panelMessage.SetActive(false);
         frontalTextMessage.GetComponent<Text>().text = "";
@@ -159,9 +161,11 @@ public class SequenceUser : MonoBehaviour
             //Recalling game manager
             if (isSequenceCorrect)
             {
-                frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
-                MagicOrchestraUtils.PositiveLightFeedback();
                 panelMessage.SetActive(true);
+                frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
+                frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "correctSequenceMessage");
+                frontalTextMessage.GetComponent<AudioSource>().Play();
+                MagicOrchestraUtils.PositiveLightFeedback();
                 yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
                 panelMessage.SetActive(false);
                 frontalTextMessage.GetComponent<Text>().text = "";
@@ -172,9 +176,11 @@ public class SequenceUser : MonoBehaviour
             }
             else
             {
-                frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.wrongSequenceMessage;
-                MagicOrchestraUtils.NegativeLightFeedback();
                 panelMessage.SetActive(true);
+                frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.wrongSequenceMessage;
+                frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "wrongSequenceMessage");
+                frontalTextMessage.GetComponent<AudioSource>().Play();
+                MagicOrchestraUtils.NegativeLightFeedback();
                 yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
                 panelMessage.SetActive(false);
                 frontalTextMessage.GetComponent<Text>().text = "";

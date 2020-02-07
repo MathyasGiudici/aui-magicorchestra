@@ -79,9 +79,11 @@ public class Game1PhasesManager : MonoBehaviour
         this.DisableRaycaster();
         this.DisableCollisionDetection();
 
-        // Showing the Pause panel 
-        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.pauseMessage;
+        // Showing the Pause panel
         panelMessage.SetActive(true);
+        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.pauseMessage;
+        frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "pauseMessage");
+        frontalTextMessage.GetComponent<AudioSource>().Play();
     }
 
 
@@ -150,13 +152,21 @@ public class Game1PhasesManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator WatchDispositionCoroutine()
     {
-        // Showing the Starting Panel with the instructions
-        if(MagicOrchestraParameters.IsContext)
-            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.watchArenaMessage_context;
-        else
-            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.watchArenaMessage;
-
         panelMessage.SetActive(true);
+
+        // Showing the Starting Panel with the instructions
+        if (MagicOrchestraParameters.IsContext)
+        {
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.watchArenaMessage_context;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "watchArenaMessage_context");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
+        }    
+        else
+        {
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.watchArenaMessage;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "watchArenaMessage");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
+        }
 
         if (!this.isArenaPresent)
         {
@@ -174,8 +184,10 @@ public class Game1PhasesManager : MonoBehaviour
         frontalTextMessage.GetComponent<Text>().text = "";
         yield return new WaitForSeconds((float)Game1Parameters.TimeInShowing);
 
-        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.endWatchArenaMessage;
         panelMessage.SetActive(true);
+        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.endWatchArenaMessage;
+        frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "endWatchArenaMessage");
+        frontalTextMessage.GetComponent<AudioSource>().Play();
         ArenaObjectsHandler.singleton.SetDragAndDropPositions();
 
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
@@ -193,13 +205,21 @@ public class Game1PhasesManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator ReorderItemsCoroutine()
     {
-        // Showing the Starting Panel with the instructions
-        if(MagicOrchestraParameters.IsContext)
-            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.reorderObjectsMessage_context;
-        else
-            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.reorderObjectsMessage;
-
         panelMessage.SetActive(true);
+
+        // Showing the Starting Panel with the instructions
+        if (MagicOrchestraParameters.IsContext)
+        {
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.reorderObjectsMessage_context;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "reorderObjectsMessage_context");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
+        } 
+        else
+        {
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.reorderObjectsMessage;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "reorderObjectsMessage");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
+        }
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
 
         // Showing thr arena disposition that the user has to remember
@@ -216,9 +236,12 @@ public class Game1PhasesManager : MonoBehaviour
     IEnumerator FinalCoroutine()
     {
         InstruMapsCanvasController.singleton.DisableAllButtons();
-        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctArenaDisposition;
-        MagicOrchestraUtils.PositiveLightFeedback();
+
         panelMessage.SetActive(true);
+        frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctArenaDisposition;
+        frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "correctArenaDisposition");
+        frontalTextMessage.GetComponent<AudioSource>().Play();
+        MagicOrchestraUtils.PositiveLightFeedback();
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         panelMessage.SetActive(false);
         frontalTextMessage.GetComponent<Text>().text = "";

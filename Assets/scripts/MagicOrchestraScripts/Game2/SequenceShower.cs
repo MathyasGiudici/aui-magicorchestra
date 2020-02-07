@@ -57,13 +57,21 @@ public class SequenceShower : MonoBehaviour
 
     private IEnumerator SequenceRoutine(int[] sequence, float showTime)
     {
-        //Showing starting information
-        if(MagicOrchestraParameters.IsContext)
-            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginGame2SequenceMessage_context;
-        else
-            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginGame2SequenceMessage;
-
         panelMessage.SetActive(true);
+
+        //Showing starting information
+        if (MagicOrchestraParameters.IsContext)
+        {
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginGame2SequenceMessage_context;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "beginGame2SequenceMessage_context");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
+        }   
+        else
+        {
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.beginGame2SequenceMessage;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "beginGame2SequenceMessage");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
+        }
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         panelMessage.SetActive(false);
         frontalTextMessage.GetComponent<Text>().text = "";
@@ -109,13 +117,21 @@ public class SequenceShower : MonoBehaviour
 
     private IEnumerator SequenceUserPanelRoutine(bool isReverse)
     {
-        //Showing information about seqence
-        if (!isReverse)
-            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.repeatSequenceMessage;
-        else
-            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.repeatSequenceReverseMessage;
-
         panelMessage.SetActive(true);
+
+        //Showing information about seqence 
+        if (!isReverse)
+        {
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.repeatSequenceMessage;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "repeatSequenceMessage");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
+        }   
+        else
+        {
+            frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.repeatSequenceReverseMessage;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "repeatSequenceReverseMessage");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
+        }
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         panelMessage.SetActive(false);
         frontalTextMessage.GetComponent<Text>().text = "";
@@ -126,19 +142,24 @@ public class SequenceShower : MonoBehaviour
 
     private IEnumerator FinalCoroutine(bool hasWin)
     {
+        panelMessage.SetActive(true);
+
         //Showing user turn information
         if (hasWin)
         {
             frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "correctSequenceMessage");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
             MagicOrchestraUtils.PositiveLightFeedback();
         }
         else
         {
             frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.wrongSequenceMessage;
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "wrongSequenceMessage");
+            frontalTextMessage.GetComponent<AudioSource>().Play();
             MagicOrchestraUtils.NegativeLightFeedback();
         }
-
-        panelMessage.SetActive(true);
+        
         yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
         panelMessage.SetActive(false);
         frontalTextMessage.GetComponent<Text>().text = "";

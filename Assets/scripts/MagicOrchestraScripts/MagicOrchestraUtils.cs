@@ -10,6 +10,7 @@ public static class MagicOrchestraUtils
     public static string pathToSpritesInstrumaps_shapes = "Sprites" + Path.DirectorySeparatorChar.ToString() + "Shapes" + Path.DirectorySeparatorChar.ToString();
 
     public static string pathToTextOfNumbers = "Audio" + Path.DirectorySeparatorChar.ToString() +"Text" + Path.DirectorySeparatorChar.ToString() + "Numbers" + Path.DirectorySeparatorChar.ToString();
+    public static string pathToTextMessages = "Audio" + Path.DirectorySeparatorChar.ToString() + "Text" + Path.DirectorySeparatorChar.ToString() + "Messages" + Path.DirectorySeparatorChar.ToString();
 
     public static string pathToCorsiSequences = Path.DirectorySeparatorChar.ToString() + "corsi_sequences.csv";
     public static string pathToGame2Sequence = Path.DirectorySeparatorChar.ToString() + "digitspan_sequences.csv";
@@ -22,7 +23,7 @@ public static class MagicOrchestraUtils
     public const string secondaryColor = "FFFFFF" ;
 
     // Times/Pauses
-    public const float generalTextTimeShow_long = 5.0f;
+    public const float generalTextTimeShow_long = 5.5f;
     public const float generalPauseTime_short = 1.0f;
 
     // MESSAGES
