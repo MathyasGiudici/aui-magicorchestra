@@ -49,7 +49,10 @@ public class DragAndDropHandler : MonoBehaviour
                 RaycastHit hitInfo;
                 this.target = GetHitTargetObject(out hitInfo);
 
-                if(this.target != null)
+                if (Game1Parameters.ConfirmSound)
+                    this.transform.parent.gameObject.GetComponent<AudioSource>().Play();
+
+                if (this.target != null)
                 {
                     this.isMouseDrag = true;
                     this.CallTargetScript();

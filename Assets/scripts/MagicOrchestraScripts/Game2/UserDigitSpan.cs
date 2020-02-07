@@ -46,6 +46,9 @@ public class UserDigitSpan : MonoBehaviour
         if (!(recognitionOn))
             return;
 
+        if (Game2Parameters.ConfirmSound)
+            this.gameObject.GetComponent<AudioSource>().Play();
+
         // Checking the sequence
         if (sequence[currentIndex] != number)
         {

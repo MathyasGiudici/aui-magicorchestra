@@ -6,7 +6,7 @@ public static class Game2Parameters
 {
     private static int difficulty;
     private static int[] sequence;
-    private static bool isReverse, isHintMode, isShuffle;
+    private static bool isReverse, isHintMode, isShuffle, confirmSound;
     private static float timeInShowing;
 
     public static int Difficulty
@@ -81,6 +81,18 @@ public static class Game2Parameters
         }
     }
 
+    public static bool ConfirmSound
+    {
+        get
+        {
+            return confirmSound;
+        }
+        set
+        {
+            confirmSound = value;
+        }
+    }
+
     public static string StringifyMe()
     {
         string toReturn = "";
@@ -94,9 +106,10 @@ public static class Game2Parameters
             toReturn += ("Modalità aiuto: " + MagicOrchestraUtils.TrueFalseConverter(isHintMode) + "\n");
 
             if (IsHintMode)
-                toReturn += ("Modalità carte Randomiche: " + MagicOrchestraUtils.TrueFalseConverter(isShuffle) + "\n");
+                toReturn += ("Modalità carte randomiche: " + MagicOrchestraUtils.TrueFalseConverter(isShuffle) + "\n");
         }
-            
+        toReturn += ("Suono di conferma: " + MagicOrchestraUtils.TrueFalseConverter(ConfirmSound) + "\n");
+
         return toReturn;
     }
 
@@ -112,5 +125,6 @@ public static class Game2Parameters
             Debug.Log("Modalità Aiuto: " + isHintMode);
             Debug.Log("Modalità Shuffle: " + isShuffle);
         }
+        Debug.Log("Suono di conferma:" + ConfirmSound);
     }
 }

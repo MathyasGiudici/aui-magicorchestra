@@ -53,8 +53,6 @@ public class ArenaSetup : MonoBehaviour
         switch (difficulty)
         {
             case 2:
-                // Debug.Log("Difficulty set to 2");
-
                 thirdLevel = arena.transform.GetChild(0).gameObject;
                 secondLevel = arena.transform.GetChild(1).gameObject;
                 firstLevel = arena.transform.GetChild(2).gameObject;
@@ -85,8 +83,6 @@ public class ArenaSetup : MonoBehaviour
                 break;
 
             case 3:
-                // Debug.Log("Difficulty set to 3");
-
                 thirdLevel = arena.transform.GetChild(0).gameObject;
                 secondLevel = arena.transform.GetChild(1).gameObject;
                 firstLevel = arena.transform.GetChild(2).gameObject;
@@ -118,8 +114,6 @@ public class ArenaSetup : MonoBehaviour
                 break;
 
             case 4:
-                // Debug.Log("Difficulty set to 4");
-
                 thirdLevel = arena.transform.GetChild(0).gameObject;
                 secondLevel = arena.transform.GetChild(1).gameObject;
                 firstLevel = arena.transform.GetChild(2).gameObject;
@@ -151,8 +145,6 @@ public class ArenaSetup : MonoBehaviour
                 break;
 
             case 6:
-                // Debug.Log("Difficulty set to 6");
-
                 thirdLevel = arena.transform.GetChild(0).gameObject;
                 secondLevel = arena.transform.GetChild(1).gameObject;
                 firstLevel = arena.transform.GetChild(2).gameObject;
@@ -193,8 +185,6 @@ public class ArenaSetup : MonoBehaviour
                 break;
 
             case 7:
-                // Debug.Log("Difficulty set to 7");
-
                 thirdLevel = arena.transform.GetChild(0).gameObject;
                 secondLevel = arena.transform.GetChild(1).gameObject;
                 firstLevel = arena.transform.GetChild(2).gameObject;
@@ -236,8 +226,6 @@ public class ArenaSetup : MonoBehaviour
                 break;
 
             case 8:
-                // Debug.Log("Difficulty set to 8");
-
                 thirdLevel = arena.transform.GetChild(0).gameObject;
                 secondLevel = arena.transform.GetChild(1).gameObject;
                 firstLevel = arena.transform.GetChild(2).gameObject;
@@ -279,8 +267,6 @@ public class ArenaSetup : MonoBehaviour
                 break;
 
             case 10:
-                // Debug.Log("Difficulty set to 10");
-
                 thirdLevel = arena.transform.GetChild(0).gameObject;
                 secondLevel = arena.transform.GetChild(1).gameObject;
                 firstLevel = arena.transform.GetChild(2).gameObject;
@@ -331,8 +317,6 @@ public class ArenaSetup : MonoBehaviour
                 break;
 
             case 11:
-                // Debug.Log("Difficulty set to 11");
-
                 thirdLevel = arena.transform.GetChild(0).gameObject;
                 secondLevel = arena.transform.GetChild(1).gameObject;
                 firstLevel = arena.transform.GetChild(2).gameObject;
@@ -384,8 +368,6 @@ public class ArenaSetup : MonoBehaviour
                 break;
 
             case 12:
-                // Debug.Log("Difficulty set to 12");
-
                 thirdLevel = arena.transform.GetChild(0).gameObject;
                 secondLevel = arena.transform.GetChild(1).gameObject;
                 firstLevel = arena.transform.GetChild(2).gameObject;
@@ -502,8 +484,6 @@ public class ArenaSetup : MonoBehaviour
             }
             else { break; }
         }
-
-        // Debug.Log("Slices are " + slices.Count);
 
         return slices;
     }

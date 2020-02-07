@@ -31,6 +31,7 @@ public class CanvasManager : MonoBehaviour
             if(MagicOrchestraParameters.LastGamePlayed <= 3)
             {
                 // format of the panel name: GameXSettingPanel
+                MagicOrchestraParameters.IsContext = true;
                 this.ShowGameSettingPanel("Game" + (MagicOrchestraParameters.LastGamePlayed + 1) + "SettingPanel");
             }
             else

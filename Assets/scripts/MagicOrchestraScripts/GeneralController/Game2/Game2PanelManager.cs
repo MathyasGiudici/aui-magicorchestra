@@ -46,7 +46,7 @@ public class Game2PanelManager : MonoBehaviour
         }
 
         // Getting the sequence panel
-        GameObject sequencePanel = gameObject.transform.GetChild(3).gameObject;
+        GameObject sequencePanel = gameObject.transform.GetChild(4).gameObject;
         SequenceObjectFile sequenceObjectFile = sequenceObjectFiles[difficultySlider.GetComponent<DifficultySlider>().GetCurrentDifficulty() - difficultySlider.GetComponent<DifficultySlider>().lowDifficulty];
 
 
@@ -96,13 +96,14 @@ public class Game2PanelManager : MonoBehaviour
         Game2Parameters.Difficulty = this.gameObject.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<DifficultySlider>().GetCurrentDifficulty();
         Game2Parameters.IsReverse = this.gameObject.transform.GetChild(0).GetChild(1).GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
         Game2Parameters.TimeInShowing = this.gameObject.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<TimeSlider>().GetCurrentTime();
+        Game2Parameters.ConfirmSound = this.gameObject.transform.GetChild(2).GetChild(1).GetComponent<SoundSlider>().GetStatus();
 
         if (MagicOrchestraParameters.IsContext)
         {
-            Game2Parameters.IsHintMode = this.gameObject.transform.GetChild(2).GetChild(0).GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
+            Game2Parameters.IsHintMode = this.gameObject.transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
 
             if (Game2Parameters.IsHintMode)
-                Game2Parameters.IsShuffle = this.gameObject.transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
+                Game2Parameters.IsShuffle = this.gameObject.transform.GetChild(3).GetChild(1).GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();
         }
             
 

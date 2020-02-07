@@ -237,12 +237,27 @@ public class Game1PhasesManager : MonoBehaviour
     {
         InstruMapsCanvasController.singleton.DisableAllButtons();
 
+        float waitTime = MagicOrchestraUtils.generalTextTimeShow_long;
         panelMessage.SetActive(true);
+        // Message
         frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctArenaDisposition;
+        // Light feedback
+        MagicOrchestraUtils.PositiveLightFeedback();
+        // First sound
+        if (MagicOrchestraParameters.IsContext)
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToSoundMessages + "sequence_correct_context");
+        else
+            frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToSoundMessages + "sequence_correct");
+        frontalTextMessage.GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(frontalTextMessage.GetComponent<AudioSource>().clip.length);
+        waitTime -= frontalTextMessage.GetComponent<AudioSource>().clip.length;
+        // Second sound
         frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "correctArenaDisposition");
         frontalTextMessage.GetComponent<AudioSource>().Play();
-        MagicOrchestraUtils.PositiveLightFeedback();
-        yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
+        yield return new WaitForSeconds(frontalTextMessage.GetComponent<AudioSource>().clip.length);
+        waitTime -= frontalTextMessage.GetComponent<AudioSource>().clip.length;
+
+        yield return new WaitForSeconds(waitTime);
         panelMessage.SetActive(false);
         frontalTextMessage.GetComponent<Text>().text = "";
         yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);

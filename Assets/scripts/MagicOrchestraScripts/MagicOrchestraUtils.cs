@@ -22,6 +22,7 @@ public static class MagicOrchestraUtils
 
     public static string pathToTextOfNumbers = "Audio" + Path.DirectorySeparatorChar.ToString() +"Text" + Path.DirectorySeparatorChar.ToString() + "Numbers" + Path.DirectorySeparatorChar.ToString();
     public static string pathToTextMessages = "Audio" + Path.DirectorySeparatorChar.ToString() + "Text" + Path.DirectorySeparatorChar.ToString() + "Messages" + Path.DirectorySeparatorChar.ToString();
+    public static string pathToSoundMessages = "Audio" + Path.DirectorySeparatorChar.ToString() + "Sounds" + Path.DirectorySeparatorChar.ToString();
 
     public static string pathToCorsiSequences = Path.DirectorySeparatorChar.ToString() + "corsi_sequences.csv";
     public static string pathToGame2Sequence = Path.DirectorySeparatorChar.ToString() + "digitspan_sequences.csv";
@@ -96,9 +97,9 @@ public static class MagicOrchestraUtils
     public static string TrueFalseConverter(bool boolStatus)
     {
         if (boolStatus)
-            return "Abilitato";
+            return "abilitato";
         else
-            return "Disabilitato";
+            return "disabilitato";
     }
 
     /* <summary>

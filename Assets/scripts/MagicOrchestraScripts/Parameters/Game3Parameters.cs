@@ -7,7 +7,7 @@ public static class Game3Parameters
     private static int difficulty;
     private static int[] sequence;
     private static string lightColor;
-    private static bool isGestureMode, showPlane, isZenithOrthographic;
+    private static bool isGestureMode, showPlane, isZenithOrthographic, confirmSound;
     private static float timeInShowing, timeInDetecting;
 
     public static int Difficulty
@@ -106,6 +106,18 @@ public static class Game3Parameters
         }
     }
 
+    public static bool ConfirmSound
+    {
+        get
+        {
+            return confirmSound;
+        }
+        set
+        {
+            confirmSound = value;
+        }
+    }
+
     public static string StringifyMe()
     {
         string toReturn = "";
@@ -113,15 +125,16 @@ public static class Game3Parameters
         toReturn += ("Difficoltà: " + Difficulty + "\n");
         toReturn += ("Sequenza: " + MagicOrchestraUtils.StringifySequence(Sequence) + "\n");
         toReturn += ("Tempo proiezione: " + TimeInShowing + MagicOrchestraUtils.SecondsTextItalianSuffix(TimeInShowing) + "\n");
-        toReturn += ("Modalità Gesture: " + MagicOrchestraUtils.TrueFalseConverter(IsGestureMode) + "\n");
+        toReturn += ("Modalità gesture: " + MagicOrchestraUtils.TrueFalseConverter(IsGestureMode) + "\n");
         if(!IsGestureMode)
             toReturn += ("Tempo posizionamento: " + TimeInDetecting + MagicOrchestraUtils.SecondsTextItalianSuffix(TimeInDetecting) + "\n");
         if(MagicOrchestraParameters.IsContext)
             toReturn += ("Modalità con piano: " + MagicOrchestraUtils.TrueFalseConverter(ShowPlane) + "\n");
         if (IsZenithOrthographic)
-            toReturn += ("Camera Zenitale ortografica\n");
+            toReturn += ("Camera zenitale ortonormale\n");
         else
-            toReturn += ("Camera Zenitale prospettica\n");
+            toReturn += ("Camera zenitale prospettica\n");
+        toReturn += ("Suono di conferma: " + MagicOrchestraUtils.TrueFalseConverter(ConfirmSound) + "\n");
         return toReturn;
     }
 
@@ -138,5 +151,6 @@ public static class Game3Parameters
         Debug.Log("TimeInDetecting: " + TimeInDetecting);
         Debug.Log("ShowPlane: " + ShowPlane);
         Debug.Log("Zenith camera orthographic" + IsZenithOrthographic);
+        Debug.Log("Suono di conferma:" + ConfirmSound);
     }
 }

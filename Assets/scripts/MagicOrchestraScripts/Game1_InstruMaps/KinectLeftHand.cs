@@ -88,6 +88,9 @@ public class KinectLeftHand : MonoBehaviour
                     RaycastHit hitInfo;
                     this.target = GetHitTargetObject(out hitInfo);
                     this.oldScale = this.target.transform.localScale;
+
+                    if (Game1Parameters.ConfirmSound)
+                        this.transform.parent.gameObject.GetComponent<AudioSource>().Play();
                 }
                 
                 if (this.target != null)

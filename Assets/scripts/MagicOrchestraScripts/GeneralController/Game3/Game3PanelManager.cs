@@ -37,6 +37,7 @@ public class Game3PanelManager : MonoBehaviour
         Game3Parameters.TimeInDetecting = this.GetChildElement(3).GetComponent<TimeSlider>().GetCurrentTime();
         Game3Parameters.ShowPlane       = this.GetChildElement(4).GetComponent<GeneralGameToggle>().GetToggleStatus();
         Game3Parameters.IsZenithOrthographic = ZenithModeSlider.singleton.GetOrthographicStatus();
+        Game3Parameters.ConfirmSound = this.GetChildElement(6).GetComponent<SoundSlider>().GetStatus();
 
         this.EnableSecondPanel();
         this.LoadSequences();

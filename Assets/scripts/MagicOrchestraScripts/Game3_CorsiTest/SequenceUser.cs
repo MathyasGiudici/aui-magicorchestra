@@ -158,15 +158,30 @@ public class SequenceUser : MonoBehaviour
         //Final cube detected
         if (isFinal)
         {
+            float waitTime = MagicOrchestraUtils.generalTextTimeShow_long;
             //Recalling game manager
             if (isSequenceCorrect)
             {
                 panelMessage.SetActive(true);
+                // Message
                 frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.correctSequenceMessage;
+                // Light feedback
+                MagicOrchestraUtils.PositiveLightFeedback();
+                // First sound
+                if (MagicOrchestraParameters.IsContext)
+                    frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToSoundMessages + "sequence_correct_context");
+                else
+                    frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToSoundMessages + "sequence_correct");
+                frontalTextMessage.GetComponent<AudioSource>().Play();
+                waitTime -= frontalTextMessage.GetComponent<AudioSource>().clip.length;
+                yield return new WaitForSeconds(frontalTextMessage.GetComponent<AudioSource>().clip.length);
+                // Second sound
                 frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "correctSequenceMessage");
                 frontalTextMessage.GetComponent<AudioSource>().Play();
-                MagicOrchestraUtils.PositiveLightFeedback();
-                yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
+                waitTime -= frontalTextMessage.GetComponent<AudioSource>().clip.length;
+                yield return new WaitForSeconds(frontalTextMessage.GetComponent<AudioSource>().clip.length);
+
+                yield return new WaitForSeconds(waitTime);
                 panelMessage.SetActive(false);
                 frontalTextMessage.GetComponent<Text>().text = "";
                 yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);
@@ -177,11 +192,22 @@ public class SequenceUser : MonoBehaviour
             else
             {
                 panelMessage.SetActive(true);
+                // Message
                 frontalTextMessage.GetComponent<Text>().text = MagicOrchestraUtils.wrongSequenceMessage;
+                // Light feedback
+                MagicOrchestraUtils.NegativeLightFeedback();
+                // First sound
+                frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToSoundMessages + "sequence_wrong");
+                frontalTextMessage.GetComponent<AudioSource>().Play();
+                waitTime -= frontalTextMessage.GetComponent<AudioSource>().clip.length;
+                yield return new WaitForSeconds(frontalTextMessage.GetComponent<AudioSource>().clip.length);
+                // Second sound
                 frontalTextMessage.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToTextMessages + "wrongSequenceMessage");
                 frontalTextMessage.GetComponent<AudioSource>().Play();
-                MagicOrchestraUtils.NegativeLightFeedback();
-                yield return new WaitForSeconds(MagicOrchestraUtils.generalTextTimeShow_long);
+                waitTime -= frontalTextMessage.GetComponent<AudioSource>().clip.length;
+                yield return new WaitForSeconds(frontalTextMessage.GetComponent<AudioSource>().clip.length);
+
+                yield return new WaitForSeconds(waitTime);
                 panelMessage.SetActive(false);
                 frontalTextMessage.GetComponent<Text>().text = "";
                 yield return new WaitForSeconds(MagicOrchestraUtils.generalPauseTime_short);

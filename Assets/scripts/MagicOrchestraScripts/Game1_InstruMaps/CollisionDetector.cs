@@ -53,12 +53,12 @@ public class CollisionDetector : MonoBehaviour
             }
         }
 
-        foreach (GameObject slice in targetSlices)
-        {
-            Debug.Log(gameObject.name + "'s slice is: " + slice.name);
-        }
-        Debug.Log(gameObject.name + "'s drag and drop position is: " + this.dragAndDropPosition);
-        Debug.Log(gameObject.name + "'s arena position is: " + this.arenaPosition);
+        //foreach (GameObject slice in targetSlices)
+        //{
+        //    Debug.Log(gameObject.name + "'s slice is: " + slice.name);
+        //}
+        //Debug.Log(gameObject.name + "'s drag and drop position is: " + this.dragAndDropPosition);
+        //Debug.Log(gameObject.name + "'s arena position is: " + this.arenaPosition);
     }
 
 
@@ -102,7 +102,7 @@ public class CollisionDetector : MonoBehaviour
             {
                 this.firstCollision = other.gameObject;
 
-                Debug.Log(gameObject.name + " collided with " + other.gameObject.name);
+                // Debug.Log(gameObject.name + " collided with " + other.gameObject.name);
 
                 if (this.isSliceTarget(other.gameObject))
                 {
@@ -166,14 +166,28 @@ public class CollisionDetector : MonoBehaviour
     IEnumerator correctAnswerCoroutine()
     {
         MagicOrchestraUtils.PositiveLightFeedback();
-        yield return new WaitForSeconds(0.5f);
+        float waitTime = 0.5f;
+        if (Game1Parameters.ConfirmSound)
+        {
+            this.gameObject.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToSoundMessages + "correct");
+            this.gameObject.GetComponent<AudioSource>().Play();
+            waitTime = this.gameObject.GetComponent<AudioSource>().clip.length;
+        }
+        yield return new WaitForSeconds(waitTime);
         MagicOrchestraUtils.SwitchOffLightFeedback();
     }
 
     IEnumerator wrongAnswerCoroutine()
     {
         MagicOrchestraUtils.NegativeLightFeedback();
-        yield return new WaitForSeconds(0.5f);
+        float waitTime = 0.5f;
+        if (Game1Parameters.ConfirmSound)
+        {
+            this.gameObject.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToSoundMessages + "wrong");
+            this.gameObject.GetComponent<AudioSource>().Play();
+            waitTime = this.gameObject.GetComponent<AudioSource>().clip.length;
+        }
+        yield return new WaitForSeconds(waitTime);
         MagicOrchestraUtils.SwitchOffLightFeedback();
     }
 
