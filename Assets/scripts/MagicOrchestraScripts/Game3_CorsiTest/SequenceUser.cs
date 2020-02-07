@@ -11,6 +11,8 @@ public class SequenceUser : MonoBehaviour
 
     //Material for the cubes
     public Material defaultMaterial;
+    public Material defaultMaterial_context;
+    public Material defaultMaterial_no_context;
     public Material lightMaterial;
 
     //Text container
@@ -48,6 +50,20 @@ public class SequenceUser : MonoBehaviour
     }
 
     /* <summary>
+     * Start is called before the first frame update
+     * </summary>
+     */
+    void Start()
+    {
+        if (MagicOrchestraParameters.IsContext)
+            this.defaultMaterial = this.defaultMaterial_context;
+        else
+            this.defaultMaterial = this.defaultMaterial_no_context;
+
+        this.InstantiateMaterialOnCubes();
+    }
+
+    /* <summary>
      * The function shows the sequence of lights (cubes) on the frontal plane
      * </summary>
      *
@@ -79,6 +95,19 @@ public class SequenceUser : MonoBehaviour
         this.InstantiateControllerOnCubes();
 
         this.coroutine = StartCoroutine(this.PanelCoroutine());
+    }
+
+    /* <summary>
+     * InstantiateControllerOnCubes creates the ZenithCubeController in the cubes
+     * </summary>
+     */
+    private void InstantiateMaterialOnCubes()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            gameObject.transform.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material = defaultMaterial;
+            gameObject.transform.GetChild(i).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().material = defaultMaterial;
+        }
     }
 
     /* <summary>

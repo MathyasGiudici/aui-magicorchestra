@@ -8,10 +8,6 @@ public class SequenceLighter : MonoBehaviour
     //Singleton of the SequenceLighter class
     public static SequenceLighter singleton = null;
 
-    //Material for the cubes
-    public Material defaultMaterial;
-    public Material lightMaterial;
-
     //Text container
     public GameObject panelMessage;
     public GameObject frontalTextMessage;
@@ -99,11 +95,11 @@ public class SequenceLighter : MonoBehaviour
                 frontalCube = plane.transform.GetChild(number - 1).gameObject.transform.GetChild(0).gameObject;
 
                 //Turn on the light
-                CorsiUtils.ShowLightOnCube(frontalCube,lightMaterial);
+                CorsiUtils.ShowLightOnCube(frontalCube,SequenceUser.singleton.lightMaterial);
                 yield return new WaitForSeconds(this.showTime);
 
                 //Turn off the light
-                CorsiUtils.RestoreIntialCube(frontalCube,defaultMaterial);
+                CorsiUtils.RestoreIntialCube(frontalCube,SequenceUser.singleton.defaultMaterial);
             }        
         }
 
@@ -128,6 +124,6 @@ public class SequenceLighter : MonoBehaviour
      */
     private void ChangeColor(string color)
     {
-        CorsiUtils.CreateMaterialFromColor(lightMaterial, color);
+        CorsiUtils.CreateMaterialFromColor(SequenceUser.singleton.lightMaterial, color);
     }
 }

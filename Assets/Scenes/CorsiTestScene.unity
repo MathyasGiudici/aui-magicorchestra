@@ -385,7 +385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &200055099
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1527,7 +1527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &950966697
 Transform:
   m_ObjectHideFlags: 0
@@ -4454,8 +4454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f92d782fa4246cf9dd770983f0549b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMaterial: {fileID: 2100000, guid: 10cd7562e0f344b1f871665f47673d9a, type: 2}
-  lightMaterial: {fileID: 2100000, guid: 1f37bceb9286d4d28bcb5fc3f00662c3, type: 2}
   panelMessage: {fileID: 1033757756}
   frontalTextMessage: {fileID: 1382605820}
 --- !u!114 &2064264576
@@ -4470,7 +4468,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b273f12c80424cedabba5861c8130ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMaterial: {fileID: 2100000, guid: 10cd7562e0f344b1f871665f47673d9a, type: 2}
+  defaultMaterial: {fileID: 0}
+  defaultMaterial_context: {fileID: 2100000, guid: fd0a018ce66e143fa8593ce84e9d2b03,
+    type: 2}
+  defaultMaterial_no_context: {fileID: 2100000, guid: 10cd7562e0f344b1f871665f47673d9a,
+    type: 2}
   lightMaterial: {fileID: 2100000, guid: 4ced5fc7d1509480a95cce15e71686d5, type: 2}
   panelMessage: {fileID: 1033757756}
   frontalTextMessage: {fileID: 1382605820}
