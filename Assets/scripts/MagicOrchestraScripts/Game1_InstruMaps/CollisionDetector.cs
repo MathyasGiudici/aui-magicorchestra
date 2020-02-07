@@ -111,6 +111,8 @@ public class CollisionDetector : MonoBehaviour
                     gameObject.transform.position = this.arenaPosition;
                     this.isPlaced = true;
 
+                    gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+
                     this.DisableCollisionDetector();
                     this.LoadBusySlice();
 

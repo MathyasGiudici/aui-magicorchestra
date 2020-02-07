@@ -11,6 +11,9 @@ public class DragAndDropHandler : MonoBehaviour
     GameObject target;
     Vector3 screenPosition;
     Vector3 offset;
+    Vector3 startingPoint;
+
+    Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
 
     private Vector3 dragScale = new Vector3(1.5f, 1.5f, 1.5f);
     private Vector3 oldScale;
@@ -63,8 +66,8 @@ public class DragAndDropHandler : MonoBehaviour
                     this.screenPosition = cam.WorldToScreenPoint(this.target.transform.position);
                     this.offset = this.target.transform.position - cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.screenPosition.z));
 
-                    this.oldScale = this.target.transform.localScale;
-                    this.target.transform.localScale = this.dragScale;
+                    //this.oldScale = this.target.transform.localScale;
+                    //this.target.transform.localScale = this.dragScale;
 
                     // Debug.Log("screen position is : " + this.screenPosition);
                     // Debug.Log("offst is : " + this.offset);
@@ -78,21 +81,29 @@ public class DragAndDropHandler : MonoBehaviour
                 if(this.target != null)
                 {
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 0, this.target.transform.position.z);
-                    this.target.transform.localScale = this.oldScale;
+                    //this.target.transform.localScale = this.oldScale;
                 }
             }
 
             // Dragging the object
             if (this.isMouseDrag)
             {
-                // Track mouse position
-                Vector3 currentScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.screenPosition.z);
+                if (!screenRect.Contains(Input.mousePosition))
+                {
+                    this.target.transform.position = this.startingPoint;
+                    this.target = null;
+                }
+                else
+                {
+                    // Track mouse position
+                    Vector3 currentScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.screenPosition.z);
 
-                // Convert screen position to world position with offset changes.
-                Vector3 currentPosition = cam.ScreenToWorldPoint(currentScreenSpace) + this.offset;
+                    // Convert screen position to world position with offset changes.
+                    Vector3 currentPosition = cam.ScreenToWorldPoint(currentScreenSpace) + this.offset;
 
-                // It will update target gameobject's current postion.
-                this.target.transform.position = currentPosition;
+                    // It will update target gameobject's current postion.
+                    this.target.transform.position = currentPosition;
+                }
             }
         }
     }
@@ -113,6 +124,8 @@ public class DragAndDropHandler : MonoBehaviour
             // Debug.Log("Collided with " + hit.collider.gameObject.name);
             hitTarget = hit.collider.gameObject;
         }
+
+        this.startingPoint = hitTarget.transform.position;
         return hitTarget;
     }
 

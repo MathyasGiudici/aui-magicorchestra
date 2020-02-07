@@ -225,6 +225,7 @@ public class ArenaObjectsHandler : MonoBehaviour
             foreach (ObjectSliceCouple couple in this.objectSliceCouples)
             {
                 couple.arenaObject.transform.position = couple.arenaPosition;
+                couple.arenaObject.transform.localScale = new Vector3(1f, 1f, 1f);
             }
         }
         else
@@ -321,6 +322,7 @@ public class ArenaObjectsHandler : MonoBehaviour
                 if (!couple.isPlaced)
                 {
                     couple.arenaObject.transform.position = couple.dragAndDropPosition;
+                    couple.arenaObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                 }
             }
         }
@@ -336,6 +338,7 @@ public class ArenaObjectsHandler : MonoBehaviour
                 float z = positionValues[i].z;
 
                 ((GameObject)this.arenaObjects[i]).transform.position = new Vector3(x, y, z);
+                ((GameObject)this.arenaObjects[i]).transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 
                 foreach (ObjectSliceCouple couple in this.objectSliceCouples)
                 {

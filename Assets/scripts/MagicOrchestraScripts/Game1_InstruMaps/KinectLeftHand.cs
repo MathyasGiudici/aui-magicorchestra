@@ -29,6 +29,9 @@ public class KinectLeftHand : MonoBehaviour
     private Vector3 dragScale = new Vector3(1.5f, 1.5f, 1.5f);
     private Vector3 oldScale;
 
+    Vector3 startingPoint;
+    Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
+
 
     // Singleton of the KinectRightHand class
     public static KinectLeftHand singleton = null;
@@ -87,7 +90,7 @@ public class KinectLeftHand : MonoBehaviour
                 {
                     RaycastHit hitInfo;
                     this.target = GetHitTargetObject(out hitInfo);
-                    this.oldScale = this.target.transform.localScale;
+                    //this.oldScale = this.target.transform.localScale;
 
                     if (Game1Parameters.ConfirmSound)
                         this.transform.parent.gameObject.transform.parent.gameObject.GetComponent<AudioSource>().Play();
@@ -99,7 +102,7 @@ public class KinectLeftHand : MonoBehaviour
                     this.CallTargetScript();
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 1.5f, this.target.transform.position.z);
 
-                    this.target.transform.localScale = this.dragScale;
+                    //this.target.transform.localScale = this.dragScale;
                 }
             }
             
@@ -112,7 +115,7 @@ public class KinectLeftHand : MonoBehaviour
                 if (this.target != null)
                 {
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 0, this.target.transform.position.z);
-                    this.target.transform.localScale = this.oldScale;
+                    //this.target.transform.localScale = this.oldScale;
                 }
             }
 
@@ -151,6 +154,8 @@ public class KinectLeftHand : MonoBehaviour
             // Debug.Log("Collided with " + hit.collider.gameObject.name);
             hitTarget = hit.collider.gameObject;
         }
+
+        this.startingPoint = hitTarget.transform.position;
         return hitTarget;
     }
 

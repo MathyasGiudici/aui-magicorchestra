@@ -87,7 +87,7 @@ public class KinectRightHand : MonoBehaviour
                 {
                     RaycastHit hitInfo;
                     this.target = GetHitTargetObject(out hitInfo);
-                    this.oldScale = this.target.transform.localScale;
+                    //this.oldScale = this.target.transform.localScale;
 
                     if (Game1Parameters.ConfirmSound)
                         this.transform.parent.gameObject.transform.parent.gameObject.GetComponent<AudioSource>().Play();
@@ -99,7 +99,7 @@ public class KinectRightHand : MonoBehaviour
                     this.CallTargetScript();
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 1.5f, this.target.transform.position.z);
 
-                    this.target.transform.localScale = this.dragScale;
+                    //this.target.transform.localScale = this.dragScale;
                 }
             }
 
@@ -113,7 +113,7 @@ public class KinectRightHand : MonoBehaviour
                 if (this.target != null)
                 {
                     this.target.transform.position = new Vector3(this.target.transform.position.x, 0, this.target.transform.position.z);
-                    this.target.transform.localScale = this.oldScale;
+                    //this.target.transform.localScale = this.oldScale;
                 }
             }
 
