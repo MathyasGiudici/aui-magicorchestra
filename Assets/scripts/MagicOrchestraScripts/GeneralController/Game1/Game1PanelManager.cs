@@ -11,6 +11,8 @@ public class Game1PanelManager : MonoBehaviour
 		Game1Parameters.TimeInShowing = this.gameObject.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<TimeSlider>().GetCurrentTime();
         Game1Parameters.ConfirmSound = this.gameObject.transform.GetChild(2).GetChild(1).GetComponent<SoundSlider>().GetStatus();
 
+        CanvasManager.singleton.StopLightRoutine();
+
         if (MagicOrchestraParameters.IsGuided)
         {
             MagicOrchestraParameters.GuidedOnPlay = true;

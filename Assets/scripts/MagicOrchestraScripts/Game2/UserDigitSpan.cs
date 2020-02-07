@@ -47,7 +47,11 @@ public class UserDigitSpan : MonoBehaviour
             return;
 
         if (Game2Parameters.ConfirmSound)
+        {
+            this.gameObject.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(MagicOrchestraUtils.pathToSoundMessages + "selection");
             this.gameObject.GetComponent<AudioSource>().Play();
+        }
+            
 
         // Checking the sequence
         if (sequence[currentIndex] != number)

@@ -98,6 +98,8 @@ public class Game2PanelManager : MonoBehaviour
         Game2Parameters.TimeInShowing = this.gameObject.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<TimeSlider>().GetCurrentTime();
         Game2Parameters.ConfirmSound = this.gameObject.transform.GetChild(2).GetChild(1).GetComponent<SoundSlider>().GetStatus();
 
+        CanvasManager.singleton.StopLightRoutine();
+
         if (MagicOrchestraParameters.IsContext)
         {
             Game2Parameters.IsHintMode = this.gameObject.transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<GeneralGameToggle>().GetToggleStatus();

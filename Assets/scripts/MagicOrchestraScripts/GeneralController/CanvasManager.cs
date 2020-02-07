@@ -12,6 +12,11 @@ public class CanvasManager : MonoBehaviour
     public GameObject zenithCamera;
     public GameObject controllerCamera;
 
+    public Coroutine lightCoroutine = null;
+
+    // Private Light colors
+    private string[] lights = { "#EFA84E", "#F06456", "#B24A4A", "#6A1E38", "#F06456" };
+
     /* <summary>
      * Start is called before the first frame update
      * </summary>
@@ -43,6 +48,8 @@ public class CanvasManager : MonoBehaviour
         {
             ShowIntro();
         }
+
+        this.lightCoroutine = StartCoroutine(CorsiMelodyLights());
     }
 
     /* <summary>
@@ -108,5 +115,28 @@ public class CanvasManager : MonoBehaviour
         for (int i = 0; i < gameObject.transform.childCount; i++)
             gameObject.transform.GetChild(i).gameObject.SetActive(false);
 
+    }
+
+    /* <summary>
+    * Light routine for room
+    * </summary>
+    */
+    private IEnumerator CorsiMelodyLights()
+    {
+        while (true)
+        {
+            foreach (string color in this.lights)
+            {
+                MagicRoomLightManager.instance.sendColour(color, 100);
+                yield return new WaitForSeconds(1f);
+            }
+            
+        }
+    }
+
+    public void StopLightRoutine()
+    {
+        StopCoroutine(this.lightCoroutine);
+        MagicRoomLightManager.instance.sendColour("#000000", 0);
     }
 }

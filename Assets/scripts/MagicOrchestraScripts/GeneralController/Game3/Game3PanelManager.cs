@@ -114,6 +114,8 @@ public class Game3PanelManager : MonoBehaviour
 
         Game3Parameters.Sequence = this.sequenceObjectFiles[Game3Parameters.Difficulty - 2].sequences[arrayIndex].ToArray();
 
+        CanvasManager.singleton.StopLightRoutine();
+
         if (MagicOrchestraParameters.GuidedOnPlay)
         {
             CutSceneParameters.TargetVideoIndex = 4;
