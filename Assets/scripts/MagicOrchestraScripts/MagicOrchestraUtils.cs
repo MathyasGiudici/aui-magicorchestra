@@ -8,6 +8,17 @@ public static class MagicOrchestraUtils
     // Paths
     public static string pathToSpritesInstrumaps = "Sprites" + Path.DirectorySeparatorChar.ToString() + "Instruments" + Path.DirectorySeparatorChar.ToString();
     public static string pathToSpritesInstrumaps_shapes = "Sprites" + Path.DirectorySeparatorChar.ToString() + "Shapes" + Path.DirectorySeparatorChar.ToString();
+    public static string pathToSpritesInstrumaps_arena = "Sprites" + Path.DirectorySeparatorChar.ToString() + "Arena" + Path.DirectorySeparatorChar.ToString();
+
+    // Slices Paths
+    public static string busyContextSlicePath = pathToSpritesInstrumaps_arena + "busySlice";
+    public static string freeContextSlicePath = pathToSpritesInstrumaps_arena + "freeSlice";
+    public static string busyNoContextSlicePath = pathToSpritesInstrumaps_arena + "NCBusySlice";
+    public static string freeNoContextSlicePath = pathToSpritesInstrumaps_arena + "NCFreeSlice";
+    public static string busyContextDoubleSlicePath = pathToSpritesInstrumaps_arena + "busyDoubleSlice";
+    public static string freeContextDoubleSlicePath = pathToSpritesInstrumaps_arena + "freeDoubleSlice";
+    public static string busyNoContextDoubleSlicePath = pathToSpritesInstrumaps_arena + "NCBusyDoubleSlice";
+    public static string freeNoContextDoubleSlicePath = pathToSpritesInstrumaps_arena + "NCFreeDoubleSlice";
 
     public static string pathToTextOfNumbers = "Audio" + Path.DirectorySeparatorChar.ToString() +"Text" + Path.DirectorySeparatorChar.ToString() + "Numbers" + Path.DirectorySeparatorChar.ToString();
     public static string pathToTextMessages = "Audio" + Path.DirectorySeparatorChar.ToString() + "Text" + Path.DirectorySeparatorChar.ToString() + "Messages" + Path.DirectorySeparatorChar.ToString();

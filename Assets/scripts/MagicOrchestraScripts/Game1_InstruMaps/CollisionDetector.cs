@@ -112,7 +112,7 @@ public class CollisionDetector : MonoBehaviour
                     this.isPlaced = true;
 
                     this.DisableCollisionDetector();
-                    other.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("busySlice");
+                    this.LoadBusySlice();
 
                     StartCoroutine(correctAnswerCoroutine());
 
@@ -128,6 +128,38 @@ public class CollisionDetector : MonoBehaviour
                 }
             } 
         }
+    }
+
+
+    // Load the sprite of the slice when it becomes busy
+    // Choice based on the presence of the context and the typology of slice (single or double)
+    private void LoadBusySlice()
+    {
+        GameObject slice = (GameObject) this.targetSlices[0];
+
+        if (MagicOrchestraParameters.IsContext)
+        {
+            if (slice.transform.GetChild(0).gameObject.activeSelf == true)
+            {
+                slice.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.busyContextSlicePath);
+            }
+            else
+            {
+                slice.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.busyContextDoubleSlicePath);
+            }
+        }
+        else
+        {
+            if (slice.transform.GetChild(0).gameObject.activeSelf == true)
+            {
+                slice.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.busyNoContextSlicePath);
+            }
+            else
+            {
+                slice.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.busyNoContextDoubleSlicePath);
+            }
+        }
+        
     }
 
 

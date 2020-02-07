@@ -76,6 +76,9 @@ public class ArenaSetup : MonoBehaviour
                 }
                 else
                 {
+                    thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextDoubleSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextDoubleSlicePath);
+                    
                     ArenaObjectsHandler.singleton.CreateShapes(difficulty);
                 }
 
@@ -105,6 +108,10 @@ public class ArenaSetup : MonoBehaviour
                 }
                 else
                 {
+                    thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextDoubleSlicePath);
+                    
                     ArenaObjectsHandler.singleton.CreateShapes(difficulty);
                 }
 
@@ -133,6 +140,11 @@ public class ArenaSetup : MonoBehaviour
                 }
                 else
                 {
+                    thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    
                     ArenaObjectsHandler.singleton.CreateShapes(difficulty);
                 }
 
@@ -168,6 +180,13 @@ public class ArenaSetup : MonoBehaviour
                 }
                 else
                 {
+                    thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice1).transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextDoubleSlicePath);
+                    secondLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextDoubleSlicePath);
+
                     ArenaObjectsHandler.singleton.CreateShapes(difficulty);
                 }
 
@@ -203,6 +222,14 @@ public class ArenaSetup : MonoBehaviour
                 }
                 else
                 {
+                    thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextDoubleSlicePath);
+
                     ArenaObjectsHandler.singleton.CreateShapes(difficulty);
                 }
 
@@ -237,6 +264,15 @@ public class ArenaSetup : MonoBehaviour
                 }
                 else
                 {
+                    thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+
                     ArenaObjectsHandler.singleton.CreateShapes(difficulty);
                 }
 
@@ -278,6 +314,17 @@ public class ArenaSetup : MonoBehaviour
                 }
                 else
                 {
+                    thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    firstLevel.transform.GetChild(indexSlice1).transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextDoubleSlicePath);
+                    firstLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextDoubleSlicePath);
+
                     ArenaObjectsHandler.singleton.CreateShapes(difficulty);
                 }
 
@@ -319,6 +366,18 @@ public class ArenaSetup : MonoBehaviour
                 }
                 else
                 {
+                    thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    firstLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    firstLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    firstLevel.transform.GetChild(indexSlice3).transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextDoubleSlicePath);
+
                     ArenaObjectsHandler.singleton.CreateShapes(difficulty);
                 }
 
@@ -359,6 +418,19 @@ public class ArenaSetup : MonoBehaviour
                 }
                 else
                 {
+                    thirdLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    thirdLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    secondLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    firstLevel.transform.GetChild(indexSlice1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    firstLevel.transform.GetChild(indexSlice2).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    firstLevel.transform.GetChild(indexSlice3).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+                    firstLevel.transform.GetChild(indexSlice4).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(MagicOrchestraUtils.freeNoContextSlicePath);
+
                     ArenaObjectsHandler.singleton.CreateShapes(difficulty);
                 }
 
