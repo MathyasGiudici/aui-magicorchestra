@@ -7,6 +7,10 @@ public static class MagicOrchestraParameters
     private static bool isContext, isGuided;
     private static int gameNumber;
 
+    // Guided parameters
+    private static bool guidedOnPlay = false;
+    private static int lastGamePlayed = -1;
+
     public static bool IsContext
     {
         get
@@ -40,6 +44,30 @@ public static class MagicOrchestraParameters
         set
         {
             gameNumber = value;
+        }
+    }
+
+    public static bool GuidedOnPlay
+    {
+        get
+        {
+            return guidedOnPlay;
+        }
+        set
+        {
+            guidedOnPlay = value;
+        }
+    }
+
+    public static int LastGamePlayed
+    {
+        get
+        {
+            return lastGamePlayed;
+        }
+        set
+        {
+            lastGamePlayed = value;
         }
     }
 

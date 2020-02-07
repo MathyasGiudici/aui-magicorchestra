@@ -26,7 +26,22 @@ public class CanvasManager : MonoBehaviour
             MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
         }
 
-        ShowIntro();
+        if (MagicOrchestraParameters.GuidedOnPlay)
+        {
+            if(MagicOrchestraParameters.LastGamePlayed <= 3)
+            {
+                // format of the panel name: GameXSettingPanel
+                this.ShowGameSettingPanel("Game" + (MagicOrchestraParameters.LastGamePlayed + 1) + "SettingPanel");
+            }
+            else
+            {
+                Debug.Log("Something is not working");
+            }
+        }
+        else
+        {
+            ShowIntro();
+        }
     }
 
     /* <summary>
@@ -51,11 +66,13 @@ public class CanvasManager : MonoBehaviour
      */
     public void ShowIntro()
     {
+        MagicOrchestraParameters.GuidedOnPlay = false;
+        MagicOrchestraParameters.LastGamePlayed = -1;
         this.EnablePanel("Intro");
     }
 
     /* <summary>
-     * The function shows the panel of the Game3 Parameters
+     * The function shows the panel of the game selected
      * </summary>
      */
     public void ShowGameSettingPanel(string panelName)

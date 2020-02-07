@@ -124,6 +124,16 @@ public class Game2PanelManager : MonoBehaviour
 
         Game2Parameters.Sequence = this.sequenceObjectFiles[Game2Parameters.Difficulty - 2].sequences[arrayIndex].ToArray();
 
-        SceneManager.LoadScene("Game2");
+        if (MagicOrchestraParameters.GuidedOnPlay)
+        {
+            CutSceneParameters.TargetVideoIndex = 3;
+            SceneManager.LoadScene("BlackCutScenePlayer");
+        }
+        else
+        {
+            MagicOrchestraParameters.GuidedOnPlay = false;
+            MagicOrchestraParameters.LastGamePlayed = -1;
+            SceneManager.LoadScene("Game2");
+        }
     }
 }

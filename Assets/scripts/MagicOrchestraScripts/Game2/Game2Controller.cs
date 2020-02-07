@@ -93,6 +93,10 @@ public class Game2Controller : MonoBehaviour
     public void CorrectUserSequence()
     {
         SequenceShower.singleton.StopClassCoroutine();
+        if (MagicOrchestraParameters.GuidedOnPlay)
+        {
+            MagicOrchestraParameters.LastGamePlayed += 1;
+        }
         SceneManager.LoadScene("MagicOrchestra");
     }
 

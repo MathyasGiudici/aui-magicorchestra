@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class CutSceneParameters {
 
-    private static List<string> videos = new List<string>{ "corsi_melody" };
+    private static List<string> videos = new List<string>{ "corsi_melody", "intro", "game1", "game2", "game3" };
     private static int targetVideoIndex = -1;
 
     public static List<string> Videos

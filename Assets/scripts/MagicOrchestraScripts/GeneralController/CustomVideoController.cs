@@ -27,8 +27,17 @@ public class CustomVideoController : MonoBehaviour
             MagicOrchestraBuilderManager.singleton.ActivateAllCameras();
         }
 
+        this.LoadVideo();
+    }
+
+    /* <summary>
+     * Function to load the video before the routine
+     * </summary>
+     */
+    private void LoadVideo()
+    {
         // Checking if there is a video to play
-        if(CutSceneParameters.TargetVideoIndex == -1)
+        if (CutSceneParameters.TargetVideoIndex == -1)
         {
             this.ReturnToHome(null);
         }
@@ -45,22 +54,6 @@ public class CustomVideoController : MonoBehaviour
         StartCoroutine(this.VideoCoroutine());
 
         this.CheckingLightRoutine();
-    }
-
-    /* <summary>
-     * Called before return to MagicOrchestra scene
-     * </summary>
-     */
-    private void ReturnToHome(VideoPlayer videoPlayer)
-    {
-        // Stopping all the coroutines
-        this.StopAllCoroutines();
-
-        // Checking if there are light to switch off
-        if (MagicRoomLightManager.instance != null)
-            MagicOrchestraUtils.SwitchOffLightFeedback();
-
-        SceneManager.LoadScene("MagicOrchestra");
     }
 
     /* <summary>
@@ -84,6 +77,51 @@ public class CustomVideoController : MonoBehaviour
 
     }
 
+    /* <summary>
+     * Called before return to MagicOrchestra scene
+     * </summary>
+     */
+    private void ReturnToHome(VideoPlayer videoPlayer)
+    {
+        // Stopping all the coroutines
+        this.StopAllCoroutines();
+
+        // Checking if there are light to switch off
+        if (MagicRoomLightManager.instance != null)
+            MagicOrchestraUtils.SwitchOffLightFeedback();
+
+        switch (CutSceneParameters.TargetVideoIndex)
+        {
+            case 0:
+                MagicOrchestraParameters.GuidedOnPlay = false;
+                MagicOrchestraParameters.LastGamePlayed = -1;
+                SceneManager.LoadScene("MagicOrchestra");
+                break;
+            case 1:
+                CutSceneParameters.TargetVideoIndex = 2;
+                this.LoadVideo();
+                break;
+            case 2:
+                SceneManager.LoadScene("InstruMaps");
+                break;
+            case 3:
+                SceneManager.LoadScene("Game2");
+                break;
+            case 4:
+                SceneManager.LoadScene("CorsiTestScene");
+                break;
+            default:
+                MagicOrchestraParameters.GuidedOnPlay = false;
+                MagicOrchestraParameters.LastGamePlayed = -1;
+                SceneManager.LoadScene("MagicOrchestra");
+                break;
+        }
+    }
+
+    /* <summary>
+    * Function to select correct light routine
+    * </summary>
+    */
     private void CheckingLightRoutine()
     {
         if (MagicRoomLightManager.instance == null)
@@ -99,6 +137,10 @@ public class CustomVideoController : MonoBehaviour
         }
     }
 
+    /* <summary>
+    * Light routine for video "corsi_melody"
+    * </summary>
+    */
     private IEnumerator CorsiMelodyLights()
     {
         yield return new WaitForSeconds(0.5f);

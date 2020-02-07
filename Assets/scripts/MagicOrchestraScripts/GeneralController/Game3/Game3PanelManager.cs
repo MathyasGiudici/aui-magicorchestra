@@ -113,7 +113,17 @@ public class Game3PanelManager : MonoBehaviour
 
         Game3Parameters.Sequence = this.sequenceObjectFiles[Game3Parameters.Difficulty - 2].sequences[arrayIndex].ToArray();
 
-        SceneManager.LoadScene("CorsiTestScene");
+        if (MagicOrchestraParameters.GuidedOnPlay)
+        {
+            CutSceneParameters.TargetVideoIndex = 4;
+            SceneManager.LoadScene("CorsiTestScene");
+        }
+        else
+        {
+            MagicOrchestraParameters.GuidedOnPlay = false;
+            MagicOrchestraParameters.LastGamePlayed = -1;
+            SceneManager.LoadScene("CorsiTestScene");
+        }
     }
 
     public void BackToFirstPanel()

@@ -79,6 +79,11 @@ public class InstruMapsController : MonoBehaviour
     /// </summary>
     public void EndGame()
     {
+        if (MagicOrchestraParameters.GuidedOnPlay)
+        {
+            MagicOrchestraParameters.LastGamePlayed += 1;
+        }
+
         SceneManager.LoadScene("MagicOrchestra");
     }
 

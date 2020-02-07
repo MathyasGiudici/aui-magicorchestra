@@ -122,6 +122,8 @@ public class InstruMapsCanvasController : MonoBehaviour
     /// </summary>
     public void BackToHome()
     {
+        MagicOrchestraParameters.GuidedOnPlay = false;
+        MagicOrchestraParameters.LastGamePlayed = -1;
         SceneManager.LoadScene("MagicOrchestra");
     }
 

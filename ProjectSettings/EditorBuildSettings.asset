@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CutScenePlayer.unity
     guid: 7f444f60725124490a01baf6187b1291
+  - enabled: 1
+    path: Assets/Scenes/BlackCutScenePlayer.unity
+    guid: ffd8654ed42b144308c3117d43dd0f03
   m_configObjects: {}
