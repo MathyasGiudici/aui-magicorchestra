@@ -93,9 +93,17 @@ public class CustomVideoController : MonoBehaviour
         switch (CutSceneParameters.TargetVideoIndex)
         {
             case 0:
-                MagicOrchestraParameters.GuidedOnPlay = false;
-                MagicOrchestraParameters.LastGamePlayed = -1;
-                SceneManager.LoadScene("MagicOrchestra");
+                if (MagicOrchestraParameters.IsGuided)
+                {
+                    CutSceneParameters.TargetVideoIndex = 5;
+                    SceneManager.LoadScene("BlackCutScenePlayer");
+                }
+                else
+                {
+                    MagicOrchestraParameters.GuidedOnPlay = false;
+                    MagicOrchestraParameters.LastGamePlayed = -1;
+                    SceneManager.LoadScene("MagicOrchestra");
+                }
                 break;
             case 1:
                 CutSceneParameters.TargetVideoIndex = 2;
@@ -109,6 +117,11 @@ public class CustomVideoController : MonoBehaviour
                 break;
             case 4:
                 SceneManager.LoadScene("CorsiTestScene");
+                break;
+            case 5:
+                MagicOrchestraParameters.GuidedOnPlay = false;
+                MagicOrchestraParameters.LastGamePlayed = -1;
+                SceneManager.LoadScene("MagicOrchestra");
                 break;
             default:
                 MagicOrchestraParameters.GuidedOnPlay = false;

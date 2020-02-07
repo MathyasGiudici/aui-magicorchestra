@@ -116,7 +116,7 @@ public class Game3PanelManager : MonoBehaviour
         if (MagicOrchestraParameters.GuidedOnPlay)
         {
             CutSceneParameters.TargetVideoIndex = 4;
-            SceneManager.LoadScene("CorsiTestScene");
+            SceneManager.LoadScene("BlackCutScenePlayer");
         }
         else
         {
