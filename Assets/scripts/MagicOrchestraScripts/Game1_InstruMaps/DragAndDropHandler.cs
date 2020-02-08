@@ -125,7 +125,9 @@ public class DragAndDropHandler : MonoBehaviour
             hitTarget = hit.collider.gameObject;
         }
 
-        this.startingPoint = hitTarget.transform.position;
+        if(hitTarget != null)
+            this.startingPoint = hitTarget.transform.position;
+
         return hitTarget;
     }
 

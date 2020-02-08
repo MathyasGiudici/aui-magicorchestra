@@ -154,8 +154,6 @@ public class KinectLeftHand : MonoBehaviour
             // Debug.Log("Collided with " + hit.collider.gameObject.name);
             hitTarget = hit.collider.gameObject;
         }
-
-        this.startingPoint = hitTarget.transform.position;
         return hitTarget;
     }
 
